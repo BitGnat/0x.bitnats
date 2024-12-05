@@ -17,7 +17,7 @@ Unlocking Bitcoin's Secrets, One Bit at a Time
 
 ### ⦻ **0x08**
 
-![0x08](https://raw.githubusercontent.com/BitGnat/base-bitnats-blocks/main/0x08.png)
+![0x08](https://github.com/BitGnat/base-bitnats-blocks/blob/main/0x08.png)
 
 ### ⦻ **0x09**
 
