@@ -1,17 +1,15 @@
 # ⦻ bitnats ⦻
 Unlocking Bitcoin's Secrets, One Bit at a Time
 
-| **ordinal index** | **name** | **inscription** | **type** |
-| ----------------- | ------------------ | -----------| -------- |
-| <inscription_id>_i0 | base-bitnats-block | block_height.bitnats | txt |
-| <inscription_id>_i1 | ⦻ | ⦻ | ⦻ |
-| <inscription_id>_i2 | ⦻ | ⦻ | ⦻ |
+# ⦻ validating bitnats ⦻
 
-# ⦻ base-bitnats-blocks ⦻
+1️⃣ `block_height.bitnats` (text) on inscription index 0  `<inscriptionid>i0` (base-bitnats-block)
 
-| **base-bitnats-block** | **inscription_num** | **inscription-id_0** | **block-trait** |
-| ----------------- | ------------------ | -----------| -------- |
-| block_height.bitnats | <ordinal_number> | <inscription_id>_i0 | 0x |
+2️⃣ `inscription_block` > `block_height`  (previously mined blocks only)
+
+3️⃣ `min[inscription_number]` (first-is-first)
+
+1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
 # ⦻ block-trait-image ⦻
 
@@ -21,12 +19,12 @@ Unlocking Bitcoin's Secrets, One Bit at a Time
 
 ### ⦻ **0x22**
 
-![0x22](https://github.com/BitGnat/base-bitnats-blocks/blob/main/0x22.png)
+![0x22](images/22.svg)
 
 ### ⦻ **0x23**
 
-![0x23](https://github.com/BitGnat/base-bitnats-blocks/blob/main/0x23.png)
+![0x23](images/23.svg)
 
 ### ⦻ **0x24**
 
-![0x24](https://github.com/BitGnat/base-bitnats-blocks/blob/main/0x24.png)
+![0x24](images/24.svg)
