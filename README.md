@@ -2,8 +2,6 @@
 
 Unlocking Bitcoin's Secrets, One Bit at a Time
 
----
-
 # ⦻ validating bitnats ⦻
 
 1️⃣ `block_height.bitnats`(text) on Inscription Output :0 
@@ -21,8 +19,6 @@ id = `<revealtransaction>i0`
 ➥ (first-inscription-is-first)
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
-
----
 
 # ⦻ block_hash ⦻
 
