@@ -20,7 +20,7 @@ id = `<revealtransaction>i0`
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
-# ⦻ block_hash ⦻
+# ⦻ block_hash of block_height ⦻
 
 **0x21**
 
