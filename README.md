@@ -1,6 +1,6 @@
 # ⦻ bitnats ⦻
 
-Unlocking Bitcoin's Secrets, One Bit at a Time
+⦻ the rarest digital artifacts ⦻
 
 # ⦻ validating bitnats ⦻
 
