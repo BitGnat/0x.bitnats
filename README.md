@@ -4,7 +4,7 @@
 
 # validating bitnats
 
-1️⃣ `block_height.bitnats`(text) on Inscription Output :0 
+1️⃣ `block_height.bitnats`(text) on Ordinal Inscription Output 0 
 
 id = `<revealtransaction>i0` 
 
