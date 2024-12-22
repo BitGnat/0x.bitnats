@@ -28,6 +28,28 @@ run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
+# stats
+
+| bitnats_trait | available |
+|---------------| -----------------|
+| 0x19 | 264542 |
+| 0x18 | 119830 | 
+| 0x17 | 115939 | 
+| 0x13 | 93292 | 
+| 0x16 | 53307 | 
+| 0x08 | 47419 | 
+| 0x20 | 38937 | 
+| 0x14 | 36098 | 
+| 0x15 | 23966 | 
+| 0x12 | 21694 | 
+| 0x11 | 20715 | 
+| 0x09 | 20178 | 
+| 0x10 | 17377 | 
+| 0x21 | 2441 | 
+| 0x22 | 147 | 
+| 0x23 | 6 | 
+| 0x24 | 2 | 
+
 # block_hash of block_height ⦻
 
 **0x08** `0x00000000...`
