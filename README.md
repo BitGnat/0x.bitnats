@@ -16,15 +16,15 @@ run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats
         where
         id = `<revealtransaction>i0`
 
-    ➥ (first inscription on sat)
+➥ (first inscription on sat)
 
 2️⃣ `inscription_block` > `claimed_block`  
 
-    ➥ (previously mined blocks only)
+➥ (previously mined blocks only)
 
 3️⃣ `minimum[inscription_number]` 
 
-    ➥ (first-inscription-is-first)
+➥ (first-inscription-is-first)
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
