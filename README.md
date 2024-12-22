@@ -22,7 +22,7 @@ id = `<revealtransaction>i0`
 
 **SQL**
 
-run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats.csv headers
+run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats.csv
 
 # block_hash of block_height ⦻
 
