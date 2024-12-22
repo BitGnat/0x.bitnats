@@ -30,6 +30,8 @@ run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats
 
 # stats
 
+as of block 875890
+
 | trait | valids | supply | % minted | rarity |
 |-------| -------| -------| -------- | ------- |
 | 0x08 | 13865 | 47419 | 29.2% | 5.4% |
