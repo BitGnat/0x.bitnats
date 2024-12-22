@@ -1,6 +1,6 @@
 # bitnats
 
-⦻ the rarest digital artifacts ⦻
+**⦻ the rarest digital artifacts ⦻**
 
 # validating bitnats
 
