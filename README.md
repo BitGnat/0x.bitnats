@@ -4,7 +4,13 @@
 
 # validating bitnats
 
-1️⃣ `block_height.bitnats`(text) on Ordinal Inscription Output 0 
+**SQL**
+
+run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats.csv
+
+**ruleset**
+
+1️⃣ `block_height.bitnats`(text/plain) on Ordinal Inscription Output 0 
 
 id = `<revealtransaction>i0` 
 
@@ -19,10 +25,6 @@ id = `<revealtransaction>i0`
 ➥ (first-inscription-is-first)
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
-
-**SQL**
-
-run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats.csv
 
 # block_hash of block_height ⦻
 
