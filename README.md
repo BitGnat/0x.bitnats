@@ -1,8 +1,8 @@
-# ⦻ bitnats ⦻
+# bitnats
 
 ⦻ the rarest digital artifacts ⦻
 
-# ⦻ validating bitnats ⦻
+# validating bitnats
 
 1️⃣ `block_height.bitnats`(text) on Inscription Output :0 
 
@@ -20,7 +20,11 @@ id = `<revealtransaction>i0`
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
-# ⦻ block_hash of block_height ⦻
+**SQL**
+
+run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats.csv headers
+
+# block_hash of block_height ⦻
 
 **0x08**
 
