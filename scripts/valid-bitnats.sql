@@ -25,9 +25,10 @@ WITH validity_query AS (
     ) AS with_validity
 )
 SELECT 
-    v_inscription_id AS id,
+    v_inscription_id AS inscription_id,
     meta_name,
-    CONCAT('0x', LPAD(CAST(LENGTH(SUBSTRING(b.hash, 3)) - LENGTH(REGEXP_REPLACE(SUBSTRING(b.hash, 3), '^0+', '')) AS STRING), 2, '0')) AS meta_trait
+    CONCAT('0x', LPAD(CAST(LENGTH(SUBSTRING(b.hash, 3)) - LENGTH(REGEXP_REPLACE(SUBSTRING(b.hash, 3), '^0+', '')) AS STRING), 2, '0')) AS meta_trait,
+    CONCAT('https://github.com/BitGnat/bitnats/blob/main/images/0x', LPAD(CAST(LENGTH(SUBSTRING(b.hash, 3)) - LENGTH(REGEXP_REPLACE(SUBSTRING(b.hash, 3), '^0+', '')) AS STRING), 2, '0'), '.png') AS high_res_img_url
 FROM 
     validity_query
 JOIN 
