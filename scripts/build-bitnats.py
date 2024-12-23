@@ -53,8 +53,8 @@ gzip_output_file = os.path.join(output_folder, 'inscriptions.json.gz')
 os.makedirs(output_folder, exist_ok=True)
 
 # Write the JSON data to an uncompressed JSON file
-with open(json_output_file, 'w') as json_file:
-    json.dump(all_data, json_file, indent=2)
+# with open(json_output_file, 'w') as json_file:
+#    json.dump(all_data, json_file, indent=2)
 
 # Write the JSON data to a Gzip-compressed JSON file
 with gzip.open(gzip_output_file, 'wt', encoding='utf-8') as gz_file:
