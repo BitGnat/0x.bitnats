@@ -1,0 +1,19 @@
+[
+    {
+     "id": "3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0",
+     "meta": {
+      "name": "0.bitnats",
+      "attributes": [
+       {
+        "trait_type": "Trait",
+        "value": "0x10"
+       },
+       {
+       "trait_type": "Project",
+       "value": "Project"
+       }
+      ]
+     },
+     "high_res_img_url": "https://github.com/BitGnat/bitnats/blob/main/images/0x10.png"
+    }
+]
