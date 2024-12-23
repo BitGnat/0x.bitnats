@@ -46,7 +46,7 @@ for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are pr
 
 # Define the output folder and filenames
 output_folder = '../build'
-json_output_file = os.path.join(output_folder, 'inscriptions.json')
+# json_output_file = os.path.join(output_folder, 'inscriptions.json')
 gzip_output_file = os.path.join(output_folder, 'inscriptions.json.gz')
 
 # Create the output directory if it doesn't exist
