@@ -2,7 +2,17 @@
 
 **⦻** the rarest digital artifacts **⦻**
 
-# validating bitnats
+# basics
+
+⦻ bitnats are ordinal inscriptions on Bitcoin  
+⦻ bitnats inscriptions are on-chain claims to Bitcoin block data  
+⦻ bitnats collection traits stem from Bitcoin block hashes  
+⦻ bitnats rarity is derived from the number of leading zeros of the block hash: 0x00000000...  
+⦻ bitnats blocks become available to claim each time a Bitcoin block is mined  
+⦻ bitnats are directly related to Bitcoin's difficulty adjustment and the global hash power of the network  
+⦻ bitnats are forever
+
+# collection
 
 **ruleset**
 
@@ -12,25 +22,25 @@
         where
         id = `<revealtransaction>i0`
 
-➥ (first inscription on sat)
+➥ **first inscription on sat**
 
 2️⃣ `inscription_block` > `claimed_block`  
 
-➥ (previously mined blocks only)
+➥ **previously mined blocks only**
 
 3️⃣ `minimum[inscription_number]` 
 
-➥ (first-inscription-is-first)
+➥ **first-inscription-is-first**
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
 **SQL**
 
-run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput `data/valid-bitnats.csv'
+`scripts/valid-bitnats.sql` run on Bitcoin & ORD datasets provides `data/valid-bitnats.csv'
 
-note this repo has valid-bitnats.csv split into eight (8) chunks that are compiled into a single inscriptions.json collection file
+📙 note this repo has valid-bitnats.csv split into eight (8) chunks that are compiled into a single inscriptions.json collection file
 
-0-1 : 0.bitnats to 99999.bitnats  
+0-1 :      0.bitnats to 99999.bitnats  
 1-2 : 100000.bitnats to 199999.bitnats  
 2-3 : 200000.bitnats to 299999.bitnats  
 3-4 : 300000.bitnats to 399999.bitnats  
