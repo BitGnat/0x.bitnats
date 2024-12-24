@@ -27,15 +27,15 @@ for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are pr
                 "id": row['inscription_id'],
                 "meta": {
                     "name": row['meta_name'],
+                    "high_res_img_url": row['high_res_img_url'],
+                    "collection_page_img_url": row['collection_page_img_url'],
                     "attributes": [
                         {
                             "trait_type": "Trait",
                             "value": row['meta_trait']
                         }
-                    ]
-                },
-                "high_res_img_url": row['high_res_img_url'],
-                "collection_page_img_url": row['collection_page_img_url']
+                    ]                    
+                }
             }
         
         # Apply the transformation to each row in the DataFrame
@@ -46,15 +46,15 @@ for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are pr
 
 # Define the output folder and filenames
 output_folder = '../build'
-# json_output_file = os.path.join(output_folder, 'inscriptions.json')
+json_output_file = os.path.join(output_folder, 'inscriptions.json')
 gzip_output_file = os.path.join(output_folder, 'inscriptions.json.gz')
 
 # Create the output directory if it doesn't exist
 os.makedirs(output_folder, exist_ok=True)
 
 # Write the JSON data to an uncompressed JSON file
-# with open(json_output_file, 'w') as json_file:
-#    json.dump(all_data, json_file, indent=2)
+with open(json_output_file, 'w') as json_file:
+    json.dump(all_data, json_file, indent=2)
 
 # Write the JSON data to a Gzip-compressed JSON file
 with gzip.open(gzip_output_file, 'wt', encoding='utf-8') as gz_file:
