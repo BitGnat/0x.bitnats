@@ -10,7 +10,7 @@ run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput valid-bitnats
 
 **csv headers**
 
-inscription_id, meta_name, meta_trait, high_res_img_url
+inscription_id, meta_name, meta_trait, high_res_img_url, collection_page_img_url
 
 **ruleset**
 
