@@ -6,7 +6,6 @@
 
 ⦻ bitnats are ordinal inscriptions on Bitcoin  
 ⦻ bitnats inscriptions are on-chain claims to Bitcoin block data  
-⦻ bitnats collection traits stem from Bitcoin block hashes  
 ⦻ bitnats blocks become available to claim each time a Bitcoin block is mined  
 ⦻ bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
 ⦻ bitnats are directly related to Bitcoin's difficulty adjustment and the global hash power of the network  
