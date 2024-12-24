@@ -30,15 +30,15 @@ run `scripts/valid-bitnats.sql` on bitcoin & ord datasets to ouput `data/valid-b
 
 note this repo has valid-bitnats.csv split into eight (8) chunks that are compiled into a single inscriptions.json collection file
 
-0-1 : 0.bitnats to 99999.bitnats
-1-2 : 100000.bitnats to 199999.bitnats
-2-3 : 200000.bitnats to 299999.bitnats
-3-4 : 300000.bitnats to 399999.bitnats
-4-5 : 400000.bitnats to 499999.bitnats
-5-6 : 500000.bitnats to 599999.bitnats
-6-7 : 600000.bitnats to 699999.bitnats
-7-8 : 700000.bitnats to 799999.bitnats
-8-9 : 800000.bitnats to 899999.bitnats
+0-1 : 0.bitnats to 99999.bitnats  
+1-2 : 100000.bitnats to 199999.bitnats  
+2-3 : 200000.bitnats to 299999.bitnats  
+3-4 : 300000.bitnats to 399999.bitnats  
+4-5 : 400000.bitnats to 499999.bitnats  
+5-6 : 500000.bitnats to 599999.bitnats  
+6-7 : 600000.bitnats to 699999.bitnats  
+7-8 : 700000.bitnats to 799999.bitnats  
+8-9 : 800000.bitnats to 899999.bitnats  
 
 **csv headers**
 
