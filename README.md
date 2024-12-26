@@ -29,13 +29,11 @@
 
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
-**SQL**  
-
-`scripts/valid-bitnats.sql` run on Bitcoin & ORD datasets provides `data/valid-bitnats.csv'  
+**data**  
+📙 to obtain collection validity run `scripts/valid-bitnats.sql` on Bitcoin & ORD datasets
 
 **build**  
-
-📙 note: this repo splits collection inscriptions.json files into nine (9) chunks:  
+📙 to build collection metadata run `scripts/build-bitnats.py` on /data csv files to provide `build/{chunk}_inscriptions.json`
 
 | chunk | from to | file |
 | ----- | ------- | ---- |
