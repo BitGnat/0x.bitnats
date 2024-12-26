@@ -31,7 +31,7 @@
 
 **data**  
 📙 to obtain collection validity run `scripts/valid-bitnats.sql` on Bitcoin & ORD datasets  
-csv headers: inscription_id, meta_name, meta_trait, high_res_img_url, collection_page_img_url
+csv headers: inscription_id, meta_name, meta_trait, high_res_img_url, low_res_img_url
 
 **build**  
 📙 to build collection metadata run `scripts/build-bitnats.py` on /data csv files to provide `build/{chunk}_inscriptions.json`  
