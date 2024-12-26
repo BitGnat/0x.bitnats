@@ -4,7 +4,7 @@ import os
 import shutil
 
 # Define the folder paths
-data_folder = '../data'
+data_folder = '../csv'
 output_folder = '../build'
 
 # Clear the output folder by removing all files within it
@@ -23,7 +23,7 @@ else:
     os.makedirs(output_folder)  # Create the output directory if it doesn't exist
 
 # Specify the correct column headers as per the CSV file (modify as needed)
-column_headers = ['inscription_id', 'meta_name', 'meta_trait', 'high_res_img_url', 'collection_page_img_url']
+column_headers = ['inscription_id', 'meta_name', 'meta_trait', 'high_res_img_url', 'low_res_img_url']
 
 # Loop through each CSV file in the data folder
 for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are processed in order
@@ -41,7 +41,7 @@ for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are pr
                 "meta": {
                     "name": row['meta_name'],
                     "high_res_img_url": row['high_res_img_url'],
-                    "collection_page_img_url": row['collection_page_img_url'],
+                    "low_res_img_url": row['low_res_img_url'],
                     "attributes": [
                         {
                             "trait_type": "Trait",
