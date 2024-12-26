@@ -36,7 +36,7 @@
 📙 note: this repo splits collection inscriptions.json files into eight (8) chunks:  
 
 | chunk | from to | file |
-| ----- | ------- |
+| ----- | ------- | ---- |
 | 0-1 | 0.bitnats to 99999.bitnats | 0-1_inscriptions.json |
 | 1-2 | 100000.bitnats to 199999.bitnats | 1-2_inscriptions.json |
 | 2-3 | 200000.bitnats to 299999.bitnats | 2-3_inscriptions.json |
