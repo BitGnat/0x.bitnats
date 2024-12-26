@@ -35,7 +35,7 @@
 
 **build**  
 
-📙 note: this repo splits collection inscriptions.json files into eight (8) chunks:  
+📙 note: this repo splits collection inscriptions.json files into nine (9) chunks:  
 
 | chunk | from to | file |
 | ----- | ------- | ---- |
