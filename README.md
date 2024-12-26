@@ -33,7 +33,7 @@
 📙 to obtain collection validity run `scripts/valid-bitnats.sql` on Bitcoin & ORD datasets
 
 **build**  
-📙 to build collection metadata run `scripts/build-bitnats.py` on /data csv files to provide `build/{chunk}_inscriptions.json`
+📙 to build collection metadata run `scripts/build-bitnats.py` on /data csv files to provide `build/{chunk}_inscriptions.json`  
 
 | chunk | from to | file |
 | ----- | ------- | ---- |
