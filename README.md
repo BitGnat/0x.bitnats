@@ -49,11 +49,11 @@
 | 7-8 | 700000.bitnats to 799999.bitnats | 7-8_inscriptions.json |
 | 8-9 | 800000.bitnats to 899999.bitnats | 8-9_inscriptions.json |
 
-**csv headers**
+**csv headers**  
 
 inscription_id, meta_name, meta_trait, high_res_img_url, collection_page_img_url
 
-**csv to json**
+**csv to json**  
 
 run `scripts/build-bitnats.py` to output gzip compressed metadata to `build/inscriptions.json.gz`
 
