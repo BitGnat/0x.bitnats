@@ -15,7 +15,7 @@
 **ruleset**  
 
 1️⃣ `block_height.bitnats`(text/plain)  
-&nbsp;&nbsp;&nbsp;&nbsp;at
+&nbsp;&nbsp;&nbsp;&nbsp;at  
 &nbsp;&nbsp;&nbsp;&nbsp;trasaction output 0  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inscription id = `<revealtransaction>i0`  
