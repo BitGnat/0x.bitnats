@@ -1,24 +1,37 @@
 import pandas as pd
 import json
 import os
-import gzip  # Import the gzip module
+import shutil
 
-# Define the folder path containing the CSV files
+# Define the folder paths
 data_folder = '../data'
+output_folder = '../build'
 
-# Initialize an empty list to store data from all CSV files
-all_data = []
+# Clear the output folder by removing all files within it
+if os.path.exists(output_folder):
+    # Remove all files and folders within the output folder
+    for filename in os.listdir(output_folder):
+        file_path = os.path.join(output_folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)  # Remove file or symbolic link
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)  # Remove directory
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
+else:
+    os.makedirs(output_folder)  # Create the output directory if it doesn't exist
 
 # Specify the correct column headers as per the CSV file (modify as needed)
 column_headers = ['inscription_id', 'meta_name', 'meta_trait', 'high_res_img_url', 'collection_page_img_url']
 
-# Loop through each CSV file in the folder
+# Loop through each CSV file in the data folder
 for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are processed in order
     if file_name.endswith('.csv'):
-        # Construct the full file path
+        # Construct the full path for the CSV file
         csv_file = os.path.join(data_folder, file_name)
         
-        # Load the CSV file into a pandas DataFrame, skip the first row (CSV headers)
+        # Load the CSV file into a pandas DataFrame, skipping the first row (CSV headers)
         df = pd.read_csv(csv_file, header=0, names=column_headers)
         
         # Create a function to transform each row to the desired format
@@ -41,23 +54,12 @@ for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are pr
         # Apply the transformation to each row in the DataFrame
         json_data = df.apply(row_to_json, axis=1).tolist()
         
-        # Append the JSON data from this CSV file to the all_data list
-        all_data.extend(json_data)
-
-# Define the output folder and filenames
-output_folder = '../build'
-json_output_file = os.path.join(output_folder, 'inscriptions.json')
-gzip_output_file = os.path.join(output_folder, 'inscriptions.json.gz')
-
-# Create the output directory if it doesn't exist
-os.makedirs(output_folder, exist_ok=True)
-
-# Write the JSON data to an uncompressed JSON file
-with open(json_output_file, 'w') as json_file:
-    json.dump(all_data, json_file, indent=2)
-
-# Write the JSON data to a Gzip-compressed JSON file
-with gzip.open(gzip_output_file, 'wt', encoding='utf-8') as gz_file:
-    json.dump(all_data, gz_file, separators=(',', ':'))
-
-print("All CSV data successfully combined and exported to both JSON and Gzip-compressed JSON!")
+        # Prepare the output filename based on the input CSV filename and appending '_inscriptions'
+        base_name = file_name.replace('.csv', '_inscriptions')
+        json_output_file = os.path.join(output_folder, f"{base_name}.json")
+        
+        # Write the JSON data to an uncompressed JSON file
+        with open(json_output_file, 'w') as json_file:
+            json.dump(json_data, json_file, indent=2)
+        
+        print(f"Processed and exported {file_name} to {base_name}.json.")
