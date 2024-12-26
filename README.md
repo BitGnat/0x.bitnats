@@ -2,34 +2,30 @@
 
 **⦻** the rarest digital artifacts **⦻**
 
-# basics
+## basics
 
 ⦻ bitnats are ordinal inscriptions on Bitcoin  
 ⦻ bitnats inscriptions are on-chain claims to Bitcoin block data  
 ⦻ bitnats blocks become available to claim each time a Bitcoin block is mined  
 ⦻ bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
-⦻ bitnats are directly related to Bitcoin's difficulty adjustment and the global hash power of the network  
-⦻ bitnats rarity increases as the target hash becomes smaller (more leading zeros) due to higher global hash power 
+⦻ bitnats are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
 
-# collection
+## collection
 
-**ruleset**
+**ruleset**  
 
 1️⃣ `block_height.bitnats`(text/plain)
     at
-    Ordinal Inscription Output 0 
-        where
-        id = `<revealtransaction>i0`
-
-➥ **first inscription on sat**
+    trasaction output 0  
+        where  
+        inscription id = `<revealtransaction>i0`  
+➥ **first inscription on sat**  
 
 2️⃣ `inscription_block` > `claimed_block`  
+➥ **previously mined blocks only**  
 
-➥ **previously mined blocks only**
-
-3️⃣ `minimum[inscription_number]` 
-
-➥ **first-inscription-is-first**
+3️⃣ `minimum[inscription_number]`  
+➥ **first-inscription-is-first**  
 
 1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid
 
@@ -57,7 +53,7 @@ inscription_id, meta_name, meta_trait, high_res_img_url, collection_page_img_url
 
 run `scripts/build-bitnats.py` to output gzip compressed metadata to `build/inscriptions.json.gz`
 
-# stats
+## stats
 
 as of block 875890
 
@@ -82,107 +78,108 @@ as of block 875890
 | 0x24 | 2 | 2 | 100.0% | 0.0002% |
 | **total** | **224173** | **875890** | **25.6%** | - |
 
-# traits
+## traits
 
-block_hash `0x00000000...` = **0x08**
+### Project
 
-## 0⦻8
+![⦻](images/0.svg)
+
+### 0⦻8
 
 ![0⦻8](images/08.svg)
 
 block_hash `0x000000000...` = **0x09** 
 
-## 0⦻9
+### 0⦻9
 
 ![0⦻9](images/09.svg)
 
 block_hash `0x0000000000...` = **0x10** 
 
-## 1⦻0
+### 1⦻0
 
 ![1⦻0](images/10.svg)
 
 block_hash `0x00000000000...` = **0x11** 
 
-## 1⦻1
+### 1⦻1
 
 ![1⦻1](images/11.svg)
 
 block_hash `0x000000000000...` = **0x12** 
 
-## 1⦻2
+### 1⦻2
 
 ![1⦻2](images/12.svg)
 
 block_hash `0x0000000000000...` = **0x13** 
 
-## 1⦻3
+### 1⦻3
 
 ![1⦻3](images/13.svg)
 
 block_hash `0x00000000000000...` = **0x14** 
 
-## 1⦻4
+### 1⦻4
 
 ![1⦻4](images/14.svg)
 
 block_hash `0x000000000000000...` = **0x15** 
 
-## 1⦻5
+### 1⦻5
 
 ![1⦻5](images/15.svg)
 
 block_hash `0x0000000000000000...` = **0x16** 
 
-## 1⦻6
+### 1⦻6
 
 ![1⦻6](images/16.svg)
 
 block_hash `0x00000000000000000...` = **0x17** 
 
-## 1⦻7
+### 1⦻7
 
 ![1⦻7](images/17.svg)
 
 block_hash `0x000000000000000000...` = **0x18** 
 
-## 1⦻8
+### 1⦻8
 
 ![1⦻8](images/18.svg)
 
 block_hash `0x0000000000000000000...` = **0x19** 
 
-## 1⦻9
+### 1⦻9
 
 ![1⦻9](images/19.svg)
 
 block_hash `0x00000000000000000000...` = **0x20** 
 
-## 2⦻0
+### 2⦻0
 
 ![2⦻0](images/20.svg)
 
 block_hash `0x000000000000000000000...` = **0x21** 
 
-## 2⦻1
+### 2⦻1
 
 ![2⦻1](images/21.svg)
 
 block_hash `0x0000000000000000000000...` = **0x22** 
 
-## 2⦻2
+### 2⦻2
 
 ![2⦻2](images/22.svg)
 
 block_hash `0x00000000000000000000000...` = **0x23** 
 
-## 2⦻3
+### 2⦻3
 
 ![2⦻3](images/23.svg)
 
 block_hash `0x000000000000000000000000...` = **0x24** 
 
-## 2⦻4
+### 2⦻4
 
 ![2⦻4](images/24.svg)
-
