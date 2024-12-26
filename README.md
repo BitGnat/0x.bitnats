@@ -31,7 +31,9 @@
 
 **SQL**  
 
-`scripts/valid-bitnats.sql` run on Bitcoin & ORD datasets provides `data/valid-bitnats.csv'
+`scripts/valid-bitnats.sql` run on Bitcoin & ORD datasets provides `data/valid-bitnats.csv'  
+
+**build**  
 
 📙 note: this repo splits collection inscriptions.json files into eight (8) chunks:  
 
