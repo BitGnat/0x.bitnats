@@ -59,7 +59,7 @@ run `scripts/build-bitnats.py` to output gzip compressed metadata to `build/insc
 
 ## stats
 
-as of block 875890
+**collection data as of block 875890**
 
 | trait | valids | supply | % minted | rarity |
 |-------| -------| -------| -------- | ------- |
