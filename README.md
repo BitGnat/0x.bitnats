@@ -30,7 +30,8 @@
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
 **data**  
-📙 to obtain collection validity run `scripts/valid-bitnats.sql` on Bitcoin & ORD datasets
+📙 to obtain collection validity run `scripts/valid-bitnats.sql` on Bitcoin & ORD datasets  
+csv headers: inscription_id, meta_name, meta_trait, high_res_img_url, collection_page_img_url
 
 **build**  
 📙 to build collection metadata run `scripts/build-bitnats.py` on /data csv files to provide `build/{chunk}_inscriptions.json`  
@@ -45,15 +46,7 @@
 | 5-6 | 500000.bitnats to 599999.bitnats | 5-6_inscriptions.json |
 | 6-7 | 600000.bitnats to 699999.bitnats | 6-7_inscriptions.json |
 | 7-8 | 700000.bitnats to 799999.bitnats | 7-8_inscriptions.json |
-| 8-9 | 800000.bitnats to 899999.bitnats | 8-9_inscriptions.json |
-
-**csv headers**  
-
-inscription_id, meta_name, meta_trait, high_res_img_url, collection_page_img_url
-
-**csv to json**  
-
-run `scripts/build-bitnats.py` to output gzip compressed metadata to `build/inscriptions.json.gz`
+| 8-9 | 800000.bitnats to 899999.bitnats | 8-9_inscriptions.json |  
 
 ## stats
 
