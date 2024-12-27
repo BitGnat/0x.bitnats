@@ -41,7 +41,7 @@ for file_name in sorted(os.listdir(data_folder)):  # Sort to ensure files are pr
                 "meta": {
                     "name": row['meta_name'],
                     "high_res_img_url": row['high_res_img_url'],
-                    "low_res_img_url": row['low_res_img_url'],
+                    "collection_page_img_url": row['low_res_img_url'],
                     "attributes": [
                         {
                             "trait_type": "Trait",
