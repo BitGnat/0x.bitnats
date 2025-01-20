@@ -29,25 +29,6 @@
 
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
-**data**  
-📙 to obtain collection validity run `scripts/valid-bitnats.sql` on Bitcoin & ORD datasets  
-csv headers: inscription_id, meta_name, meta_trait, high_res_img_url, low_res_img_url
-
-**build**  
-📙 to build collection metadata run `scripts/build-bitnats.py` on /data csv files to provide `build/{chunk}_inscriptions.json`  
-
-| chunk | from to | file |
-| ----- | ------- | ---- |
-| 0-1 | 0.bitnats to 99999.bitnats | 0-1_inscriptions.json |
-| 1-2 | 100000.bitnats to 199999.bitnats | 1-2_inscriptions.json |
-| 2-3 | 200000.bitnats to 299999.bitnats | 2-3_inscriptions.json |
-| 3-4 | 300000.bitnats to 399999.bitnats | 3-4_inscriptions.json |
-| 4-5 | 400000.bitnats to 499999.bitnats | 4-5_inscriptions.json |
-| 5-6 | 500000.bitnats to 599999.bitnats | 5-6_inscriptions.json |
-| 6-7 | 600000.bitnats to 699999.bitnats | 6-7_inscriptions.json |
-| 7-8 | 700000.bitnats to 799999.bitnats | 7-8_inscriptions.json |
-| 8-9 | 800000.bitnats to 899999.bitnats | 8-9_inscriptions.json |  
-
 ## stats
 
 **collection data as of block 875890**
