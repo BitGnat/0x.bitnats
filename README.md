@@ -31,7 +31,7 @@
 
 ## stats
 
-**collection data as of block 875890**
+**collection data as of block 875890**  
 
 | trait | valids | supply | % minted | rarity |
 |-------| -------| -------| -------- | ------- |
