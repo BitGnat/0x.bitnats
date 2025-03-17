@@ -1,6 +1,10 @@
+# bitnats
+
+**🟠** the rarest digital artifacts **🟠**
+
 # 0x.bitnats
 
-**⦻** the rarest digital artifacts **⦻**
+**⦻** bitnats' hash zero collection **⦻**
 
 ## basics
 
@@ -56,7 +60,7 @@
 
 ## traits
 
-### project
+### collection
 
 ![⦻](images/0.svg)
 
