@@ -8,11 +8,11 @@
 
 ## basics
 
-⦻ 0x.bitnats are ordinal inscriptions on Bitcoin  
-⦻ 0x.bitnats inscriptions are on-chain claims to Bitcoin block data  
-⦻ 0x.bitnats blocks become available to claim each time a Bitcoin block is mined  
-⦻ 0x.bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
-⦻ 0x.bitnats are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
+👉 0x.bitnats are ordinal inscriptions on Bitcoin  
+👉 0x.bitnats inscriptions are on-chain claims to Bitcoin block data  
+👉 0x.bitnats blocks become available to claim each time a Bitcoin block is mined  
+👉 0x.bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
+👉 0x.bitnats are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
 
 ## collection
 
