@@ -4,7 +4,7 @@
 
 # 0x.bitnats
 
-**⦻** bitnats' hash zero collection **⦻**
+**⦻** bitnats' block hash zero collection **⦻**
 
 ## basics
 
