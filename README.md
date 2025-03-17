@@ -1,4 +1,4 @@
-# bitnats
+# 0x.bitnats
 
 **⦻** the rarest digital artifacts **⦻**
 
