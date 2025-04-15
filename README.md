@@ -1,10 +1,6 @@
 # bitnats
 
-**🟠** the rarest digital artifacts **🟠**
-
-# 0x.bitnats
-
-**⦻** bitnats' block hash zero collection **⦻**
+0x.bitnats **⦻** the rarest digital artifacts **⦻**
 
 ## basics
 
