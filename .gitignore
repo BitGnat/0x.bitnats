@@ -1,4 +1,0 @@
-/venv
-/node_modules    # If you're using any Node.js dependencies
-*.log            # Ignore log files
-.DS_Store        # macOS-specific hidden files
