@@ -11,6 +11,13 @@ For Intellectual Property inquiries or collaborations, reach out via:
 - 𝕏: [@0x_bitnats](https://x.com/0x_bitnats)
 - Telegram: [@bitnat_sats](https://t.me/bitant_sats)
 
+[0.bitnats/inscription/53394039](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
+
+Owned by:
+bc1pr8mtdatgt58yypf938kc4rcr5vw4xl2vexvueef37dnpk9jwac7qhu0ma6
+
+
+
 ## basics
 
 👉 0x.bitnats are ordinal inscriptions on Bitcoin  
