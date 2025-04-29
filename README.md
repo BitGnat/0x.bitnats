@@ -4,6 +4,12 @@
 
 ## legal
 
+For Intellectual Property inquiries or collaborations, reach out via:
+
+- Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
+- 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
+- Telegram: [@bitnat_sats](https://t.me/bitant_sats)
+
 ## basics
 
 👉 0x.bitnats are ordinal inscriptions on Bitcoin  
