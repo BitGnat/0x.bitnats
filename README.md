@@ -8,7 +8,7 @@ For Intellectual Property inquiries or collaborations, reach out via:
 
 - Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
 - 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
-- 𝕏: [@bitnat_sats](https://x.com/0x_bitnats)
+- 𝕏: [@0x_bitnats](https://x.com/0x_bitnats)
 - Telegram: [@bitnat_sats](https://t.me/bitant_sats)
 
 ## basics
