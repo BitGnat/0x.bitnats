@@ -2,6 +2,8 @@
 
 0x.bitnats **⦻** the rarest digital artifacts **⦻**
 
+## legal
+
 ## basics
 
 👉 0x.bitnats are ordinal inscriptions on Bitcoin  
