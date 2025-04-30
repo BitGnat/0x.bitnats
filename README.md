@@ -2,7 +2,7 @@
 
 0x.bitnats **⦻** the rarest digital artifacts **⦻**
 
-## legal
+## contact
 
 For Intellectual Property inquiries or collaborations, reach out via:
 
@@ -13,10 +13,8 @@ For Intellectual Property inquiries or collaborations, reach out via:
 
 [0.bitnats/inscription/53394039](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
 
-Owned by:
+Bitcoin wallet addresses associated with the original inscription:
 bc1pr8mtdatgt58yypf938kc4rcr5vw4xl2vexvueef37dnpk9jwac7qhu0ma6
-
-
 
 ## basics
 
