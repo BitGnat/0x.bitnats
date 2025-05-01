@@ -16,7 +16,7 @@
 
 The 0x.bitnats [dashboard](https://dune.com/bitgnat/0x-bitnats) is updated daily at 12:00 UTC and provides the following stats:  
 
-📙**Base Bitnats Blocks**:  
+📙**Base Blocks**:  
 ➤ expansionary total supply of base bitnats blocks  
   
 📙**0x Bitnats**:  
