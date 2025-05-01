@@ -12,7 +12,7 @@
 
 # TOKENOMICS
 
-[![Dune Dashboard](https://img.shields.io/badge/Dune-Dashboard-yellow)](https://dune.com/bitgnat/0x-bitnats)  
+[![Dune Dashboard](https://img.shields.io/badge/Dune-Dashboard-blue)](https://dune.com/bitgnat/0x-bitnats)  
 
 The 0x.bitnats [dashboard](https://dune.com/bitgnat/0x-bitnats) is updated daily at 12:00 UTC and provides the following stats:  
 
