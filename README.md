@@ -1,6 +1,6 @@
-# bitnats
+# 0x.bitnats
 
-0x.bitnats **⦻** the rarest digital artifacts **⦻**
+**⦻** the rarest digital artifacts **⦻**  
 
 ## basics
 
@@ -9,6 +9,18 @@
 👉 0x.bitnats blocks become available to claim each time a Bitcoin block is mined  
 👉 0x.bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
 👉 0x.bitnats are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
+
+# TOKENOMICS
+
+[![Dune Dashboard](https://img.shields.io/badge/Dune-Dashboard-yellow)](https://dune.com/bitgnat/0x-bitnats)  
+
+The 0x.bitnats [dashboard](https://dune.com/bitgnat/0x-bitnats) is updated daily at 12:00 UTC and provides the following stats:  
+
+📙**Base Bitnats Blocks**:  
+➤ expansionary total supply of base bitnats blocks  
+  
+📙**0x Bitnats**:  
+➤ expansionary total supply of 0x bitnats
 
 ## collection
 
