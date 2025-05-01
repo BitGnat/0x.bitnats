@@ -2,7 +2,7 @@
 
 **⦻** the rarest digital artifacts **⦻**  
 
-## BASICS
+# BASICS
 
 👉 0x.bitnats are [ordinal inscriptions](https://docs.ordinals.com/) on ₿itcoin  
 👉 0x.bitnats inscriptions are on-chain claims to Bitcoin block data  
@@ -22,7 +22,7 @@ The 0x.bitnats [dashboard](https://dune.com/bitgnat/0x-bitnats) is updated daily
 📙**0x Bitnats**:  
 ➤ expansionary total supply of 0x bitnats
 
-## collection
+# COLLECTION
 
 **ruleset**  
 
@@ -41,7 +41,7 @@ The 0x.bitnats [dashboard](https://dune.com/bitgnat/0x-bitnats) is updated daily
 
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
-## stats
+## STATS
 
 **collection data as of block 875890**
 
