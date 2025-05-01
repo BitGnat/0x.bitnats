@@ -29,6 +29,30 @@
 
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
+# Bitcoin Block Hash Analysis Query
+
+This query analyzes Bitcoin blocks to count the total number of blocks and sum the leading zeros in their hashes.
+
+```sql
+WITH block_zeros AS (
+  SELECT 
+    height,
+    -- Convert hash to string, remove '0x' prefix and count leading zeros
+    LENGTH(REGEXP_EXTRACT(CAST(hash AS VARCHAR), '^0x0*', 0)) - 2 as leading_zeros
+  FROM bitcoin.blocks
+)
+SELECT
+  COUNT(height) as base_blocks,
+  SUM(leading_zeros) as "0x.bitnats"
+FROM block_zeros;
+```
+
+This query:
+- Counts total blocks as `base_blocks`
+- Calculates cumulative leading zeros as `0x.bitnats`
+- Uses Trino/DuneSQL syntax
+- Requires access to the `bitcoin.blocks` table
+
 ## stats
 
 **collection data as of block 875890**
