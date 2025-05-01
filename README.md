@@ -2,20 +2,6 @@
 
 0x.bitnats **⦻** the rarest digital artifacts **⦻**
 
-## contact
-
-For Intellectual Property inquiries or collaborations, reach out via:
-
-- Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
-- 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
-- 𝕏: [@0x_bitnats](https://x.com/0x_bitnats)
-- Telegram: [@bitnat_sats](https://t.me/bitant_sats)
-
-[0.bitnats/inscription/53394039](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
-
-Bitcoin wallet addresses associated with the original inscription:  
-bc1pr8mtdatgt58yypf938kc4rcr5vw4xl2vexvueef37dnpk9jwac7qhu0ma6
-
 ## basics
 
 👉 0x.bitnats are ordinal inscriptions on Bitcoin  
@@ -156,3 +142,17 @@ block_hash : `0x00000000000000000000000...`
 
 block_hash : `0x000000000000000000000000...`  
 ![2⦻4](images/24.svg)
+
+## contact
+
+For Intellectual Property inquiries or collaborations, reach out via:
+
+- Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
+- 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
+- 𝕏: [@0x_bitnats](https://x.com/0x_bitnats)
+- Telegram: [@bitnat_sats](https://t.me/bitant_sats)
+
+[0.bitnats/inscription/53394039](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
+
+Bitcoin wallet addresses associated with the original inscription:  
+bc1pr8mtdatgt58yypf938kc4rcr5vw4xl2vexvueef37dnpk9jwac7qhu0ma6
