@@ -22,6 +22,17 @@ The 0x.bitnats [dashboard](https://dune.com/bitgnat/0x-bitnats) is updated daily
 📙**0x Bitnats**:  
 ➤ expansionary total supply of 0x bitnats
 
+## Hash Depth Traits
+
+Bitcoin blocks are classified into traits based on their hash depth (number of leading zeros):
+- Range from `0x08` (8 leading zeros) to `0x25` (25 leading zeros)
+- Each trait represents a specific mining difficulty level
+- Higher trait values indicate more computational work required
+
+Example:
+- `0x08`: Hash starts with 8 zeros (lower difficulty)
+- `0x25`: Hash starts with 25 zeros (highest difficulty)
+
 # COLLECTION
 
 **ruleset**  
