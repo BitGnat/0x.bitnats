@@ -2,7 +2,7 @@
 
  the rarest digital artifacts  
 
-# BASICS
+## Basics
 
 👉 0x.bitnats are [ordinal inscriptions](https://docs.ordinals.com/) on ₿itcoin  
 👉 0x.bitnats inscriptions are on-chain claims to Bitcoin block data  
@@ -10,7 +10,7 @@
 👉 0x.bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
 👉 0x.bitnats are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
 
-# Hash Depth Traits
+## Hash Depth Traits
 
 Bitcoin blocks are classified into traits based on their hash depth (number of leading zeros):
 - Range from `0x08` (8 leading zeros) to `0x24` (24 leading zeros)
@@ -21,9 +21,13 @@ Example:
 - `0x08`: Hash starts with 8 zeros (lower difficulty)
 - `0x24`: Hash starts with 24 zeros (highest difficulty)
 
-# COLLECTION
+# Collection
 
-**ruleset**  
+[build](inscriptions.json)
+
+[build](meta.json)
+
+**Reference Ruleset**  
 
 1️⃣ `block_height.bitnats`(text/plain)  
 &nbsp;&nbsp;&nbsp;&nbsp;at  
