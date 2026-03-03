@@ -10,16 +10,16 @@
 👉 0x.bitnats traits are derived from the number of leading zeros of the block hash: 0x00000000...  
 👉 0x.bitnats are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
 
-## Hash Depth Traits
+# Hash Depth Traits
 
 Bitcoin blocks are classified into traits based on their hash depth (number of leading zeros):
-- Range from `0x08` (8 leading zeros) to `0x25` (25 leading zeros)
+- Range from `0x08` (8 leading zeros) to `0x24` (24 leading zeros)
 - Each trait represents a specific mining difficulty level
 - Higher trait values indicate more computational work required
 
 Example:
 - `0x08`: Hash starts with 8 zeros (lower difficulty)
-- `0x25`: Hash starts with 25 zeros (highest difficulty)
+- `0x24`: Hash starts with 24 zeros (highest difficulty)
 
 # COLLECTION
 
@@ -40,9 +40,9 @@ Example:
 
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
-## contact
+# CONTACT
 
-For Intellectual Property inquiries or collaborations, reach out via:
+For Intellectual Property inquiries or collaborations:
 
 - Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
 - 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
