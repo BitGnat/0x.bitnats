@@ -40,101 +40,13 @@ Example:
 
 `1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
 
-## collection image
-
-
-## 0x08 blocks
-
-block_hash : `0x00000000...`  
-
-
-## 0x09 blocks
-
-block_hash : `0x000000000...`  
-
-
-## 0x10 blocks
-
-block_hash : `0x0000000000...`  
-
-
-## 0x11 blocks
-
-block_hash : `0x00000000000...`  
-
-
-## 0x12 blocks
-
-block_hash : `0x000000000000...`  
-
-
-## 0x13 blocks
-
-block_hash : `0x0000000000000...`  
-
-
-## 0x14 blocks
-
-block_hash : `0x00000000000000...`  
-
-
-## 0x15 blocks
-
-block_hash : `0x000000000000000...`  
-
-
-## 0x16 blocks
-
-block_hash : `0x0000000000000000...`  
-
-
-## 0x17 blocks
-
-block_hash : `0x00000000000000000...`  
-
-
-## 0x18 blocks
-
-block_hash : `0x000000000000000000...`  
-
-
-## 0x19 blocks
-
-block_hash : `0x0000000000000000000...`  
-
-
-## 0x20 blocks
-
-block_hash : `0x00000000000000000000...`  
-
-
-## 0x21 blocks
-
-block_hash : `0x000000000000000000000...`  
-
-
-## 0x22 blocks
-
-block_hash : `0x0000000000000000000000...`  
-
-
-## 0x23 blocks
-
-block_hash : `0x00000000000000000000000...`  
-
-
-## 0x24 blocks
-
-block_hash : `0x000000000000000000000000...`  
-
-
 ## contact
 
 For Intellectual Property inquiries or collaborations, reach out via:
 
 - Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
 - 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
-- 𝕏: [@0x_bitnats](https://x.com/0x_bitnats)
+- Discord: [Mscribe]([https://x.com/0x_bitnats](https://discord.gg/kxdzuzhC))
 - Telegram: [@bitnat_sats](https://t.me/bitant_sats)
 
 [0.bitnats/inscription/53394039](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
