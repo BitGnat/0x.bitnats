@@ -23,9 +23,9 @@ Example:
 
 # Collection
 
-[build](inscriptions.json)
+➠ build/inscriptions.json (raw)
 
-[build](meta.json)
+➠ build/meta.json
 
 **Reference Ruleset**  
 
