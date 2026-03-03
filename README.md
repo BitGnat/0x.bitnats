@@ -1,6 +1,6 @@
-# 0x.bitnats
+# **⦻** bitnats **⦻**
 
-**⦻** the rarest digital artifacts **⦻**  
+ the rarest digital artifacts  
 
 # BASICS
 
