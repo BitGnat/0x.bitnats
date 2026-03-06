@@ -57,6 +57,7 @@ protocol rules contained in this repository.
 - [Specification](#specification)
 - [Repository Structure](#repository-structure)
 - [License](#license)
+- [Trademark](#trademark)
 
 ## Protocol Overview
 
@@ -593,3 +594,11 @@ This project is provided **as-is**, without warranty of any kind.
 
 The maintainers assume no responsibility for software bugs, financial loss,
 or misuse of the protocol.
+
+## Trademark
+
+"Bitnats" and the ⦻ Bitnats mark are trademarks of the Bitnats project.
+
+This repository contains open protocol specifications and datasets under
+the MIT License. Use of the Bitnats name, brand, or visual identity in
+commercial products or services may require permission.
