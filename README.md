@@ -5,7 +5,7 @@ A protocol for extracting Bitcoin block hash entropy into ordinal artifacts and 
 
 ---
 
-A **Bitnat Block** is an ordinal artifact representing a Bitcoin block whose
+A **Bitnats Block** is an ordinal artifact representing a Bitcoin block whose
 hash contains **N leading hexadecimal zeros**.
 
 These leading zeros represent measurable **hash entropy** produced by
