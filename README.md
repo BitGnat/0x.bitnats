@@ -5,37 +5,27 @@ A protocol for extracting Bitcoin block hash entropy into ordinal artifacts and 
 
 ---
 
-A **Bitnats Block** is an ordinal artifact representing a Bitcoin block whose
-hash contains **N leading hexadecimal zeros**.
+A **Bitnats Block** is an ordinal artifact representing a Bitcoin block whose hash contains **N leading hexadecimal zeros**.
 
-These leading zeros represent measurable **hash entropy** produced by
-Bitcoin mining. The Bitnats protocol captures this entropy and converts it
-into on-chain artifacts and derived units.
+These leading zeros represent measurable **hash entropy** produced by Bitcoin mining. The Bitnats protocol captures this entropy and converts it into on-chain artifacts and derived units.
 
-Each Bitnat Block is therefore a deterministic representation of a
-specific moment in Bitcoin’s proof-of-work history.
+Each Bitnat Block is therefore a deterministic representation of a specific moment in Bitcoin’s proof-of-work history.
 
-The artifact’s rarity is derived directly from the number of leading
-hexadecimal zeros in the block hash and can be reproduced entirely from
-public Bitcoin blockchain data.
+The artifact’s rarity is derived directly from the number of leading hexadecimal zeros in the block hash and can be reproduced entirely from public Bitcoin blockchain data.
 
 ---
 
-From each Forged Bitnats Block, the protocol allows the extraction of
-**Bitnat Bitcoins** — individual units derived from the block's entropy.
+From each Forged Bitnats Block, the protocol allows the extraction of **Bitnat Bitcoins** — individual units derived from the block's entropy.
 
 Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
 
 These units are **not fungible tokens**.
 
-Every Bitnat Bitcoin retains the **block provenance** of the Forged Bitnats Block
-from which it was derived, making each unit uniquely tied to a specific
-Bitcoin block and its entropy signature.
+Every Bitnat Bitcoin retains the **block provenance** of the Forged Bitnats Block from which it was derived, making each unit uniquely tied to a specific Bitcoin block and its entropy signature.
 
 ---
 
-Bitnats artifacts are defined exclusively by the canonical dataset and
-protocol rules contained in this repository.
+Bitnats artifacts are defined exclusively by the canonical dataset and protocol rules contained in this repository.
 
 ## Table of Contents
 
@@ -63,19 +53,13 @@ protocol rules contained in this repository.
 
 ## Protocol Overview
 
-The **0x.bitnats protocol** deterministically maps Bitcoin block hash
-entropy into ordinal artifacts and derived non-fungible units.
+The **0x.bitnats protocol** deterministically maps Bitcoin block hash entropy into ordinal artifacts and derived non-fungible units.
 
-Bitcoin mining produces measurable entropy in the form of block hashes.
-The Bitnats protocol captures this entropy and binds it to ordinal
-artifacts representing specific Bitcoin blocks.
+Bitcoin mining produces measurable entropy in the form of block hashes. The Bitnats protocol captures this entropy and binds it to ordinal artifacts representing specific Bitcoin blocks.
 
-These artifacts may then be extended through derived inscriptions and
-used to mint provenance-bound units tied to the entropy of the original
-block.
+These artifacts may then be extended through derived inscriptions and used to mint provenance-bound units tied to the entropy of the original block.
 
-All artifact validity can be reproduced deterministically using only
-public Bitcoin blockchain data:
+All artifact validity can be reproduced deterministically using only public Bitcoin blockchain data:
 
 - Bitcoin block headers
 - block hashes
@@ -84,8 +68,7 @@ public Bitcoin blockchain data:
 
 ## Protocol Primitives
 
-The **0x.bitnats protocol** defines three core primitives that convert
-Bitcoin proof-of-work entropy into artifacts and derived units.
+The **0x.bitnats protocol** defines three core primitives that convert Bitcoin proof-of-work entropy into artifacts and derived units.
 
 | Primitive | Description |
 |---|---|
@@ -93,8 +76,7 @@ Bitcoin proof-of-work entropy into artifacts and derived units.
 | **Forged Bitnats Block** | Derived artifact reinscribed on the same satoshi as the base artifact |
 | **Bitnat Bitcoin** | Non-fungible unit minted from the entropy of a forged bitnats block |
 
-These primitives transform **Bitcoin block hash entropy** into both
-collectible artifacts and provenance-bound units.
+These primitives transform **Bitcoin block hash entropy** into both collectible artifacts and provenance-bound units.
 
 Protocol flow:
 
@@ -176,20 +158,17 @@ A Bitcoin block qualifies as a **bitnats block** if:
 
 These rules ensure deterministic artifact identity.
 
-The Bitnats Block sat refers to the canonical satoshi used to
-inscribe the base bitnats block artifact for each valid Bitnat Block within the
-deterministic Bitnats dataset.
+The Bitnats Block sat refers to the canonical satoshi used to inscribe the base bitnats block artifact for each valid Bitnat Block within the deterministic Bitnats dataset.
 
 ## Canonical Artifact Rules
 
 The Bitnats protocol defines a **single canonical set of Base Bitnats Block artifacts**.
 
-An artifact may only be considered a **valid Base Bitnats Block** if it satisfies **all**
-of the following conditions.
+An artifact may only be considered a **valid Base Bitnats Block** if it satisfies **all** of the following conditions.
 
 ### 1. Canonical Base Set
 
-The canonical Bitnats base set consists of **224,175 valid Base Bitnats Blocks**.
+The canonical Bitnats base set consists of **224,174 valid Base Bitnats Blocks**.
 
 These blocks are defined deterministically by:
 
@@ -199,7 +178,7 @@ These blocks are defined deterministically by:
 
 The dataset contained in this repository defines the **complete base bitnats block set**.
 
-Inscriptions not contained within this dataset are **not Base Bitnats Blocks**.
+Inscription ID's not contained within this dataset are **not Base Bitnats Blocks**.
 
 ---
 
@@ -209,33 +188,28 @@ A valid **Base Bitnat Block artifact** must satisfy the following:
 
 1. The referenced Bitcoin block must already be **mined and confirmed**.
 2. The block must exist within the **canonical Bitnats base dataset**.
-3. The inscription must be placed on the **first satoshi of the canonical
-Base Bitnat Block sat** defined by the dataset.
+3. The inscription must be placed on the **first satoshi of the canonical Base Bitnat Block sat** defined by the dataset.
 4. The base artifact must be the **first inscription (`i0`) on that sat**.
 
-If any of these conditions are not met, the artifact is **not recognized as a
-Base Bitnats Block**.
+If any of these conditions are not met, the artifact is **not recognized as a Base Bitnats Block**.
 
 ---
 
 ### 3. Forged Bitnats Blocks
 
-Forged Bitnat artifacts represent **visual or derived artifacts created from a
-valid Base Bitnats Block**.
+Forged Bitnat artifacts represent **visual or derived artifacts created from a valid Base Bitnats Block**.
 
 A Forged Bitnats Block is valid only if:
 
 - it references a valid Base Bitnats Block
 - the base artifact exists and satisfies the Base Bitnats Block Artifact Rules
-- the forged bitnats block artifact is produced through the official Bitnats forging
-infrastructure
+- the forged bitnats block artifact is produced through the official Bitnats forging infrastructure
 
 The official forging infrastructure is operated at:
 
 forge.bitnats.io
 
-Artifacts claiming to be forged Bitnats that are produced outside of this
-system are **not canonical Bitnats**.
+Artifacts claiming to be forged Bitnats that are produced outside of this system are **not canonical Bitnats**.
 
 ---
 
@@ -245,14 +219,13 @@ The Bitnats protocol enforces a deterministic supply model:
 
 | Category | Supply Source |
 |--------|--------|
-| Base Bitnat Blocks | 225,000 canonical blocks |
+| Base Bitnat Blocks | 224,174 canonical blocks |
 | Forged Bitnats | derived from base blocks |
 | New Bitnat Blocks | issued only via Bitnats protocol infrastructure |
 
 The protocol recognizes **only one canonical lineage of artifacts**.
 
-Forks, replicas, or derivative collections that attempt to mimic Bitnats are
-not recognized by the protocol.
+Forks, replicas, or derivative collections that attempt to mimic Bitnats are not recognized by the protocol.
 
 ---
 
@@ -272,18 +245,15 @@ This allows independent verification without relying on a centralized service.
 
 ### 6. Canonical Registry
 
-The canonical Bitnats dataset and artifact definitions are published in this
-repository and serve as the **reference implementation** for the protocol.
+The canonical Bitnats dataset and artifact definitions are published in this repository and serve as the **reference implementation** for the protocol.
 
-Explorers, marketplaces, and indexers should reference this dataset when
-determining whether an artifact is a valid Bitnat.
+Explorers, marketplaces, and indexers should reference this dataset when determining whether an artifact is a valid Bitnat.
 
 ---
 
 ### 7. Non-Canonical Artifacts
 
-Artifacts that fail any of the canonical rules above are considered
-**non-canonical**.
+Artifacts that fail any of the canonical rules above are considered **non-canonical**.
 
 Examples include:
 
@@ -296,8 +266,7 @@ Such artifacts may exist on-chain but **are not Bitnats**.
 
 ## Rarity
 
-Bitnats block rarity is determined by the number of leading hexadecimal
-zeros in the Bitcoin block hash.
+Bitnats block rarity is determined by the number of leading hexadecimal zeros in the Bitcoin block hash.
 
 Trait definition:
 
@@ -329,7 +298,7 @@ Higher values indicate greater hash entropy and therefore greater rarity.
 
 ### Trait Distribution
 
-The following distribution reflects the observed bitnat block supply through **Bitcoin block 939,413**.
+The following distribution reflects the observed total bitnat block supply through **Bitcoin block 939,413**.
 
 | trait | leading_zeros | supply | share | approx probability | category |
 |------|------|------|------|------|------|
@@ -400,8 +369,7 @@ Expected probability for a Bitcoin block hash to contain N leading hexadecimal z
 | 31            | ⦻31   | 1 / 16³¹             | 21,267,647,932,558,653,965,558,717,221,223,817,216  |
 | 32            | ⦻32   | 1 / 16³²             | 340,282,366,920,938,463,463,374,607,431,768,211,456 |
 
-Each additional leading hexadecimal zero represents a **16× increase in
-hash rarity**.
+Each additional leading hexadecimal zero represents a **16× increase in hash rarity**.
 
 # Bitnat Bitcoin Supply
 
@@ -419,8 +387,7 @@ Total supply grows deterministically as new blocks with leading zeros are discov
 
 Approximately **225,000 Base Bitcoin Blocks** satisfy the eligibility rules.
 
-For indexing efficiency and marketplace compatibility the collection
-is partitioned into **nine volumes**.
+For indexing efficiency and marketplace compatibility the collection is partitioned into **nine volumes**.
 
 Each volume represents a deterministic subset of the dataset.
 
@@ -436,8 +403,7 @@ Procedure:
 4. Filter blocks with ≥ 1 leading zero
 5. Apply inscription eligibility rules
 
-Because the rules depend only on Bitcoin block data, the collection
-remains fully verifiable.
+Because the rules depend only on Bitcoin block data, the collection remains fully verifiable.
 
 ## Data Sources
 
@@ -452,8 +418,7 @@ No external metadata is required to determine artifact validity.
 
 ## Forging
 
-Base bitnat blocks may be **reinscribed** with derived visual artifacts
-generated from block hash entropy.
+Base bitnat blocks may be **reinscribed** with derived visual artifacts generated from block hash entropy.
 
 Forged artifacts:
 
