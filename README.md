@@ -176,8 +176,8 @@ A Bitcoin block qualifies as a **bitnats block** if:
 
 These rules ensure deterministic artifact identity.
 
-The Bitnat Block sat refers to the canonical satoshi used to
-inscribe the base artifact for each valid Bitnat Block within the
+The Bitnats Block sat refers to the canonical satoshi used to
+inscribe the base bitnats block artifact for each valid Bitnat Block within the
 deterministic Bitnats dataset.
 
 ## Canonical Artifact Rules
@@ -199,7 +199,7 @@ These blocks are defined deterministically by:
 
 The dataset contained in this repository defines the **complete base bitnats block set**.
 
-Blocks not contained within this dataset are **not Base Bitnats Blocks**.
+Inscriptions not contained within this dataset are **not Base Bitnats Blocks**.
 
 ---
 
