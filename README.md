@@ -58,7 +58,7 @@ protocol rules contained in this repository.
 - [Repository Structure](#repository-structure)
 - [License](#license)
 - [Trademark](#trademark)
-- [Support BitGnat](#support-bitgnat)
+- [Support the Bitnats Project](#support-the-bitnats-project)
 
 
 ## Protocol Overview
@@ -607,7 +607,7 @@ commercial products or services may require permission.
 
 ---
 
-## Support BitGnat
+## Support the Bitnats Project 
 
 The Bitnats protocol is maintained by BitGnat.
 
@@ -620,7 +620,7 @@ Bitcoin Address
 bc1qq92uur8dp65n87x40m2ta3qve2l2znuqwyg0s8
 ```
 
-![Bitcoin Donation QR](images/donate-btc.png)
+<img src="images/donate-btc.svg" width="256" />
 
 Donations are voluntary and provide no special privileges,
 governance rights, or ownership in the Bitnats protocol.
