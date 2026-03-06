@@ -107,7 +107,7 @@ Mintable supply from a forged bitnats block:
 
 Minting is only possible from **forged bitnat blocks**.
 
-Base artifacts alone cannot produce Bitnat Bitcoins.
+Base bitnats block artifacts alone cannot produce Bitnat Bitcoins.
 
 ## Eligibility Rules
 
