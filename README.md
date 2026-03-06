@@ -21,14 +21,14 @@ public Bitcoin blockchain data.
 
 ---
 
-From each Bitnats Block, the protocol allows the extraction of
+From each Forged Bitnats Block, the protocol allows the extraction of
 **Bitnat Bitcoins** — individual units derived from the block's entropy.
 
 Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
 
 These units are **not fungible tokens**.
 
-Every Bitnat Bitcoin retains the **block provenance** of the Bitnats Block
+Every Bitnat Bitcoin retains the **block provenance** of the Forge Bitnats Block
 from which it was derived, making each unit uniquely tied to a specific
 Bitcoin block and its entropy signature.
 
@@ -38,7 +38,7 @@ The 0x.bitnats protocol defines three primitives:
 
 | Primitive | Description |
 |---|---|
-| **Bitnats Block** | Canonical ordinal artifact representing a Bitcoin block with N leading hexadecimal zeros |
+| **Base Bitnats Block** | Canonical ordinal artifact representing a Bitcoin block with N leading hexadecimal zeros |
 | **Forged Bitnats Block** | Derived artifact reinscribed on the same satoshi as the base block |
 | **Bitnat Bitcoin** | non-fungible unit minted from the entropy of a forged bitnat block |
 
@@ -46,13 +46,13 @@ These primitives transform **Bitcoin block hash entropy** into both collectible 
 
 Bitcoin Block  
       ↓  
-Bitnats Block (artifact)  
+Base Bitnats Block (artifact)  
       ↓  
 Forged Bitnats Block (derived artifact)  
       ↓  
 Bitnat Bitcoin (non-fungible unit)  
 
-entity: bitnats_block  
+entity: base_bitnats_block  
 entity: forged_bitnats_block  
 entity: bitnat_bitcoin  
 
@@ -60,7 +60,7 @@ entity: bitnat_bitcoin
 
 Each bitnats block artifact consists of inscriptions placed on the **same satoshi**.
 
-### Bitnats Block (i0)
+### Base Bitnats Block (i0)
 
 The canonical artifact.
 
@@ -120,7 +120,7 @@ A Bitcoin block qualifies as a **bitnats block** if:
 
 These rules ensure deterministic artifact identity.
 
-The Base Bitnat Block sat refers to the canonical satoshi used to
+The Bitnat Block sat refers to the canonical satoshi used to
 inscribe the base artifact for each valid Bitnat Block within the
 deterministic Bitnats dataset.
 
