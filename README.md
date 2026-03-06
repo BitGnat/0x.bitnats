@@ -37,17 +37,28 @@ Bitcoin block and its entropy signature.
 Bitnats artifacts are defined exclusively by the canonical dataset and
 protocol rules contained in this repository.
 
-## Protocol Primitives
+## Protocol Overview
 
-The 0x.bitnats protocol defines three primitives:
+The **0x.bitnats protocol** deterministically maps Bitcoin block hash entropy
+into ordinal artifacts and derived non-fungible units.
+
+The protocol operates through three primitives:
 
 | Primitive | Description |
 |---|---|
-| **Base Bitnats Block** | Canonical ordinal artifact representing a Bitcoin block with N leading hexadecimal zeros |
-| **Forged Bitnats Block** | Derived artifact reinscribed on the same satoshi as the base block |
-| **Bitnat Bitcoin** | non-fungible unit minted from the entropy of a forged bitnat block |
+| Base Bitnats Block | canonical artifact representing a Bitcoin block with N leading hexadecimal zeros |
+| Forged Bitnats Block | derived artifact reinscribed on the same satoshi |
+| Bitnat Bitcoin | non-fungible unit minted from the entropy of a forged block |
 
-These primitives transform **Bitcoin block hash entropy** into both collectible artifacts and non-fungible units.
+The protocol converts **proof-of-work entropy** into verifiable digital artifacts
+using only public Bitcoin blockchain data.
+
+All artifact validity can be reproduced deterministically from:
+
+- Bitcoin block headers
+- block hashes
+- ordinal inscription ordering
+- canonical dataset rules
 
 Bitcoin Block  
       ↓  
