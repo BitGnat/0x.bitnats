@@ -182,28 +182,28 @@ deterministic Bitnats dataset.
 
 ## Canonical Artifact Rules
 
-The Bitnats protocol defines a **single canonical set of Bitnat artifacts**.
+The Bitnats protocol defines a **single canonical set of Base Bitnats Block artifacts**.
 
-An artifact may only be considered a **valid Bitnat** if it satisfies **all**
+An artifact may only be considered a **valid Base Bitnats Block** if it satisfies **all**
 of the following conditions.
 
 ### 1. Canonical Base Set
 
-The canonical Bitnats base set consists of **225,000 valid Bitnat Blocks**.
+The canonical Bitnats base set consists of **224,175 valid Base Bitnats Blocks**.
 
 These blocks are defined deterministically by:
 
 - Bitcoin block hashes containing **N leading hexadecimal zeros**
-- Inclusion in the canonical Bitnats dataset
-- Placement within the published Bitnats volumes
+- Inclusion in the canonical Base Bitnats Block dataset
+- Placement within the published Base Bitnats Block volumes
 
-The dataset contained in this repository defines the **complete base set**.
+The dataset contained in this repository defines the **complete base bitnats block set**.
 
-Blocks not contained within this dataset are **not Bitnat Blocks**.
+Blocks not contained within this dataset are **not Base Bitnats Blocks**.
 
 ---
 
-### 2. Base Artifact Rules
+### 2. Base Bitnats Block Artifact Rules
 
 A valid **Base Bitnat Block artifact** must satisfy the following:
 
@@ -214,26 +214,25 @@ Base Bitnat Block sat** defined by the dataset.
 4. The base artifact must be the **first inscription (`i0`) on that sat**.
 
 If any of these conditions are not met, the artifact is **not recognized as a
-Bitnat Block**.
+Base Bitnats Block**.
 
 ---
 
-### 3. Forged Bitnats
+### 3. Forged Bitnats Blocks
 
 Forged Bitnat artifacts represent **visual or derived artifacts created from a
-valid Base Bitnat Block**.
+valid Base Bitnats Block**.
 
-A forged Bitnat is valid only if:
+A Forged Bitnats Block is valid only if:
 
-- it references a valid Base Bitnat Block
-- the base artifact exists and satisfies the Base Artifact Rules
-- the forged artifact is produced through the official Bitnats forging
+- it references a valid Base Bitnats Block
+- the base artifact exists and satisfies the Base Bitnats Block Artifact Rules
+- the forged bitnats block artifact is produced through the official Bitnats forging
 infrastructure
 
 The official forging infrastructure is operated at:
 
 forge.bitnats.io
-
 
 Artifacts claiming to be forged Bitnats that are produced outside of this
 system are **not canonical Bitnats**.
