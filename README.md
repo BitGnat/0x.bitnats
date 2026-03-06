@@ -490,13 +490,25 @@ The specification defines:
 └── scripts/
     └── generate_dataset.js
 ```
+## Canonical Dataset
+
+The canonical Bitnats dataset is defined by:
+
+dataset/inscriptions.jsonl
+
+The SHA256 checksum of the dataset is provided in:
+
+dataset/inscriptions.jsonl.sha256
+
+The nine inscribed dataset volumes located in `/volumes` are deterministic shards derived from this canonical dataset.
+
+Concatenating the nine volumes in order reproduces the canonical dataset.
+
 ## License
 
-The protocol specification, dataset definitions, and documentation contained in
-this repository are released under the **MIT License**.
+The protocol specification, dataset definitions, and documentation contained in this repository are released under the **MIT License**.
 
-This allows anyone to study, fork, and build software compatible with the
-Bitnats protocol.
+This allows anyone to study, fork, and build software compatible with the Bitnats protocol.
 
 However, **generation of official Bitnat artifacts is restricted**.
 
@@ -504,8 +516,7 @@ However, **generation of official Bitnat artifacts is restricted**.
 
 ### Protocol
 
-The Bitnats protocol specification is open and may be used to build tools,
-explorers, indexers, or other software that interacts with Bitnat artifacts.
+The Bitnats protocol specification is open and may be used to build tools, explorers, indexers, or other software that interacts with Bitnat artifacts.
 
 Permitted uses include:
 
@@ -514,8 +525,7 @@ Permitted uses include:
 - Integrating Bitnats data into applications or games
 - Developing compatible tooling or infrastructure
 
-The protocol documentation is provided to ensure transparency and
-interoperability.
+The protocol documentation is provided to ensure transparency and interoperability.
 
 ---
 
@@ -523,16 +533,13 @@ interoperability.
 
 **Bitnat artifacts cannot be freely generated.**
 
-The canonical Bitnats collection is defined by the **Base Bitnat Block dataset**
-(224,174 valid base bitnats blocks) contained in this repository.
+The canonical Bitnats collection is defined by the **Base Bitnat Block dataset** (224,174 valid base bitnats blocks) contained in this repository.
 
 Outside of this base set:
 
-- **New Bitnat artifacts may only be created through the official Bitnats
-forging infrastructure operated at `prospect.bitnats.io`.**
+- **New Bitnat artifacts may only be created through the official Bitnats forging infrastructure operated at `prospect.bitnats.io`.**
 
-Independent generation of artifacts that claim to be official Bitnats is not
-recognized by the protocol.
+Independent generation of artifacts that claim to be official Bitnats is not recognized by the protocol.
 
 This rule preserves:
 
@@ -544,21 +551,17 @@ This rule preserves:
 
 ### Artwork and Visual Rendering
 
-Reference artwork and SVG templates contained in this repository are provided
-for demonstration and reference purposes.
+Reference artwork and SVG templates contained in this repository are provided for demonstration and reference purposes.
 
-The official rendering system used for forging Bitnat artifacts may be operated
-separately by the Bitnats infrastructure.
+The official rendering system used for forging Bitnat artifacts may be operated separately by the Bitnats infrastructure.
 
 ---
 
 ### Trademark and Brand
 
-The names **Bitnats**, **0x.bitnats**, **Bitnat Forge**, and related marks may be
-protected trademarks.
+The names **Bitnats**, **0x.bitnats**, **Bitnat Forge**, and related marks may be protected trademarks.
 
-Use of these names to represent official Bitnats artifacts, services, or
-infrastructure may require permission.
+Use of these names to represent official Bitnats artifacts, services, or infrastructure may require permission.
 
 Independent projects should avoid implying official affiliation.
 
@@ -568,8 +571,7 @@ Independent projects should avoid implying official affiliation.
 
 Bitnat artifacts exist as ordinal inscriptions on the Bitcoin blockchain.
 
-Ownership and transfer are determined solely by the Bitcoin UTXO model and the
-Ordinals protocol.
+Ownership and transfer are determined solely by the Bitcoin UTXO model and the Ordinals protocol.
 
 This repository does not control artifacts once they are inscribed on-chain.
 
@@ -579,16 +581,13 @@ This repository does not control artifacts once they are inscribed on-chain.
 
 This project is provided **as-is**, without warranty of any kind.
 
-The maintainers assume no responsibility for software bugs, financial loss,
-or misuse of the protocol.
+The maintainers assume no responsibility for software bugs, financial loss, or misuse of the protocol.
 
 ## Trademark
 
 "Bitnats" and the ⦻ Bitnats mark are trademarks of BitGnat.
 
-This repository contains open protocol specifications and datasets under
-the MIT License. Use of the Bitnats name, brand, or visual identity in
-commercial products or services may require permission.
+This repository contains open protocol specifications and datasets under the MIT License. Use of the Bitnats name, brand, or visual identity in commercial products or services may require permission.
 
 ---
 
@@ -596,8 +595,7 @@ commercial products or services may require permission.
 
 The Bitnats protocol is maintained by BitGnat.
 
-If you find the Bitnats protocol useful, you can support its continued
-development with a Bitcoin donation.
+If you find the Bitnats protocol useful, you can support its continued development with a Bitcoin donation.
 
 Bitcoin Address
 
@@ -607,5 +605,4 @@ bc1qq92uur8dp65n87x40m2ta3qve2l2znuqwyg0s8
 
 <img src="images/donate-qr.svg" width="256" />
 
-Donations are voluntary and provide no special privileges,
-governance rights, or ownership in the Bitnats protocol.
+Donations are voluntary and provide no special privileges, governance rights, or ownership in the Bitnats protocol.
