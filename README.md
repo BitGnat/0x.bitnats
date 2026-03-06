@@ -309,29 +309,31 @@ The specification defines:
 
 ## Repository Structure
 
-0x.bitnats/  
-│  
-├─ README.md  
-│  
-├─ docs/  
-│  └─ specification.md  
-│  
-├─ images/  
-│  └─ icon.svg  
-│  
-├─ volumes/  
-│  ├─ volume1.json  
-│  ├─ volume2.json  
-│  ├─ volume3.json  
-│  ├─ volume4.json  
-│  ├─ volume5.json  
-│  ├─ volume6.json  
-│  ├─ volume7.json  
-│  ├─ volume8.json  
-│  └─ volume9.json  
-│  
-└─ scripts/  
-   └─ generate_dataset.js  
+```
+0x.bitnats/
+│
+├── README.md
+│
+├── docs/
+│   └── specification.md
+│
+├── images/
+│   └── icon.svg
+│
+├── volumes/
+│   ├── volume1.json
+│   ├── volume2.json
+│   ├── volume3.json
+│   ├── volume4.json
+│   ├── volume5.json
+│   ├── volume6.json
+│   ├── volume7.json
+│   ├── volume8.json
+│   └── volume9.json
+│
+└── scripts/
+    └── generate_dataset.js
+```
 
 ## License
 
