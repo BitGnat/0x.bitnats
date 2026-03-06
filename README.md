@@ -597,7 +597,7 @@ or misuse of the protocol.
 
 ## Trademark
 
-"Bitnats" and the ⦻ Bitnats mark are trademarks of the Bitnats project.
+"Bitnats" and the ⦻ Bitnats mark are trademarks of BitGnat.
 
 This repository contains open protocol specifications and datasets under
 the MIT License. Use of the Bitnats name, brand, or visual identity in
