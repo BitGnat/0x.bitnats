@@ -500,9 +500,38 @@ The SHA256 checksum of the dataset is provided in:
 
 dataset/inscriptions.jsonl.sha256
 
-The nine inscribed dataset volumes located in `/volumes` are deterministic shards derived from this canonical dataset.
+The nine inscribed dataset volumes in `volumes/` are deterministic shards derived from this canonical dataset. Concatenating them in order reproduces the canonical dataset.
 
-Concatenating the nine volumes in order reproduces the canonical dataset.
+### Dataset Verification
+
+To verify the volumes:
+
+1. Ensure you have Node.js installed.
+2. Run the verification script included in this repository:
+
+```bash
+node scripts/verify_volumes.js
+```
+
+The script will:
+
+Concatenate the nine volumes in order.
+
+Compute the SHA256 hash of the combined file.
+
+Compare it against the canonical dataset hash (dataset/inscriptions.jsonl.sha256).
+
+If the hash matches, you will see:
+
+✅ Reconstruction verified. Hash matches canonical dataset.
+
+If it does not match, the script will report an error:
+
+❌ Reconstruction failed!
+Expected: <canonical hash>
+Actual:   <computed hash>
+
+This ensures the volumes in the repository are exact, verifiable shards of the canonical dataset.
 
 ## License
 
