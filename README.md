@@ -58,7 +58,8 @@ Example:
 
 ## Marketplace Display
 
-📙 Bitnats Blocks shall be rendered as plain text  
+📙 Bitnats Blocks shall be rendered as bitnats icon:
+
 📙 Bitnats Blocks shall be re-inscribed for on-chain artwork (wip)
 
 ## Contact
@@ -70,7 +71,6 @@ For Intellectual Property inquiries or collaborations:
 - Discord: [BitGnat @ Mscribe](https://discord.gg/kxdzuzhC)
 - Telegram: [@bitnat_sats](https://t.me/bitant_sats)
 
-[0.bitnats/inscription/53394039](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
+[0.bitnats](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
 
-Bitcoin wallet address associated with the original inscription:  
-bc1pr8mtdatgt58yypf938kc4rcr5vw4xl2vexvueef37dnpk9jwac7qhu0ma6
+[0x.bitnats](https://ordinals.com/inscription/78a676fe082dc9c392b7d3bbf9ef2ee7cc0370a0e471be3d5f83e679511a2255i0)
