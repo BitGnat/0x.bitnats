@@ -32,6 +32,11 @@ Every Bitnat Bitcoin retains the **block provenance** of the Forged Bitnats Bloc
 from which it was derived, making each unit uniquely tied to a specific
 Bitcoin block and its entropy signature.
 
+---
+
+Bitnats artifacts are defined exclusively by the canonical dataset and
+protocol rules contained in this repository.
+
 ## Protocol Primitives
 
 The 0x.bitnats protocol defines three primitives:
@@ -123,6 +128,121 @@ These rules ensure deterministic artifact identity.
 The Bitnat Block sat refers to the canonical satoshi used to
 inscribe the base artifact for each valid Bitnat Block within the
 deterministic Bitnats dataset.
+
+## Canonical Artifact Rules
+
+The Bitnats protocol defines a **single canonical set of Bitnat artifacts**.
+
+An artifact may only be considered a **valid Bitnat** if it satisfies **all**
+of the following conditions.
+
+### 1. Canonical Base Set
+
+The canonical Bitnats base set consists of **225,000 valid Bitnat Blocks**.
+
+These blocks are defined deterministically by:
+
+- Bitcoin block hashes containing **N leading hexadecimal zeros**
+- Inclusion in the canonical Bitnats dataset
+- Placement within the published Bitnats volumes
+
+The dataset contained in this repository defines the **complete base set**.
+
+Blocks not contained within this dataset are **not Bitnat Blocks**.
+
+---
+
+### 2. Base Artifact Rules
+
+A valid **Base Bitnat Block artifact** must satisfy the following:
+
+1. The referenced Bitcoin block must already be **mined and confirmed**.
+2. The block must exist within the **canonical Bitnats base dataset**.
+3. The inscription must be placed on the **first satoshi of the canonical
+Base Bitnat Block sat** defined by the dataset.
+4. The base artifact must be the **first inscription (`i0`) on that sat**.
+
+If any of these conditions are not met, the artifact is **not recognized as a
+Bitnat Block**.
+
+---
+
+### 3. Forged Bitnats
+
+Forged Bitnat artifacts represent **visual or derived artifacts created from a
+valid Base Bitnat Block**.
+
+A forged Bitnat is valid only if:
+
+- it references a valid Base Bitnat Block
+- the base artifact exists and satisfies the Base Artifact Rules
+- the forged artifact is produced through the official Bitnats forging
+infrastructure
+
+The official forging infrastructure is operated at:
+
+forge.bitnats.io
+
+
+Artifacts claiming to be forged Bitnats that are produced outside of this
+system are **not canonical Bitnats**.
+
+---
+
+### 4. Canonical Supply
+
+The Bitnats protocol enforces a deterministic supply model:
+
+| Category | Supply Source |
+|--------|--------|
+| Base Bitnat Blocks | 225,000 canonical blocks |
+| Forged Bitnats | derived from base blocks |
+| New Bitnat Blocks | issued only via Bitnats protocol infrastructure |
+
+The protocol recognizes **only one canonical lineage of artifacts**.
+
+Forks, replicas, or derivative collections that attempt to mimic Bitnats are
+not recognized by the protocol.
+
+---
+
+### 5. Deterministic Verification
+
+A Bitnat artifact can be verified deterministically using:
+
+- Bitcoin block hash
+- canonical dataset inclusion
+- ordinal inscription placement
+- inscription index on the sat
+- artifact lineage
+
+This allows independent verification without relying on a centralized service.
+
+---
+
+### 6. Canonical Registry
+
+The canonical Bitnats dataset and artifact definitions are published in this
+repository and serve as the **reference implementation** for the protocol.
+
+Explorers, marketplaces, and indexers should reference this dataset when
+determining whether an artifact is a valid Bitnat.
+
+---
+
+### 7. Non-Canonical Artifacts
+
+Artifacts that fail any of the canonical rules above are considered
+**non-canonical**.
+
+Examples include:
+
+- inscriptions placed on incorrect sats
+- artifacts referencing non-eligible blocks
+- artifacts produced outside the official forging infrastructure
+- collections attempting to replicate Bitnats without following protocol rules
+
+Such artifacts may exist on-chain but **are not Bitnats**.
 
 ## Rarity
 
