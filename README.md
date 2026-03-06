@@ -114,7 +114,7 @@ Base artifacts alone cannot produce Bitnat Bitcoins.
 A Bitcoin block qualifies as a **bitnats block** if:
 
 1. The block hash begins with **one or more leading hexadecimal zeros**
-2. The inscription is placed on the **first sat of the block reward**
+2. The base Bitnat Block inscription must be placed on the **first satoshi of the Base Bitnat Block sat**, as defined by the canonical Bitnats base set.
 3. The base artifact must be the **first inscription (i0)** on the sat
 4. Only **one valid base artifact may exist per block**
 
