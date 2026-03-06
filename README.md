@@ -28,7 +28,7 @@ Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
 
 These units are **not fungible tokens**.
 
-Every Bitnat Bitcoin retains the **block provenance** of the Forge Bitnats Block
+Every Bitnat Bitcoin retains the **block provenance** of the Forged Bitnats Block
 from which it was derived, making each unit uniquely tied to a specific
 Bitcoin block and its entropy signature.
 
