@@ -503,7 +503,7 @@ interoperability.
 **Bitnat artifacts cannot be freely generated.**
 
 The canonical Bitnats collection is defined by the **Base Bitnat Block dataset**
-(225,000 valid blocks) contained in this repository.
+(224,174 valid base bitnats blocks) contained in this repository.
 
 Outside of this base set:
 
