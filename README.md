@@ -27,8 +27,7 @@ The 0x.bitnats protocol defines three primitives:
 | **Forged Bitnats Block** | Derived artifact reinscribed on the same satoshi as the base block |
 | **Bitnat Bitcoin** | non-fungible unit minted from the entropy of a forged bitnat block |
 
-These primitives transform **Bitcoin block hash entropy** into both
-collectible artifacts and fungible units.
+These primitives transform **Bitcoin block hash entropy** into both collectible artifacts and non-fungible units.
 
 ## Artifact Model
 
