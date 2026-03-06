@@ -45,23 +45,23 @@ The 0x.bitnats protocol defines three primitives:
 
 These primitives transform **Bitcoin block hash entropy** into both collectible artifacts and non-fungible units.
 
-Bitcoin Block
-      ↓
-Bitnat Block (artifact)
-      ↓
-Forged Bitnat (derived artifact)
-      ↓
-Bitnat Bitcoin (non-fungible unit)
+Bitcoin Block  
+      ↓  
+Bitnats Block (artifact)  
+      ↓  
+Forged Bitnats Block (derived artifact)  
+      ↓  
+Bitnat Bitcoin (non-fungible unit)  
 
-entity: bitnats_block
-entity: forged_bitnats_block
-entity: bitnat_bitcoin
+entity: bitnats_block  
+entity: forged_bitnats_block  
+entity: bitnat_bitcoin  
 
 ## Artifact Model
 
 Each bitnat artifact consists of inscriptions placed on the **same satoshi**.
 
-### Base Bitnat Block (i0)
+### Bitnats Block (i0)
 
 The canonical artifact.
 
@@ -74,7 +74,7 @@ Properties:
 
 The base artifact establishes the canonical representation of the block.
 
-### Forged Bitnat (i1+)
+### Forged Bitnats Block (i1+)
 
 Optional derived artifact.
 
@@ -87,7 +87,7 @@ Properties:
 
 Forged artifacts may include SVG and other deterministic representations.
 
-## Bitnat Bitcoins
+### Bitnat Bitcoins
 
 Bitnat Bitcoins are non-fungible units derived from the **leading-zero entropy of forged bitnats blocks**.
 
