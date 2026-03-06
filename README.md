@@ -239,7 +239,7 @@ Bitnat Bitcoins represent the total mintable entropy extracted from forged bitna
 
 Supply as of **Bitcoin block 939,413**:
 
-| base_blocks | bitnat_bitcoins |
+| base_bitnats_blocks | bitnat_bitcoins |
 |---|---|
 | 939,413 | 15,379,051 |
 
@@ -247,7 +247,7 @@ Total supply grows deterministically as new blocks with leading zeros are discov
 
 ## Collection Size
 
-Approximately **225,000 Bitcoin Blocks** satisfy the eligibility rules.
+Approximately **225,000 Base Bitcoin Blocks** satisfy the eligibility rules.
 
 For indexing efficiency and marketplace compatibility the collection
 is partitioned into **nine volumes**.
