@@ -60,6 +60,8 @@ Example:
 
 📙 Bitnats Blocks shall be rendered as bitnats icon:
 
+![Bitnats Icon](images/icon.svg "Bitnats Icon")
+
 📙 Bitnats Blocks shall be re-inscribed for on-chain artwork (wip)
 
 ## Contact
