@@ -120,6 +120,10 @@ A Bitcoin block qualifies as a **bitnats block** if:
 
 These rules ensure deterministic artifact identity.
 
+The Base Bitnat Block sat refers to the canonical satoshi used to
+inscribe the base artifact for each valid Bitnat Block within the
+deterministic Bitnats dataset.
+
 ## Rarity
 
 Bitnat Block rarity is determined by the number of leading hexadecimal
