@@ -1,7 +1,7 @@
 # 0x.bitnats
 <img src="images/icon.svg" width="120" />
 
-Bitcoin block artifacts derived from leading-zero block hash entropy.
+A protocol for extracting Bitcoin block hash entropy into artifacts and non-fungible units.
 
 A **bitnats block** is an ordinal artifact representing a Bitcoin block whose hash contains **N leading hexadecimal zeros**.
 
@@ -28,6 +28,18 @@ The 0x.bitnats protocol defines three primitives:
 | **Bitnat Bitcoin** | non-fungible unit minted from the entropy of a forged bitnat block |
 
 These primitives transform **Bitcoin block hash entropy** into both collectible artifacts and non-fungible units.
+
+Bitcoin Block
+      ↓
+Bitnat Block (artifact)
+      ↓
+Forged Bitnat (derived artifact)
+      ↓
+Bitnat Bitcoin (non-fungible unit)
+
+entity: bitnats_block
+entity: forged_bitnats_block
+entity: bitnat_bitcoin
 
 ## Artifact Model
 
