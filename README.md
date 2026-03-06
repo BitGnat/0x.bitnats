@@ -126,7 +126,7 @@ deterministic Bitnats dataset.
 
 ## Rarity
 
-Bitnat Block rarity is determined by the number of leading hexadecimal
+Bitnats block rarity is determined by the number of leading hexadecimal
 zeros in the Bitcoin block hash.
 
 Trait definition:
@@ -184,65 +184,83 @@ The following distribution reflects the observed bitnat block supply through **B
 
 ### Distribution Notes
 
-- Bitnat traits begin at **⦻08** because the forging dataset is derived from blocks meeting the minimum entropy threshold defined by the collection.
+- Bitnat traits begin at **⦻08** because the base bitnats block dataset is derived from blocks meeting the minimum entropy threshold defined by the collection.
 - The distribution evolves as new Bitcoin blocks are mined.
 - Rarity categories are descriptive labels and do **not** affect artifact validity.
 
-### Theoretical Maximum
+### Theoretical Maximum (Classical & Quantum Era)
 
-The theoretical maximum rarity for a Bitcoin block hash is:
+The theoretical maximum rarity for a Bitcoin block hash under classical mining is:
 
-⦻24
+⦻24 – corresponding to a block hash beginning with 24 leading hexadecimal zeros.
 
-This corresponds to a block hash beginning with **24 leading hexadecimal zeros**.
+In a quantum computing scenario, the theoretical maximum could extend up to:
+
+⦻32 – corresponding to a block hash beginning with 32 leading hexadecimal zeros, representing the ultimate upper bound.
 
 ### Expected Hash Probability
 
-Expected probability for a Bitcoin block hash to contain **N leading
-hexadecimal zeros**.
+Expected probability for a Bitcoin block hash to contain N leading hexadecimal zeros:
 
-| leading_zeros | trait | expected probability | approx 1 in N |
-|---|---|---|---|
-| 8 | ⦻08 | 1 / 16⁸ | 1 in 4,294,967,296 |
-| 9 | ⦻09 | 1 / 16⁹ | 1 in 68,719,476,736 |
-| 10 | ⦻10 | 1 / 16¹⁰ | 1 in 1,099,511,627,776 |
-| 11 | ⦻11 | 1 / 16¹¹ | 1 in 17,592,186,044,416 |
-| 12 | ⦻12 | 1 / 16¹² | 1 in 281,474,976,710,656 |
-| 13 | ⦻13 | 1 / 16¹³ | 1 in 4,503,599,627,370,496 |
-| 14 | ⦻14 | 1 / 16¹⁴ | 1 in 72,057,594,037,927,936 |
-| 15 | ⦻15 | 1 / 16¹⁵ | 1 in 1,152,921,504,606,846,976 |
-| 16 | ⦻16 | 1 / 16¹⁶ | 1 in 18,446,744,073,709,551,616 |
-| 17 | ⦻17 | 1 / 16¹⁷ | 1 in 295,147,905,179,352,825,856 |
-| 18 | ⦻18 | 1 / 16¹⁸ | 1 in 4,722,366,482,869,645,213,696 |
-| 19 | ⦻19 | 1 / 16¹⁹ | 1 in 75,557,863,725,914,323,419,136 |
-| 20 | ⦻20 | 1 / 16²⁰ | 1 in 1,208,925,819,614,629,174,706,176 |
-| 21 | ⦻21 | 1 / 16²¹ | 1 in 19,342,813,113,834,066,795,298,816 |
-| 22 | ⦻22 | 1 / 16²² | 1 in 309,485,009,821,345,068,724,781,056 |
-| 23 | ⦻23 | 1 / 16²³ | 1 in 4,951,760,157,141,521,099,596,496,896 |
-| 24 | ⦻24 | 1 / 16²⁴ | 1 in 79,228,162,514,264,337,593,543,950,336 |
-| 25 | ⦻25 | 1 / 16²⁵ | 1 in 1,267,650,600,228,229,401,496,703,205,376 |
+### Expected Hash Probability
+
+| leading_zeros | trait | expected probability | approx 1 in N                                       |
+| ------------- | ----- | -------------------- | --------------------------------------------------- |
+| 8             | ⦻08   | 1 / 16⁸              | 4,294,967,296                                       |
+| 9             | ⦻09   | 1 / 16⁹              | 68,719,476,736                                      |
+| 10            | ⦻10   | 1 / 16¹⁰             | 1,099,511,627,776                                   |
+| 11            | ⦻11   | 1 / 16¹¹             | 17,592,186,044,416                                  |
+| 12            | ⦻12   | 1 / 16¹²             | 281,474,976,710,656                                 |
+| 13            | ⦻13   | 1 / 16¹³             | 4,503,599,627,370,496                               |
+| 14            | ⦻14   | 1 / 16¹⁴             | 72,057,594,037,927,936                              |
+| 15            | ⦻15   | 1 / 16¹⁵             | 1,152,921,504,606,846,976                           |
+| 16            | ⦻16   | 1 / 16¹⁶             | 18,446,744,073,709,551,616                          |
+| 17            | ⦻17   | 1 / 16¹⁷             | 295,147,905,179,352,825,856                         |
+| 18            | ⦻18   | 1 / 16¹⁸             | 4,722,366,482,869,645,213,696                       |
+| 19            | ⦻19   | 1 / 16¹⁹             | 75,557,863,725,914,323,419,136                      |
+| 20            | ⦻20   | 1 / 16²⁰             | 1,208,925,819,614,629,174,706,176                   |
+| 21            | ⦻21   | 1 / 16²¹             | 19,342,813,113,834,066,795,298,816                  |
+| 22            | ⦻22   | 1 / 16²²             | 309,485,009,821,345,068,724,781,056                 |
+| 23            | ⦻23   | 1 / 16²³             | 4,951,760,157,141,521,099,596,496,896               |
+| 24            | ⦻24   | 1 / 16²⁴             | 79,228,162,514,264,337,593,543,950,336              |
+| 25            | ⦻25   | 1 / 16²⁵             | 1,267,650,600,228,229,401,496,703,205,376           |
+| 26            | ⦻26   | 1 / 16²⁶             | 20,282,409,603,596,470,423,204,851,261,696          |
+| 27            | ⦻27   | 1 / 16²⁷             | 324,518,553,658,426,726,783,156,020,576,256         |
+| 28            | ⦻28   | 1 / 16²⁸             | 5,192,296,858,534,827,628,530,496,329,244,096       |
+| 29            | ⦻29   | 1 / 16²⁹             | 83,076,749,736,557,242,056,088,740,707,905,536      |
+| 30            | ⦻30   | 1 / 16³⁰             | 1,329,227,995,784,915,872,897,419,851,326,488,576   |
+| 31            | ⦻31   | 1 / 16³¹             | 21,267,647,932,558,653,965,558,717,221,223,817,216  |
+| 32            | ⦻32   | 1 / 16³²             | 340,282,366,920,938,463,463,374,607,431,768,211,456 |
 
 ### Rarity Curve
 
 Observed distribution of bitnat traits (blocks through height 939,413)
 
-⦻08  ███████████████████
-⦻09  ████████
-⦻10  ███████
-⦻11  ████████
-⦻12  ████████
-⦻13  ████████████████████████████
-⦻14  ███████████
-⦻15  ███████
-⦻16  █████████████
-⦻17  ██████████████████████████████████
-⦻18  ███████████████████████████████████
-⦻19  █████████████████████████████████████████████████████████████████
-⦻20  ███████████████
-⦻21  █
-⦻22  ▏
-⦻23  ·
-⦻24  ·
+⦻08 ███████████████████
+⦻09 ████████
+⦻10 ███████
+⦻11 ████████
+⦻12 ████████
+⦻13 ████████████████████████████
+⦻14 ███████████
+⦻15 ███████
+⦻16 █████████████
+⦻17 ██████████████████████████████████
+⦻18 ███████████████████████████████████
+⦻19 █████████████████████████████████████████████████████████████████
+⦻20 ███████████████
+⦻21 █
+⦻22 ▏
+⦻23 ·
+⦻24 ·
+⦻25 ·
+⦻26 ·
+⦻27 ·
+⦻28 ·
+⦻29 ·
+⦻30 ·
+⦻31 ·
+⦻32 ·
 
 Each additional leading hexadecimal zero represents a **16× increase in
 hash rarity**.
