@@ -1,21 +1,37 @@
 # 0x.bitnats
 <img src="images/icon.svg" width="120" />
 
-A protocol for extracting Bitcoin block hash entropy into artifacts and non-fungible units.
+A protocol for extracting Bitcoin block hash entropy into ordinal artifacts and provenance-bound units.
 
-A **bitnats block** is an ordinal artifact representing a Bitcoin block whose hash contains **N leading hexadecimal zeros**.
+---
 
-The artifact's rarity is determined directly from Bitcoin block hash entropy and is reproducible from public blockchain data.
+A **Bitnat Block** is an ordinal artifact representing a Bitcoin block whose
+hash contains **N leading hexadecimal zeros**.
 
-## Overview
+These leading zeros represent measurable **hash entropy** produced by
+Bitcoin mining. The Bitnats protocol captures this entropy and converts it
+into on-chain artifacts and derived units.
 
-0x.bitnats are ordinal inscriptions that reference Bitcoin blocks whose hashes begin with one or more leading hexadecimal zeros.
+Each Bitnat Block is therefore a deterministic representation of a
+specific moment in Bitcoin’s proof-of-work history.
 
-Each artifact corresponds to a specific block height and derives its rarity deterministically from the number of leading zeros in the block hash.
+The artifact’s rarity is derived directly from the number of leading
+hexadecimal zeros in the block hash and can be reproduced entirely from
+public Bitcoin blockchain data.
 
-Because the rules are deterministic, the collection can always be reconstructed from Bitcoin block data.
+---
 
-The protocol also introduces **Bitnat Bitcoins**, non-fungible units derived from the entropy of forged bitnat blocks.
+From each Bitnat Block, the protocol allows the extraction of
+**Bitnat Bitcoins** — individual units derived from the block's entropy.
+
+Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
+
+These units are **not fungible tokens**.
+
+Every Bitnat Bitcoin retains the **block provenance** of the Bitnat Block
+from which it was derived, making each unit uniquely tied to a specific
+Bitcoin block and its entropy signature.
+
 
 ## Protocol Primitives
 
