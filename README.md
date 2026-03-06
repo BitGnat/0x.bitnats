@@ -334,6 +334,94 @@ The specification defines:
 └── scripts/
     └── generate_dataset.js
 ```
-
 ## License
 
+The protocol specification, dataset definitions, and documentation contained in
+this repository are released under the **MIT License**.
+
+This allows anyone to study, fork, and build software compatible with the
+Bitnats protocol.
+
+However, **generation of official Bitnat artifacts is restricted**.
+
+---
+
+### Protocol
+
+The Bitnats protocol specification is open and may be used to build tools,
+explorers, indexers, or other software that interacts with Bitnat artifacts.
+
+Permitted uses include:
+
+- Building explorers, galleries, or indexers
+- Creating software that reads Bitnats datasets
+- Integrating Bitnats data into applications or games
+- Developing compatible tooling or infrastructure
+
+The protocol documentation is provided to ensure transparency and
+interoperability.
+
+---
+
+### Artifact Generation
+
+**Bitnat artifacts cannot be freely generated.**
+
+The canonical Bitnats collection is defined by the **Base Bitnat Block dataset**
+(225,000 valid blocks) contained in this repository.
+
+Outside of this base set:
+
+- **New Bitnat artifacts may only be created through the official Bitnats
+forging infrastructure operated at `prospect.bitnats.io`.**
+
+Independent generation of artifacts that claim to be official Bitnats is not
+recognized by the protocol.
+
+This rule preserves:
+
+- canonical supply
+- deterministic rarity
+- dataset integrity
+
+---
+
+### Artwork and Visual Rendering
+
+Reference artwork and SVG templates contained in this repository are provided
+for demonstration and reference purposes.
+
+The official rendering system used for forging Bitnat artifacts may be operated
+separately by the Bitnats infrastructure.
+
+---
+
+### Trademark and Brand
+
+The names **Bitnats**, **0x.bitnats**, **Bitnat Forge**, and related marks may be
+protected trademarks.
+
+Use of these names to represent official Bitnats artifacts, services, or
+infrastructure may require permission.
+
+Independent projects should avoid implying official affiliation.
+
+---
+
+### On-Chain Artifacts
+
+Bitnat artifacts exist as ordinal inscriptions on the Bitcoin blockchain.
+
+Ownership and transfer are determined solely by the Bitcoin UTXO model and the
+Ordinals protocol.
+
+This repository does not control artifacts once they are inscribed on-chain.
+
+---
+
+### Warranty
+
+This project is provided **as-is**, without warranty of any kind.
+
+The maintainers assume no responsibility for software bugs, financial loss,
+or misuse of the protocol.
