@@ -455,16 +455,37 @@ The specification defines:
 ├── images/
 │   └── icon.svg
 │
-├── volumes/
-│   ├── volume1.json
-│   ├── volume2.json
-│   ├── volume3.json
-│   ├── volume4.json
-│   ├── volume5.json
-│   ├── volume6.json
-│   ├── volume7.json
-│   ├── volume8.json
-│   └── volume9.json
+├─ dataset/
+│  ├─ inscriptions.jsonl
+│  └─ inscriptions.jsonl.sha256
+│
+├─ volumes/
+│  ├─ volume1.jsonl
+│  ├─ volume1.jsonl.sha256
+│  │
+│  ├─ volume2.jsonl
+│  ├─ volume2.jsonl.sha256
+│  │
+│  ├─ volume3.jsonl
+│  ├─ volume3.jsonl.sha256
+│  │
+│  ├─ volume4.jsonl
+│  ├─ volume4.jsonl.sha256
+│  │
+│  ├─ volume5.jsonl
+│  ├─ volume5.jsonl.sha256
+│  │
+│  ├─ volume6.jsonl
+│  ├─ volume6.jsonl.sha256
+│  │
+│  ├─ volume7.jsonl
+│  ├─ volume7.jsonl.sha256
+│  │
+│  ├─ volume8.jsonl
+│  ├─ volume8.jsonl.sha256
+│  │
+│  └─ volume9.jsonl
+│  └─ volume9.jsonl.sha256
 │
 └── scripts/
     └── generate_dataset.js
