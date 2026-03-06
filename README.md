@@ -1,78 +1,103 @@
-# **⦻** BITNATS
+# 0x.bitnats
 
-*the rarest digital artifacts*
+Bitcoin block artifacts derived from leading-zero block hash entropy.
 
-## Bitnats Blocks & Bitnat ₿itcoins
+---
 
-👉 bitnats blocks are [ordinal inscriptions](https://docs.ordinals.com/) on ₿itcoin  
-👉 bitnats block inscriptions are on-chain claims to Bitcoin block data  
-👉 bitnats blocks become available to claim each time a ₿itcoin block is mined  
-👉 bitnats block rarity traits are derived from the number of leading zeros of block hashes: 0x00000000...  
-👉 bitnats blocks are directly correlated to Bitcoin's difficulty adjustment and the global hash power of the network  
-👉 bitnats blocks allow owners to mint a bitnat ₿itcoin for each leading zero of the claimed block hash  
+## Definition
 
-🟠 bitnat ₿itcoins are [ordinal inscriptions](https://docs.ordinals.com/) on ₿itcoin  
-🟠 bitnat ₿itcoins utilize ordinals *parent/child* relationships to maintain rarity traits to bitnats blocks   
-🟠 bitnat ₿itcoins can only be minted from Forged bitnats blocks: plain text ➠ on-chain art  
-🟠 bitnat ₿itcoins have specific rules for the size of the UTXO based on the hash depth
+0x.bitnats are ordinal inscriptions representing Bitcoin blocks whose
+hashes begin with one or more leading hexadecimal zeros.
 
+Each artifact corresponds to a specific block height and derives its
+rarity from the number of leading zeros in the block hash.
 
-## Hash Depth Traits
+---
 
-Bitnats blocks are classified into traits based on their hash depth (number of leading zeros):
-- Range from `0x08` (8 leading zeros) to `0x24` (24 leading zeros)
-- Each trait represents a specific mining difficulty level
-- Higher trait values indicate more computational work required
+## Artifact Structure
+
+Each bitnat consists of two inscriptions on the same sat:
+
+1. **Base Bitnat Block (i0)**
+   - plain text block reference
+   - canonical artifact identifier
+
+2. **Forged Bitnat (i1+)**
+   - optional visual or symbolic representation
+   - derived from the base block entropy
+
+---
+
+## Eligibility Rules
+
+A block qualifies as a bitnat if:
+
+1. The block hash begins with at least one leading hexadecimal zero.
+2. The inscription is placed on the **first sat of the block reward**.
+3. The base artifact must be the **first inscription (i0)** on the sat.
+4. Only one valid base artifact may exist per block.
+
+---
+
+## Rarity
+
+Rarity is determined by the number of leading hexadecimal zeros in the
+block hash.
 
 Example:
-- `0x08`: Hash starts with 8 zeros (lower difficulty)
-- `0x24`: Hash starts with 24 zeros (highest difficulty)
 
-## Collection
+| Trait | Meaning |
+|------|--------|
+| 0x1 | minimal rarity |
+| 0x2 | uncommon |
+| 0x3 | rare |
+| ... | ... |
+| 0x24 | theoretical maximum |
 
-**Supply & Rarity Traits**
+---
 
-🖥 [Dune Dashboard](https://dune.com/bitgnat/bitnats)
+## Collection Size
 
-**Unforged Base Set**
+Approximately **225,000 blocks** satisfy the eligibility rules.
 
-➠ The free 🆓 community mint generated ~225k valid base bitnats blocks plain text with no on-chain artwork (unforged)  
-➠ Valid Base Set: build/inscriptions.json (raw data)
+The collection is partitioned into **nine volumes** for indexing and
+marketplace pagination.
 
-**Reference Ruleset**
+---
 
-1️⃣ `block_height.bitnats`(text/plain)  
-&nbsp;&nbsp;&nbsp;&nbsp;at  
-&nbsp;&nbsp;&nbsp;&nbsp;reveal transaction output 0  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inscription id = `<revealtransaction>i0`  
-➥ **first inscription on sat**  
 
-2️⃣ `inscription_block` > `claimed_block`  
-➥ **previously mined blocks only**  
+---
 
-3️⃣ `minimum[inscription_number]`  
-➥ **first-inscription-is-first**  
+## Data Sources
 
-`1️⃣ + 2️⃣ + 3️⃣ = ✅ Valid base-bitnats-block`
+All artifacts derive from publicly verifiable Bitcoin data:
 
-## Marketplace Display
+- Bitcoin block headers
+- block hashes
+- block heights
+- ordinal inscription ordering
 
-📙 Bitnats Blocks shall be rendered as bitnats icon:
+---
 
-![Bitnats Icon](images/icon.svg "Bitnats Icon")
+## Verification
 
-📙 Bitnats Blocks shall be re-inscribed for on-chain artwork (wip)
+The dataset can be independently reproduced by:
 
-## Contact
+1. Enumerating Bitcoin blocks
+2. Counting leading hexadecimal zeros in each block hash
+3. Applying the eligibility rules
+4. verifying inscription ordering
 
-For Intellectual Property inquiries or collaborations:
+---
 
-- Email: [miners.founts_0c@icloud.com](mailto:miners.founts_0c@icloud.com)  
-- 𝕏: [@bitnat_sats](https://x.com/bitnat_sats)
-- Discord: [BitGnat @ Mscribe](https://discord.gg/kxdzuzhC)
-- Telegram: [@bitnat_sats](https://t.me/bitant_sats)
+## Specification
 
-[0.bitnats](https://ordinals.com/inscription/3640c0659f28210aa9c1935ad235bf147d6521f609fdfa746b168a64871bb5a3i0)
+The full deterministic rules are defined in:
 
-[0x.bitnats](https://ordinals.com/inscription/78a676fe082dc9c392b7d3bbf9ef2ee7cc0370a0e471be3d5f83e679511a2255i0)
+docs/specification.md
+
+---
+
+## License
+
+CC0
