@@ -21,17 +21,16 @@ public Bitcoin blockchain data.
 
 ---
 
-From each Bitnat Block, the protocol allows the extraction of
+From each Bitnats Block, the protocol allows the extraction of
 **Bitnat Bitcoins** — individual units derived from the block's entropy.
 
 Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
 
 These units are **not fungible tokens**.
 
-Every Bitnat Bitcoin retains the **block provenance** of the Bitnat Block
+Every Bitnat Bitcoin retains the **block provenance** of the Bitnats Block
 from which it was derived, making each unit uniquely tied to a specific
 Bitcoin block and its entropy signature.
-
 
 ## Protocol Primitives
 
@@ -59,7 +58,7 @@ entity: bitnat_bitcoin
 
 ## Artifact Model
 
-Each bitnat artifact consists of inscriptions placed on the **same satoshi**.
+Each bitnats block artifact consists of inscriptions placed on the **same satoshi**.
 
 ### Bitnats Block (i0)
 
@@ -81,7 +80,6 @@ Optional derived artifact.
 Properties:
 
 - visual or symbolic representation
-- derived from block hash entropy
 - inscribed after the base artifact
 - does not alter the canonical base artifact
 
@@ -93,7 +91,7 @@ Bitnat Bitcoins are non-fungible units derived from the **leading-zero entropy o
 
 Each leading hexadecimal zero may be **minted as one Bitnat Bitcoin**.
 
-Minting converts block entropy into transferable units while preserving the canonical artifact.
+Minting converts block entropy into transferable units while preserving provenance to the canonical artifact.
 
 Example:
 
@@ -103,7 +101,7 @@ Trait:
 
 ⦻15
 
-Mintable supply from the block:
+Mintable supply from a forged bitnats block:
 
 15 Bitnat Bitcoins
 
