@@ -59,9 +59,33 @@ Properties:
 
 Forged artifacts may include SVG and other deterministic representations.
 
+## Bitnat Bitcoins
+
+Bitnat Bitcoins are non-fungible units derived from the **leading-zero entropy of forged bitnats blocks**.
+
+Each leading hexadecimal zero may be **minted as one Bitnat Bitcoin**.
+
+Minting converts block entropy into transferable units while preserving the canonical artifact.
+
+Example:
+
+Block hash: 000000000000000abc123...
+
+Trait:
+
+⦻15
+
+Mintable supply from the block:
+
+15 Bitnat Bitcoins
+
+Minting is only possible from **forged bitnat blocks**.
+
+Base artifacts alone cannot produce Bitnat Bitcoins.
+
 ## Eligibility Rules
 
-A Bitcoin block qualifies as a **bitnat block** if:
+A Bitcoin block qualifies as a **bitnats block** if:
 
 1. The block hash begins with **one or more leading hexadecimal zeros**
 2. The inscription is placed on the **first sat of the block reward**
@@ -193,6 +217,18 @@ Observed distribution of bitnat traits (blocks through height 939,413)
 Each additional leading hexadecimal zero represents a **16× increase in
 hash rarity**.
 
+# Bitnat Bitcoin Supply
+
+Bitnat Bitcoins represent the total mintable entropy extracted from forged bitnat blocks.
+
+Supply as of **Bitcoin block 939,413**:
+
+| base_blocks | bitnat_bitcoins |
+|---|---|
+| 939,413 | 15,379,051 |
+
+Total supply grows deterministically as new blocks with leading zeros are discovered.
+
 ## Collection Size
 
 Approximately **225,000 Bitcoin Blocks** satisfy the eligibility rules.
@@ -247,12 +283,12 @@ Formal protocol rules are defined in:
 
 docs/specification.md
 
-
 The specification defines:
 
 - deterministic artifact rules
 - eligibility verification
 - rarity calculation
+- minting rules for Bitnat Bitcoins
 - inscription ordering requirements
 
 ## Repository Structure
