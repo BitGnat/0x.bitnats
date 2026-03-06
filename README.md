@@ -202,8 +202,6 @@ In a quantum computing scenario, the theoretical maximum could extend up to:
 
 Expected probability for a Bitcoin block hash to contain N leading hexadecimal zeros:
 
-### Expected Hash Probability
-
 | leading_zeros | trait | expected probability | approx 1 in N                                       |
 | ------------- | ----- | -------------------- | --------------------------------------------------- |
 | 8             | ⦻08   | 1 / 16⁸              | 4,294,967,296                                       |
@@ -231,36 +229,6 @@ Expected probability for a Bitcoin block hash to contain N leading hexadecimal z
 | 30            | ⦻30   | 1 / 16³⁰             | 1,329,227,995,784,915,872,897,419,851,326,488,576   |
 | 31            | ⦻31   | 1 / 16³¹             | 21,267,647,932,558,653,965,558,717,221,223,817,216  |
 | 32            | ⦻32   | 1 / 16³²             | 340,282,366,920,938,463,463,374,607,431,768,211,456 |
-
-### Rarity Curve
-
-Observed distribution of bitnat traits (blocks through height 939,413)
-
-⦻08 ███████████████████
-⦻09 ████████
-⦻10 ███████
-⦻11 ████████
-⦻12 ████████
-⦻13 ████████████████████████████
-⦻14 ███████████
-⦻15 ███████
-⦻16 █████████████
-⦻17 ██████████████████████████████████
-⦻18 ███████████████████████████████████
-⦻19 █████████████████████████████████████████████████████████████████
-⦻20 ███████████████
-⦻21 █
-⦻22 ▏
-⦻23 ·
-⦻24 ·
-⦻25 ·
-⦻26 ·
-⦻27 ·
-⦻28 ·
-⦻29 ·
-⦻30 ·
-⦻31 ·
-⦻32 ·
 
 Each additional leading hexadecimal zero represents a **16× increase in
 hash rarity**.
