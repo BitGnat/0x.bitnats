@@ -58,6 +58,8 @@ protocol rules contained in this repository.
 - [Repository Structure](#repository-structure)
 - [License](#license)
 - [Trademark](#trademark)
+- [Support BitGnat](#support-bitgnat)
+
 
 ## Protocol Overview
 
@@ -602,3 +604,23 @@ or misuse of the protocol.
 This repository contains open protocol specifications and datasets under
 the MIT License. Use of the Bitnats name, brand, or visual identity in
 commercial products or services may require permission.
+
+---
+
+## Support BitGnat
+
+The Bitnats protocol is maintained by BitGnat.
+
+If you find the Bitnats protocol useful, you can support its continued
+development with a Bitcoin donation.
+
+Bitcoin Address
+
+```
+bc1qq92uur8dp65n87x40m2ta3qve2l2znuqwyg0s8
+```
+
+![Bitcoin Donation QR](images/donate-btc.png)
+
+Donations are voluntary and provide no special privileges,
+governance rights, or ownership in the Bitnats protocol.
