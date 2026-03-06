@@ -385,7 +385,7 @@ Total supply grows deterministically as new blocks with leading zeros are discov
 
 ## Collection Size
 
-Approximately **225,000 Base Bitcoin Blocks** satisfy the eligibility rules.
+**224,174 Base Bitcoin Blocks** satisfy the eligibility rules.
 
 For indexing efficiency and marketplace compatibility the collection is partitioned into **nine volumes**.
 
