@@ -1,0 +1,8 @@
+# ----------------------------------------
+# Bitnats AI Architecture Context (private)
+# ----------------------------------------
+
+ai-context/
+spec/
+prompts/
+scratch/

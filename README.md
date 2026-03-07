@@ -19,7 +19,7 @@ From each Forged Bitnats Block, the protocol allows the extraction of **Bitnat B
 
 Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
 
-These units are **not fungible tokens**.
+These units are **not fungible tokens** and they are **not arbitrary tokens**.
 
 Every Bitnat Bitcoin retains the **block provenance** of the Forged Bitnats Block from which it was derived, making each unit uniquely tied to a specific Bitcoin block and its entropy signature.
 
@@ -125,7 +125,7 @@ Forged artifacts may include SVG and other deterministic representations.
 
 ### Bitnat Bitcoins
 
-Bitnat Bitcoins are non-fungible units derived from the **leading-zero entropy of forged bitnats blocks**.
+Bitnat Bitcoins are non-fungible and non-arbitrary units derived from the **leading-zero entropy of forged bitnats blocks**.
 
 Each leading hexadecimal zero may be **minted as one Bitnat Bitcoin**.
 
@@ -137,7 +137,7 @@ Block hash: 000000000000000abc123...
 
 Trait:
 
-⦻15
+0x15
 
 Mintable supply from a forged bitnats block:
 
@@ -153,8 +153,7 @@ A Bitcoin block qualifies as a **bitnats block** if:
 
 1. The block hash begins with **one or more leading hexadecimal zeros**
 2. The referenced Bitcoin block must already exist on-chain at the time the base Bitnat Block artifact is inscribed.
-3. The base Bitnat Block artifact must be the **first inscription (i0)** on the designated Base Bitnat Block sat
-4. Only **one valid Base Bitnat Block artifact may exist per Bitcoin block**
+3. Only **one valid Base Bitnat Block artifact may exist per Bitcoin block**
 
 These rules ensure deterministic artifact identity.
 
@@ -186,10 +185,18 @@ Inscription ID's not contained within this dataset are **not Base Bitnats Blocks
 
 A valid **Base Bitnat Block artifact** must satisfy the following:
 
-1. The referenced Bitcoin block must already be **mined and confirmed**.
+1. The referenced Bitcoin block **must have already been mined and confirmed**.
 2. The block must exist within the **canonical Bitnats base dataset**.
 3. The inscription must be placed on the **first satoshi of the canonical Base Bitnat Block sat** defined by the dataset.
-4. The base artifact must be the **first inscription (`i0`) on that sat**.
+4. The base artifact must be the **first inscription (`i0`) on that satoshi and the first such inscription to be mined on-chain**.
+
+The Bitnats protocol follows a **first-is-first rule**:
+
+- The earliest mined inscription claiming the canonical Base Bitnat Block sat
+  is considered the **valid Base Bitnats Block artifact**.  
+
+- Any later inscriptions on the same sat, or competing claims mined later,
+  are **not recognized by the protocol**, even if they attempt to replicate the artifact.
 
 If any of these conditions are not met, the artifact is **not recognized as a Base Bitnats Block**.
 
@@ -220,8 +227,8 @@ The Bitnats protocol enforces a deterministic supply model:
 | Category | Supply Source |
 |--------|--------|
 | Base Bitnat Blocks | 224,174 canonical blocks |
-| Forged Bitnats | derived from base blocks |
-| New Bitnat Blocks | issued only via Bitnats protocol infrastructure |
+| Forged Bitnats Blocks | derived from base blocks |
+| New Bitnats Blocks | issued only via Bitnats protocol infrastructure |
 
 The protocol recognizes **only one canonical lineage of artifacts**.
 
@@ -300,7 +307,7 @@ Higher values indicate greater hash entropy and therefore greater rarity.
 
 The following distribution reflects the observed total bitnat block supply through **Bitcoin block 939,413**.
 
-| trait | leading_zeros | supply | share | approx probability | category |
+| trait_display | leading_zeros | supply | share | approx probability | category |
 |------|------|------|------|------|------|
 | ⦻08 | 8 | 47,419 | 5.05% | 1 in 20 | Select |
 | ⦻09 | 9 | 20,178 | 2.15% | 1 in 47 | Select |
@@ -341,7 +348,7 @@ In a quantum computing scenario, the theoretical maximum could extend up to:
 
 Expected probability for a Bitcoin block hash to contain N leading hexadecimal zeros:
 
-| leading_zeros | trait | expected probability | approx 1 in N                                       |
+| leading_zeros | trait_display | expected probability | approx 1 in N                                       |
 | ------------- | ----- | -------------------- | --------------------------------------------------- |
 | 8             | ⦻08   | 1 / 16⁸              | 4,294,967,296                                       |
 | 9             | ⦻09   | 1 / 16⁹              | 68,719,476,736                                      |
@@ -488,7 +495,7 @@ The specification defines:
 │  └─ volume9.jsonl.sha256
 │
 └── scripts/
-    └── generate_dataset.js
+    └─ verify_volumes.js
 ```
 ## Canonical Dataset
 
