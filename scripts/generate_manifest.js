@@ -73,7 +73,6 @@ function buildManifest() {
   return {
     name: "0x.bitnats canonical dataset",
     version: 1,
-    description: "Deterministic dataset of valid Base Bitnat Block inscriptions.",
     dataset_file: toRepoPath(DATASET_FILE),
     dataset_bytes: datasetBytes,
     dataset_sha256: datasetSha256,
