@@ -2,43 +2,53 @@
   "name": "0x.bitnats canonical dataset",
   "version": 1,
   "dataset_file": "dataset/inscriptions.jsonl",
+  "dataset_bytes": 17037223,
   "dataset_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
   "volume_count": 9,
   "volumes": [
     {
       "file": "volumes/volume1.jsonl",
+      "bytes": 1900000,
       "sha256": "41eebd1e9699a08e7746da4902f69a0afe797e411fb1b724bf4386e3bdf20dd9"
     },
     {
       "file": "volumes/volume2.jsonl",
+      "bytes": 1900000,
       "sha256": "64cff9e293f748871afbb584e295014b8a8e7dcd1147d0802e6b1479b6a4c785"
     },
     {
       "file": "volumes/volume3.jsonl",
+      "bytes": 1900000,
       "sha256": "5b3a356c5297682918d5fd6851522e3e4b8e0a743d6ed5ccb39959a6267d73ed"
     },
     {
       "file": "volumes/volume4.jsonl",
+      "bytes": 1900000,
       "sha256": "7f20876c20f5e9a033b6ed6565bf7e772c24a0aa64d3affa7097268ee24621eb"
     },
     {
       "file": "volumes/volume5.jsonl",
+      "bytes": 1900000,
       "sha256": "d869c29b000040f0fbad72267a87eee4c6229e5edab312cfcf804aecbf1aa950"
     },
     {
       "file": "volumes/volume6.jsonl",
+      "bytes": 1900000,
       "sha256": "9622bca48d60450c4cc6a121876ba4bc624f7334617e9fe5ae965b204aa454ce"
     },
     {
       "file": "volumes/volume7.jsonl",
+      "bytes": 1900000,
       "sha256": "4fec75581bc1cc3dbe21fe7fe98d83cc357139546ce50e877d1293f3e51c9495"
     },
     {
       "file": "volumes/volume8.jsonl",
+      "bytes": 1900000,
       "sha256": "733bb12d12c1d748cbdac9fbae5210b08a4279db728f8d235561834f779d9c9a"
     },
     {
       "file": "volumes/volume9.jsonl",
+      "bytes": 1837223,
       "sha256": "8cfb8ba0241ef840bb5579b765eb414a9f1fa58735e3646962def24b0aee43b9"
     }
   ]
