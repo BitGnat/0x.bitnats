@@ -1,0 +1,18 @@
+{
+  "name": "0x.bitnats canonical dataset",
+  "description": "Deterministic dataset of valid Bitnat Block inscriptions.",
+  "dataset_file": "dataset/inscriptions.jsonl",
+  "dataset_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+  "volume_count": 9,
+  "volumes": [
+    "volumes/volume1.jsonl",
+    "volumes/volume2.jsonl",
+    "volumes/volume3.jsonl",
+    "volumes/volume4.jsonl",
+    "volumes/volume5.jsonl",
+    "volumes/volume6.jsonl",
+    "volumes/volume7.jsonl",
+    "volumes/volume8.jsonl",
+    "volumes/volume9.jsonl"
+  ]
+}
