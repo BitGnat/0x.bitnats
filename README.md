@@ -513,8 +513,7 @@ The nine inscribed dataset volumes in `volumes/` are deterministic shards derive
 
 To verify the volumes:
 
-1. Ensure you have Node.js installed.
-2. Run the verification script included in this repository:
+Run the verification script included in this repository:
 
 ```bash
 node scripts/verify_volumes.js
