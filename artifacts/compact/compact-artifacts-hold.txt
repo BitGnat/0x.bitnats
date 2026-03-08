@@ -1,0 +1,11 @@
+canonical source: dataset/inscriptions.jsonl
+
+each record must match {"id":"<64hex>i0"}
+
+encoder extracts only the 32-byte txid
+
+shards are written as concatenated raw txid bytes
+
+decoder rebuilds canonical JSONL exactly
+
+verifier concatenates decoded records, hashes result, checks against canonical dataset hash from manifest

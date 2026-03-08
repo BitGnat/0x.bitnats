@@ -1,0 +1,7 @@
+canonical form = JSONL
+
+inscribed transport form = compact binary shards
+
+on-chain proof target = manifest hash / dataset hash
+
+verification = transport decode → canonical JSONL → hash match
