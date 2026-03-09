@@ -1,0 +1,1 @@
+Define the exact deterministic encoding and decoding algorithm used to produce shards.
