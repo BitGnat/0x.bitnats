@@ -53,7 +53,7 @@ Bitnats artifacts are defined exclusively by the canonical dataset and protocol 
 
 ## Protocol Overview
 
-The **0x.bitnats protocol** deterministically maps Bitcoin block hash entropy into ordinal artifacts and derived non-fungible units.
+The **bitnats protocol** deterministically maps Bitcoin block hash entropy into ordinal artifacts and derived non-fungible units.
 
 Bitcoin mining produces measurable entropy in the form of block hashes. The Bitnats protocol captures this entropy and binds it to ordinal artifacts representing specific Bitcoin blocks.
 
@@ -68,7 +68,7 @@ All artifact validity can be reproduced deterministically using only public Bitc
 
 ## Protocol Primitives
 
-The **0x.bitnats protocol** defines three core primitives that convert Bitcoin proof-of-work entropy into artifacts and derived units.
+The **bitnats protocol** defines three core primitives that convert Bitcoin proof-of-work entropy into artifacts and derived units.
 
 | Primitive | Description |
 |---|---|
