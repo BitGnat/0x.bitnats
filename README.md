@@ -1,4 +1,4 @@
-# 0x.bitnats
+# bitnats
 <img src="images/icon.svg" width="120" />
 
 A protocol for extracting Bitcoin block hash entropy into ordinal artifacts and provenance-bound units.
