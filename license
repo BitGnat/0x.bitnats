@@ -1,6 +1,12 @@
-MIT License
+Bitnats Repository License
 
 Copyright (c) 2026 BitGnat
+
+This repository is licensed under the MIT License for software, protocol
+specifications, dataset definitions, and documentation, subject to the
+additional restrictions and notices set out below.
+
+MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +25,56 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Additional Restrictions and Notices
+
+1. Protocol Usage
+
+The Bitnats protocol specification is open and may be used to build tools,
+explorers, indexers, and other compatible software.
+
+2. Official Artifact Generation Restriction
+
+Bitnat artifacts cannot be freely generated as official Bitnats artifacts.
+The canonical Bitnats collection is defined by the Base Bitnat Block dataset
+contained in this repository (224,174 valid base Bitnats blocks).
+
+In protocol terms, canonical claims for a bitnat artifact require assignment to
+the protocol-defined bitnat sats and compliance with canonical dataset and
+inscription-order rules.
+
+Outside of this base set, new official Bitnat artifacts may only be created
+through the official Bitnats forging infrastructure operated at
+prospect.bitnats.io.
+
+Independent generation of artifacts that claim to be official Bitnats is not
+authorized under this license and is not recognized by the protocol.
+
+3. No Trademark License
+
+No rights are granted under this license to use the names Bitnats,
+0x.bitnats, Bitnat Forge, or any related marks, logos, or branding to imply
+official affiliation, endorsement, or canonical status.
+
+Any commercial or official brand usage may require separate permission from
+BitGnat.
+
+4. Artwork and Rendering Notice
+
+Reference artwork and SVG templates in this repository are provided for
+demonstration and reference purposes. Official rendering infrastructure may be
+operated separately by Bitnats infrastructure.
+
+5. On-Chain Artifact Notice
+
+Bitnat artifacts exist as ordinal inscriptions on the Bitcoin blockchain.
+Under protocol terminology, the corresponding canonical inscription placements
+are bitnat sats.
+
+Ownership and transfer are determined by the Bitcoin UTXO model and Ordinals
+protocol rules. This repository does not control artifacts once inscribed.
+
+6. Additional Warranty Notice
+
+Maintainers assume no responsibility for software bugs, financial loss, or
+misuse of the protocol.

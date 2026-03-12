@@ -555,9 +555,9 @@ However, **generation of official Bitnat artifacts is restricted**.
 
 ---
 
-### Protocol
+### Protocol Usage
 
-The Bitnats protocol specification is open and may be used to build tools, explorers, indexers, or other software that interacts with Bitnat artifacts.
+The Bitnats protocol specification is open and may be used to build tools, explorers, indexers, and other compatible software.
 
 Permitted uses include:
 
@@ -566,63 +566,62 @@ Permitted uses include:
 - Integrating Bitnats data into applications or games
 - Developing compatible tooling or infrastructure
 
-The protocol documentation is provided to ensure transparency and interoperability.
+---
+
+### Official Artifact Generation Restriction
+
+Bitnat artifacts cannot be freely generated as official Bitnats artifacts.
+The canonical Bitnats collection is defined by the Base Bitnat Block dataset
+contained in this repository (224,174 valid base Bitnats blocks).
+
+In protocol terms, canonical claims for a bitnat artifact require assignment to
+the protocol-defined bitnat sats and compliance with canonical dataset and
+inscription-order rules.
+
+Outside of this base set, new official Bitnat artifacts may only be created
+through the official Bitnats forging infrastructure operated at
+prospect.bitnats.io.
+
+Independent generation of artifacts that claim to be official Bitnats is not
+authorized and is not recognized by the protocol.
 
 ---
 
-### Artifact Generation
+### No Trademark License
 
-**Bitnat artifacts cannot be freely generated.**
+No rights are granted to use the names Bitnats, 0x.bitnats, Bitnat Forge, or
+any related marks, logos, or branding to imply official affiliation,
+endorsement, or canonical status.
 
-The canonical Bitnats collection is defined by the **Base Bitnat Block dataset** (224,174 valid base bitnats blocks) contained in this repository.
-
-Outside of this base set:
-
-- **New Bitnat artifacts may only be created through the official Bitnats forging infrastructure operated at `prospect.bitnats.io`.**
-
-Independent generation of artifacts that claim to be official Bitnats is not recognized by the protocol.
-
-This rule preserves:
-
-- canonical supply
-- deterministic rarity
-- dataset integrity
+Any commercial or official brand usage may require separate permission from
+BitGnat.
 
 ---
 
-### Artwork and Visual Rendering
+### Artwork and Rendering Notice
 
-Reference artwork and SVG templates contained in this repository are provided for demonstration and reference purposes.
-
-The official rendering system used for forging Bitnat artifacts may be operated separately by the Bitnats infrastructure.
-
----
-
-### Trademark and Brand
-
-The names **Bitnats**, **0x.bitnats**, **Bitnat Forge**, and related marks may be protected trademarks.
-
-Use of these names to represent official Bitnats artifacts, services, or infrastructure may require permission.
-
-Independent projects should avoid implying official affiliation.
+Reference artwork and SVG templates in this repository are provided for
+demonstration and reference purposes. Official rendering infrastructure may be
+operated separately by Bitnats infrastructure.
 
 ---
 
-### On-Chain Artifacts
+### On-Chain Artifact Notice
 
 Bitnat artifacts exist as ordinal inscriptions on the Bitcoin blockchain.
+Under protocol terminology, the corresponding canonical inscription placements
+are bitnat sats.
 
-Ownership and transfer are determined solely by the Bitcoin UTXO model and the Ordinals protocol.
-
-This repository does not control artifacts once they are inscribed on-chain.
+Ownership and transfer are determined by the Bitcoin UTXO model and Ordinals
+protocol rules. This repository does not control artifacts once inscribed.
 
 ---
 
-### Warranty
+### Additional Warranty Notice
 
 This project is provided **as-is**, without warranty of any kind.
-
-The maintainers assume no responsibility for software bugs, financial loss, or misuse of the protocol.
+Maintainers assume no responsibility for software bugs, financial loss, or
+misuse of the protocol.
 
 ## Trademark
 
