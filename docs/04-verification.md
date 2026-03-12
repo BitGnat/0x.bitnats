@@ -61,16 +61,32 @@ This binary dataset is the canonical protocol dataset moving forward.
 
 ## 3. Dataset Streams
 
-Dataset V2 supports family-separated streams.
+Dataset V2 supports family-separated streams with fixed, case-sensitive identifiers:
 
-### Prospect Stream
+- `base`
+- `prospect`
+- `forged`
 
-The Prospect Stream represents Base Bitnats Block artifacts.
+Each family defines an independent ordered stream and MUST be reconstructed independently.
+
+### Base Stream
+
+The Base Stream represents Base Bitnats Block artifacts.
 
 Identifier form:
 
 ```text
 <txid>i0
+```
+
+### Prospect Stream
+
+The Prospect Stream represents Prospect artifacts.
+
+Identifier form:
+
+```text
+<txid>i<decimal-index>
 ```
 
 ### Forged Stream
@@ -83,7 +99,7 @@ Identifier form:
 <txid>i1
 ```
 
-These streams MUST be stored independently but verified under the same dataset rules.
+These streams MUST be stored and verified independently under the same reconstruction and verification rules. Implementations MUST NOT mix families during reconstruction.
 
 ## 4. Manifest V2
 
@@ -92,10 +108,12 @@ Dataset reconstruction is defined by Manifest V2.
 Manifest V2 MUST define:
 
 - Dataset version
+- Family declarations (`base`, `prospect`, `forged`)
 - Shard ordering
 - Per-shard SHA-256 hashes
 - Reconstruction rules
-- Canonical binary dataset hash
+- Per-family canonical binary stream hashes
+- Per-family reconstructed JSONL hashes
 
 The manifest MUST NOT only store hashes.
 
@@ -105,23 +123,25 @@ Manifest V2 therefore acts as the protocol reconstruction contract.
 
 ## 5. Deterministic Dataset Reconstruction
 
-A verifier MUST be able to reconstruct the dataset deterministically from the following inputs:
+A verifier MUST be able to reconstruct each family stream deterministically from the following inputs:
 
 - Bitcoin blockchain data
 - Bitnats protocol rules
 - Dataset shards
 - Manifest V2
+- Selected family identifier (`base`, `prospect`, or `forged`)
 
 Reconstruction procedure:
 
 1. Load Manifest V2.
-2. Retrieve all shards referenced by the manifest.
-3. Verify each shard SHA-256 hash against the manifest.
-4. Concatenate shards in manifest-defined order.
-5. Verify that the reconstructed binary stream length is divisible by 33.
-6. Decode the stream as a sequence of 33-byte records.
-7. Reconstruct the canonical dataset representation.
-8. Compare the resulting dataset hash against the manifest commitment.
+2. Select the target family descriptor from the manifest.
+3. Retrieve all shards referenced by that family descriptor.
+4. Verify each shard SHA-256 hash against the family descriptor.
+5. Concatenate shards in manifest-defined family order.
+6. Verify that the reconstructed binary stream length is divisible by 33.
+7. Decode the stream as a sequence of 33-byte records.
+8. Reconstruct the deterministic JSONL representation.
+9. Compare the binary stream hash and reconstructed JSONL hash against the family commitments in the manifest.
 
 No trusted indexers are required.
 
@@ -157,7 +177,9 @@ For each 33-byte record, the verifier MUST emit exactly one JSON object in the f
 {"id":"<lowercase-hex-txid>i<decimal-index>"}
 ```
 
-The reconstructed JSONL dataset MUST produce the same canonical SHA-256 hash as Dataset V1.
+The reconstructed JSONL dataset MUST produce the expected canonical SHA-256 hash for the selected family.
+
+For `base`, the reconstructed JSONL hash MUST match the canonical V1 dataset hash. For `prospect` and `forged`, the reconstructed JSONL hash MUST match the corresponding per-family commitment in Manifest V2.
 
 This dual verification ensures:
 
@@ -171,37 +193,41 @@ Algorithm VerifyDatasetV2
 
 Input:
   manifest
-  shards
-  canonical_jsonl_hash
+	family
+	shards
 
 Procedure:
-  ordered_shards <- order_by_manifest(manifest, shards)
+	family_desc <- manifest.families[family]
+	if family_desc is MISSING
+			return FAILURE
+
+	ordered_shards <- order_by_manifest_family(family_desc, shards)
 
   for each shard in ordered_shards:
-	  if SHA256(shard.bytes) != manifest.shard_hash[shard.index]
-		  return FAILURE
+			if SHA256(shard.bytes) != family_desc.shards[shard.index].sha256
+					return FAILURE
 
-	  if length(shard.bytes) mod 33 != 0
-		  return FAILURE
+			if length(shard.bytes) mod 33 != 0
+					return FAILURE
 
   binary_stream <- concatenate(ordered_shards)
   binary_hash <- SHA256(binary_stream)
 
-  if binary_hash != manifest.binary_hash
-	  return FAILURE
+  if binary_hash != family_desc.stream_hash_sha256
+			return FAILURE
 
   records <- decode_33_byte_records(binary_stream)
   jsonl_dataset <- ""
 
   for each record in records:
-	  txid_hex <- lowercase_hex(record.txid)
-	  index_dec <- decimal(record.inscription_index)
-	  jsonl_dataset <- jsonl_dataset || '{"id":"' || txid_hex || 'i' || index_dec || '"}' || LF
+			txid_hex <- lowercase_hex(record.txid)
+			index_dec <- decimal(record.inscription_index)
+			jsonl_dataset <- jsonl_dataset || '{"id":"' || txid_hex || 'i' || index_dec || '"}' || LF
 
   jsonl_hash <- SHA256(jsonl_dataset)
 
-  if jsonl_hash != canonical_jsonl_hash
-	  return FAILURE
+  if jsonl_hash != family_desc.reconstructed_jsonl_hash_sha256
+			return FAILURE
 
   return SUCCESS
 ```
@@ -229,7 +255,7 @@ The resulting hash MUST match the value committed by `dataset/inscriptions.jsonl
 
 ### V2 Reference Procedure
 
-Reconstruct the canonical binary stream:
+For a selected family (`base`, `prospect`, or `forged`), reconstruct the canonical binary stream in manifest-defined shard order:
 
 ```sh
 cat shards/*.bin > dataset.bin
@@ -237,6 +263,8 @@ sha256sum dataset.bin
 ```
 
 Then reconstruct the deterministic JSONL representation and verify that its SHA-256 hash matches the canonical V1 dataset hash.
+
+For `base`, the reconstructed JSONL hash MUST match the canonical V1 dataset hash. For `prospect` and `forged`, the reconstructed JSONL hash MUST match the corresponding per-family commitment in Manifest V2.
 
 ## 10. Verification Scripts
 
@@ -291,9 +319,11 @@ Expected reconstructed JSONL SHA-256:
 Verification MUST fail if any of the following conditions occur:
 
 - Shard ordering mismatch
+- Invalid or missing family descriptor
 - Shard hash mismatch
 - Binary stream hash mismatch
 - Reconstructed JSONL hash mismatch
+- Family stream mixing during reconstruction
 - Dataset reconstruction differs from canonical ordering
 - A decoded block violates Bitnats eligibility rules
 - A referenced block was not yet mined
