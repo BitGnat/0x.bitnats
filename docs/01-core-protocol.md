@@ -2,9 +2,9 @@
 
 ## Protocol Properties
 
-- Bitnat artifacts derive entirely from Bitcoin block hash entropy and shall be defined only from publicly verifiable blockchain data.
-- Any verifier shall be able to reproduce Bitnat eligibility directly from the public Bitcoin blockchain without a trusted intermediary.
-- Extracted Bitnat units represent measurable proof-of-work entropy and must not exceed the entropy depth present in the originating block.
+- Bitnat artifacts derive entirely from Bitcoin block hash entropy and SHALL be defined only from publicly verifiable blockchain data.
+- Any verifier SHALL be able to reproduce Bitnat eligibility directly from the public Bitcoin blockchain without a trusted intermediary.
+- Extracted Bitnat units represent measurable proof-of-work entropy and MUST NOT exceed the entropy depth present in the originating block.
 
 ## Overview
 
@@ -22,13 +22,13 @@ A Bitnats Block is a Bitcoin block whose block hash begins with $N$ leading hexa
 
 For Bitnats classification, each additional leading hexadecimal zero represents a 16x increase in hash rarity relative to the previous depth.
 
-Bitnats Block eligibility shall be computed from Bitcoin block hash data only.
+Bitnats Block eligibility SHALL be computed from Bitcoin block hash data only.
 
 ### Entropy Depth (⦻N)
 
 Entropy depth is denoted as ⦻N, where $N$ equals the number of leading hexadecimal zeros in a Bitcoin block hash.
 
-⦻N shall define the entropy tier for that block.
+⦻N SHALL define the entropy tier for that block.
 
 ### Base Bitnats Block Artifact
 
@@ -36,12 +36,12 @@ A Base Bitnats Block Artifact is the canonical ordinal artifact representation o
 
 A Base Bitnats Block Artifact is valid only if all of the following conditions are satisfied:
 
-- The referenced Bitcoin block must already be mined and confirmed.
-- The referenced block must exist within the canonical Bitnats base dataset.
-- The inscription must be placed on the canonical Bitnats sat defined by the dataset.
-- The artifact must be the first inscription (i0) on that sat.
+- The referenced Bitcoin block MUST already be mined and confirmed.
+- The referenced block MUST exist within the canonical Bitnats base dataset.
+- The inscription MUST be placed on the canonical Bitnats sat defined by the dataset.
+- The artifact MUST be the first inscription (i0) on that sat.
 
-If any condition is violated, the artifact must not be recognized as a valid Base Bitnats Block Artifact.
+If any condition is violated, the artifact MUST NOT be recognized as a valid Base Bitnats Block Artifact.
 
 ### Forged Bitnats Block
 
@@ -49,7 +49,7 @@ A Forged Bitnats Block is the second inscription (i1) on the same canonical Bitn
 
 This artifact defines the derived artifact layer, including visual or interactive representations bound to the same sat lineage.
 
-For validity, a Forged Bitnats Block must reference a valid Base Bitnats Block Artifact and must be inscribed as i1 on that sat.
+For validity, a Forged Bitnats Block MUST reference a valid Base Bitnats Block Artifact and MUST be inscribed as i1 on that sat.
 
 ### Bitnats Bitcoin
 
@@ -57,7 +57,7 @@ Each leading hexadecimal zero in the originating block hash represents one extra
 
 These units are called Bitnat Bitcoins and represent discrete units of proof-of-work entropy derived from the originating block.
 
-For a block with entropy depth ⦻N, the total number of Bitnat Bitcoins derived from that block must not exceed $N$.
+For a block with entropy depth ⦻N, the total number of Bitnat Bitcoins derived from that block MUST NOT exceed $N$.
 
 ## Deterministic Reproducibility
 
