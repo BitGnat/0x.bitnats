@@ -226,7 +226,7 @@ The Bitnats protocol enforces a deterministic supply model:
 
 | Category | Supply Source |
 |--------|--------|
-| Base Bitnat Blocks | 224,174 canonical blocks |
+| Base Bitnats Blocks | 224,174 canonical blocks |
 | Forged Bitnats Blocks | derived from base blocks |
 | New Bitnats Blocks | issued only via Bitnats protocol infrastructure |
 
@@ -238,7 +238,7 @@ Forks, replicas, or derivative collections that attempt to mimic Bitnats are not
 
 ### 5. Deterministic Verification
 
-A Bitnat artifact can be verified deterministically using:
+A Bitnats Block artifact can be verified deterministically using:
 
 - Bitcoin block hash
 - canonical dataset inclusion
@@ -254,7 +254,7 @@ This allows independent verification without relying on a centralized service.
 
 The canonical Bitnats dataset and artifact definitions are published in this repository and serve as the **reference implementation** for the protocol.
 
-Explorers, marketplaces, and indexers should reference this dataset when determining whether an artifact is a valid Bitnat.
+Explorers, marketplaces, and indexers should reference this dataset when determining whether an artifact is a valid Bitnats Block.
 
 ---
 
@@ -437,107 +437,113 @@ Forging allows visual representations of the underlying entropy.
 
 ## Specification
 
-Formal protocol rules are defined in:
+Formal protocol rules are defined in the `docs/` directory.
 
-docs/specification.md
+| Document | Description |
+|---|---|
+| `docs/00-overview.md` | Protocol overview, scope, and reading order |
+| `docs/01-core-protocol.md` | Core protocol primitives and invariants |
+| `docs/02-artifact-rules.md` | Artifact validity and eligibility rules |
+| `docs/03-dataset.md` | Dataset specification — V1 historical and V2 canonical binary |
+| `docs/04-verification.md` | Deterministic verification procedures and test vectors |
+| `docs/05-specification.md` | Complete normative protocol specification |
+| `docs/06-manifest-v2-spec.md` | Manifest V2 formal specification |
+| `docs/07-encoding-algorithm.md` | V2 canonical encoding and decoding algorithm |
 
-The specification defines:
-
-- deterministic artifact rules
-- eligibility verification
-- rarity calculation
-- minting rules for Bitnat Bitcoins
-- inscription ordering requirements
+`docs/05-specification.md` is normative. All other documents define terms, rules, and procedures referenced by the normative specification.
 
 ## Repository Structure
 
 ```
-0x.bitnats/
+bitnats/
 │
 ├── README.md
 │
 ├── docs/
-│   └── specification.md
+│   ├── 00-overview.md
+│   ├── 01-core-protocol.md
+│   ├── 02-artifact-rules.md
+│   ├── 03-dataset.md
+│   ├── 04-verification.md
+│   ├── 05-specification.md
+│   ├── 06-manifest-v2-spec.md
+│   └── 07-encoding-algorithm.md
 │
 ├── images/
 │   └── icon.svg
 │
-├─ dataset/
-│  ├─ inscriptions.jsonl
-│  └─ inscriptions.jsonl.sha256
+├── dataset/
+│   ├── inscriptions.jsonl
+│   ├── inscriptions.jsonl.sha256
+│   └── manifest.json
 │
-├─ volumes/
-│  ├─ volume1.jsonl
-│  ├─ volume1.jsonl.sha256
-│  │
-│  ├─ volume2.jsonl
-│  ├─ volume2.jsonl.sha256
-│  │
-│  ├─ volume3.jsonl
-│  ├─ volume3.jsonl.sha256
-│  │
-│  ├─ volume4.jsonl
-│  ├─ volume4.jsonl.sha256
-│  │
-│  ├─ volume5.jsonl
-│  ├─ volume5.jsonl.sha256
-│  │
-│  ├─ volume6.jsonl
-│  ├─ volume6.jsonl.sha256
-│  │
-│  ├─ volume7.jsonl
-│  ├─ volume7.jsonl.sha256
-│  │
-│  ├─ volume8.jsonl
-│  ├─ volume8.jsonl.sha256
-│  │
-│  └─ volume9.jsonl
-│  └─ volume9.jsonl.sha256
+├── volumes/
+│   ├── volume1.jsonl
+│   ├── volume1.jsonl.sha256
+│   ├── volume2.jsonl
+│   ├── volume2.jsonl.sha256
+│   ├── volume3.jsonl
+│   ├── volume3.jsonl.sha256
+│   ├── volume4.jsonl
+│   ├── volume4.jsonl.sha256
+│   ├── volume5.jsonl
+│   ├── volume5.jsonl.sha256
+│   ├── volume6.jsonl
+│   ├── volume6.jsonl.sha256
+│   ├── volume7.jsonl
+│   ├── volume7.jsonl.sha256
+│   ├── volume8.jsonl
+│   ├── volume8.jsonl.sha256
+│   ├── volume9.jsonl
+│   └── volume9.jsonl.sha256
 │
 └── scripts/
-    └─ verify_volumes.js
+      ├── generate_manifest.js
+      └── verify_volumes.js
 ```
 ## Canonical Dataset
 
-The canonical Bitnats dataset is defined by:
+The Bitnats dataset exists in two formats.
 
+**V1 — Historical JSONL**
+
+The original human-readable dataset is defined by:
+
+```
 dataset/inscriptions.jsonl
+```
 
-The SHA256 checksum of the dataset is provided in:
+The SHA-256 checksum of the dataset is provided in `dataset/inscriptions.jsonl.sha256`.
 
-dataset/inscriptions.jsonl.sha256
+The nine volumes in `volumes/` are deterministic shards derived from this dataset. Concatenating them in order reproduces the canonical V1 dataset.
 
-The nine inscribed dataset volumes in `volumes/` are deterministic shards derived from this canonical dataset. Concatenating them in order reproduces the canonical dataset.
+**V2 — Canonical Binary**
+
+V2 is the forward canonical archive format. It encodes each record as a fixed 33-byte binary entry and partitions records into deterministic shards for on-chain inscription. Reconstruction and verification are governed by Manifest V2.
+
+V2 is the normative dataset representation. V1 is preserved for historical compatibility and independent audit.
 
 ### Dataset Verification
 
-To verify the volumes:
+**V1 Volume Verification**
 
-Run the verification script included in this repository:
+Verify the nine volumes against the canonical V1 dataset:
 
 ```bash
 node scripts/verify_volumes.js
 ```
 
-The script will:
+This script concatenates the nine volumes in order, computes the SHA-256 hash of the combined output, and compares it against the committed hash in `dataset/inscriptions.jsonl.sha256`.
 
-Concatenate the nine volumes in order.
+**V2 Binary Stream Verification**
 
-Compute the SHA256 hash of the combined file.
+V2 verification requires dual verification as defined in `docs/04-verification.md`:
 
-Compare it against the canonical dataset hash (dataset/inscriptions.jsonl.sha256).
+1. Reconstruct the native binary stream from V2 shards in manifest-defined order.
+2. Verify the SHA-256 hash of the reconstructed binary stream against the `stream_hash_sha256` commitment in Manifest V2.
+3. Decode the binary stream into deterministic JSONL and verify its SHA-256 hash against the `reconstructed_jsonl_hash_sha256` commitment in Manifest V2.
 
-If the hash matches, you will see:
-
-✅ Reconstruction verified. Hash matches canonical dataset.
-
-If it does not match, the script will report an error:
-
-❌ Reconstruction failed!
-Expected: <canonical hash>
-Actual:   <computed hash>
-
-This ensures the volumes in the repository are exact, verifiable shards of the canonical dataset.
+Both checks must pass. See `docs/04-verification.md` for the full verification algorithm and `docs/07-encoding-algorithm.md` for the canonical encoding and reconstruction procedure.
 
 ## License
 
