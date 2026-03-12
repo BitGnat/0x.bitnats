@@ -19,7 +19,9 @@ Any implementation claiming Bitnats compatibility MUST correctly parse and verif
 
 The dataset contains entries representing valid Base Bitnats Blocks derived from Bitcoin block hashes. Each entry corresponds to a Bitcoin block whose hash contains $N$ leading hexadecimal zeros.
 
-Each dataset entry maps deterministically to a Base Bitnats Block sat and its associated ordinal artifact.
+Each dataset entry maps deterministically to a Base Bitnats Block sat and its associated ordinal artifact identifier.
+
+Rarity is derived from the originating Bitcoin block hash and the Bitnats eligibility rules. It is not an independently assigned dataset property.
 
 Normative constraints:
 
@@ -58,18 +60,22 @@ All Bitnats protocol implementations MUST interpret the dataset as a sequence of
 Each record in the V2 binary stream is exactly 33 bytes:
 
 ```
-[32 bytes]  inscription identifier (txid)
-[ 1 byte ]  rarity value (leading zero count)
+[32 bytes]  inscription transaction identifier (txid)
+[ 1 byte ]  inscription index
 ```
 
-- The inscription identifier corresponds to the Base Bitnats Block artifact.
-- The rarity value represents the count of leading hexadecimal zeros in the originating Bitcoin block hash.
+- The transaction identifier corresponds to the Bitcoin transaction containing the Bitnats artifact inscription.
+- The inscription index byte SHALL be interpreted as an unsigned 8-bit integer.
+- In the canonical Base Bitnats Block dataset stream, the inscription index MUST be `0x00`, corresponding to `i0`.
+- Additional family-separated streams defined by Manifest V2 MAY use other supported index values. `0x01` corresponds to `i1` for Forged artifacts.
+- Rarity SHALL be derived from the originating Bitcoin block hash and MUST NOT be redundantly encoded in the V2 record body.
 
 Normative constraints:
 
 - Records MUST be exactly 33 bytes.
 - Records MUST appear in deterministic canonical order.
 - No padding or metadata is permitted between or after records.
+- Unsupported inscription index values MUST cause verification failure.
 
 ## 5. Dataset Sharding
 
@@ -123,6 +129,12 @@ The V2 binary dataset MUST deterministically reconstruct the historical JSONL da
 dataset/inscriptions.jsonl
 ```
 
+For the canonical Base Bitnats Block dataset stream, each V2 record MUST reconstruct to exactly one JSON object in the following form, followed by a single LF byte (`0x0a`):
+
+```text
+{"id":"<lowercase-hex-txid>i0"}
+```
+
 The reconstructed JSONL MUST match the archived V1 dataset hash.
 
 This verification path ensures historical transparency, reproducibility, and independent auditability.
@@ -132,6 +144,8 @@ This verification path ensures historical transparency, reproducibility, and ind
 The Bitnats manifest defines:
 
 - Dataset version
+- Stream identifier
+- Shard ordering
 - Per-shard SHA-256 hashes
 - Reconstruction rules
 - Canonical binary dataset hash
@@ -144,25 +158,29 @@ The manifest is inscribed on Bitcoin and serves as the protocol's on-chain commi
 
 The following procedure MUST be used to reconstruct and verify the canonical dataset.
 
-**Step 1.** Retrieve all dataset shards.
+**Step 1.** Load Manifest V2 and retrieve all referenced dataset shards.
 
-**Step 2.** Concatenate shards in ascending numeric order:
+**Step 2.** Verify each shard SHA-256 hash against the manifest.
+
+**Step 3.** Concatenate shards in manifest-defined order:
 
 ```sh
 cat shard*.bin > dataset.bin
 ```
 
-**Step 3.** Compute the SHA-256 hash of the reconstructed binary stream:
+**Step 4.** Compute the SHA-256 hash of the reconstructed binary stream:
 
 ```sh
 sha256sum dataset.bin
 ```
 
-**Step 4.** Compare the computed hash against the canonical dataset hash published in the manifest.
+**Step 5.** Compare the computed hash against the canonical dataset hash published in the manifest.
 
-If the hash matches, the dataset MUST be considered valid.
+**Step 6.** Decode the binary stream as a sequence of 33-byte records and reconstruct the deterministic JSONL dataset.
 
-**Step 5 (optional).** Reconstruct the JSONL dataset from the binary stream and compare its SHA-256 hash against the published V1 archive hash to confirm dual-verification.
+**Step 7.** Compare the SHA-256 hash of the reconstructed JSONL dataset against the published V1 archive hash.
+
+If both hashes match, the dataset MUST be considered valid. If either hash differs, the dataset MUST be considered invalid.
 
 ## 9. On-Chain Dataset Archival
 
