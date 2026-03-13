@@ -6,6 +6,10 @@ const TXID_HEX_LENGTH = TXID_BYTE_LENGTH * 2;
 const U8_MAX = 255;
 const SHARD_TARGET_BYTES = 350000;
 
+const BASE_REQUIRED_INDEX = 0;
+const FORGED_REQUIRED_INDEX = 1;
+const PROSPECT_MIN_INDEX = 2;
+
 const SUPPORTED_FAMILIES = Object.freeze(["base", "prospect", "forged"]);
 const SUPPORTED_FAMILY_SET = new Set(SUPPORTED_FAMILIES);
 
@@ -47,9 +51,12 @@ function assertFamilyId(familyId) {
 }
 
 module.exports = {
+  BASE_REQUIRED_INDEX,
   FORMAT_ID_V2,
+  FORGED_REQUIRED_INDEX,
   JSONL_SCHEMA_ID,
   MANIFEST_VERSION_V2,
+  PROSPECT_MIN_INDEX,
   ProtocolValidationError,
   RECORD_SIZE_BYTES,
   SHARD_TARGET_BYTES,
