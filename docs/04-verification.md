@@ -193,41 +193,41 @@ Algorithm VerifyDatasetV2
 
 Input:
   manifest
-	family
-	shards
+ family
+ shards
 
 Procedure:
-	family_desc <- manifest.families[family]
-	if family_desc is MISSING
-			return FAILURE
+ family_desc <- manifest.families[family]
+ if family_desc is MISSING
+   return FAILURE
 
-	ordered_shards <- order_by_manifest_family(family_desc, shards)
+ ordered_shards <- order_by_manifest_family(family_desc, shards)
 
   for each shard in ordered_shards:
-			if SHA256(shard.bytes) != family_desc.shards[shard.index].sha256
-					return FAILURE
+   if SHA256(shard.bytes) != family_desc.shards[shard.index].sha256
+     return FAILURE
 
-			if length(shard.bytes) mod 33 != 0
-					return FAILURE
+   if length(shard.bytes) mod 33 != 0
+     return FAILURE
 
   binary_stream <- concatenate(ordered_shards)
   binary_hash <- SHA256(binary_stream)
 
   if binary_hash != family_desc.stream_hash_sha256
-			return FAILURE
+   return FAILURE
 
   records <- decode_33_byte_records(binary_stream)
   jsonl_dataset <- ""
 
   for each record in records:
-			txid_hex <- lowercase_hex(record.txid)
-			index_dec <- decimal(record.inscription_index)
-			jsonl_dataset <- jsonl_dataset || '{"id":"' || txid_hex || 'i' || index_dec || '"}' || LF
+   txid_hex <- lowercase_hex(record.txid)
+   index_dec <- decimal(record.inscription_index)
+   jsonl_dataset <- jsonl_dataset || '{"id":"' || txid_hex || 'i' || index_dec || '"}' || LF
 
   jsonl_hash <- SHA256(jsonl_dataset)
 
   if jsonl_hash != family_desc.reconstructed_jsonl_hash_sha256
-			return FAILURE
+   return FAILURE
 
   return SUCCESS
 ```
@@ -240,14 +240,14 @@ Reconstruct the historical JSONL dataset in canonical order:
 
 ```sh
 cat volumes/volume1.jsonl \
-	volumes/volume2.jsonl \
-	volumes/volume3.jsonl \
-	volumes/volume4.jsonl \
-	volumes/volume5.jsonl \
-	volumes/volume6.jsonl \
-	volumes/volume7.jsonl \
-	volumes/volume8.jsonl \
-	volumes/volume9.jsonl > reconstructed-inscriptions.jsonl
+ volumes/volume2.jsonl \
+ volumes/volume3.jsonl \
+ volumes/volume4.jsonl \
+ volumes/volume5.jsonl \
+ volumes/volume6.jsonl \
+ volumes/volume7.jsonl \
+ volumes/volume8.jsonl \
+ volumes/volume9.jsonl > reconstructed-inscriptions.jsonl
 sha256sum reconstructed-inscriptions.jsonl
 ```
 

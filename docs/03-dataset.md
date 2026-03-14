@@ -89,16 +89,16 @@ Shards are stored under family-specific directories:
 
 ```
 dataset_v2/
-	base/
-		shards/
-			shard-000000.bin
-			shard-000001.bin
-	prospect/
-		shards/
-			shard-000000.bin
-	forged/
-		shards/
-			shard-000000.bin
+ base/
+  shards/
+   shard-000000.bin
+   shard-000001.bin
+ prospect/
+  shards/
+   shard-000000.bin
+ forged/
+  shards/
+   shard-000000.bin
 ```
 
 Normative constraints:
