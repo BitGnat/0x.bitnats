@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * Normative references:
+ * - docs/03-dataset.md (Sections 1-3: V1 historical dataset and V2 boundary)
+ * - docs/07-encoding-algorithm.md (Section 3: canonical logical record model)
+ */
+
 const fs = require("fs");
 
 const {

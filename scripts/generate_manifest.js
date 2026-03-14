@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+
+/**
+ * Normative references:
+ * - docs/03-dataset.md (Sections 2-3 and 7: V1 dataset scope/version and manifest commitments)
+ * - docs/04-verification.md (Section 9: V1 reference verification procedure)
+ */
+
 const fs = require("fs");
 const path = require("path");
 

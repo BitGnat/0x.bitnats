@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * Normative references:
+ * - docs/04-verification.md (Sections 10-12: deterministic verifier behavior and failure vectors)
+ * - docs/06-manifest-v2-spec.md (Sections 16-17: validator rejection and fail-closed semantics)
+ */
+
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");

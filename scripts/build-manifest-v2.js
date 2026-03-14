@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * Normative references:
+ * - docs/06-manifest-v2-spec.md (Sections 6-7 and 16-17: required fields, validation, and fail-closed behavior)
+ * - docs/03-dataset.md (Sections 7-8: manifest reconstruction role and deterministic reconstruction)
+ */
+
 const fs = require("fs");
 const path = require("path");
 

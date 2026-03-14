@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * Normative references:
+ * - docs/04-verification.md (Sections 5-8 and 12: deterministic reconstruction algorithm and MUST-fail conditions)
+ * - docs/06-manifest-v2-spec.md (Sections 11-17: shard ordering, dual commitments, and fail-closed semantics)
+ * - docs/07-encoding-algorithm.md (Sections 9-10: stream/hash commitments and deterministic JSONL reconstruction)
+ */
+
 const fs = require("fs");
 const path = require("path");
 

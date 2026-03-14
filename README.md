@@ -46,6 +46,7 @@ Bitnats artifacts are defined exclusively by the canonical dataset and protocol 
 - [Forging](#forging)
 - [Specification](#specification)
 - [Repository Structure](#repository-structure)
+- [Protocol-Complete Workflow (V1 + V2)](#protocol-complete-workflow-v1--v2)
 - [License](#license)
 - [Trademark](#trademark)
 - [Support the Bitnats Project](#support-the-bitnats-project)
@@ -498,7 +499,12 @@ bitnats/
 │   └── volume9.jsonl.sha256
 │
 └── scripts/
+      ├── build-manifest-v2.js
+      ├── encode-v2.js
       ├── generate_manifest.js
+      ├── parse-v1.js
+      ├── run-tests.js
+      ├── verify-v2.js
       └── verify_volumes.js
 ```
 ## Canonical Dataset
@@ -544,6 +550,77 @@ V2 verification requires dual verification as defined in `docs/04-verification.m
 3. Decode the binary stream into deterministic JSONL and verify its SHA-256 hash against the `reconstructed_jsonl_hash_sha256` commitment in Manifest V2.
 
 Both checks must pass. See `docs/04-verification.md` for the full verification algorithm and `docs/07-encoding-algorithm.md` for the canonical encoding and reconstruction procedure.
+
+## Protocol-Complete Workflow (V1 + V2)
+
+This repository now supports a protocol-complete operator flow for V2 generation, V2 dual verification, and unified V1+V2 verification.
+
+### 1) Generate V2 Artifacts
+
+Encode canonical V2 family streams and deterministic shards from the historical V1 dataset:
+
+```bash
+node scripts/encode-v2.js \
+      --input dataset/inscriptions.jsonl \
+      --output-dir dataset_v2 \
+      --default-family base \
+      --shard-target-bytes 350000
+```
+
+Generate a deterministic local shard map (replace with real inscription ids for production publication):
+
+```bash
+node -e 'const fs=require("fs");const path=require("path");const crypto=require("crypto");const out={};for(const family of ["base","prospect","forged"]){const dir=path.join("dataset_v2",family,"shards");const files=fs.existsSync(dir)?fs.readdirSync(dir).filter((name)=>/^shard-\d+\.bin$/.test(name)).sort():[];out[family]=files.map((unused,index)=>`${crypto.createHash("sha256").update(`${family}:${index}`).digest("hex")}i${index}`);}fs.writeFileSync("dataset_v2/shard-map.local.json",JSON.stringify(out,null,2)+"\n");'
+```
+
+Build Manifest V2 from generated streams and shard files:
+
+```bash
+node scripts/build-manifest-v2.js \
+      --input-dir dataset_v2 \
+      --shard-map dataset_v2/shard-map.local.json \
+      --output dataset_v2/manifest.v2.json
+```
+
+### 2) Verify V2 (Dual Verification)
+
+Run binary stream verification and deterministic JSONL reconstruction verification:
+
+```bash
+node scripts/verify-v2.js verify \
+      --manifest dataset_v2/manifest.v2.json \
+      --output-dir dataset_v2 \
+      --base-hash-file dataset/inscriptions.jsonl.sha256
+```
+
+### 3) Verify Both Generations
+
+Use one entrypoint for V1 historical compatibility checks and V2 canonical verification:
+
+```bash
+node scripts/verify_volumes.js \
+      --mode both \
+      --manifest dataset_v2/manifest.v2.json \
+      --output-dir dataset_v2 \
+      --base-hash-file dataset/inscriptions.jsonl.sha256
+```
+
+### Failure Semantics
+
+Verification and manifest checks are fail-closed.
+
+- Any consensus-relevant manifest schema or semantic violation returns non-zero.
+- Any shard byte-length or shard hash mismatch returns non-zero.
+- Any stream hash or reconstructed JSONL hash mismatch returns non-zero.
+- `verify-v2.js` and `verify_volumes.js` return exit code `2` on CLI usage errors.
+- Successful verification returns exit code `0`.
+
+### Formal References
+
+- `docs/03-dataset.md` defines V1/V2 dataset structure and dual verification expectations.
+- `docs/04-verification.md` defines verification algorithm, vectors, and MUST-fail conditions.
+- `docs/06-manifest-v2-spec.md` defines Manifest V2 schema and fail-closed requirements.
+- `docs/07-encoding-algorithm.md` defines canonical ordering, encoding, sharding, and reconstruction.
 
 ## License
 

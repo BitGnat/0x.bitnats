@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * Normative references:
+ * - docs/03-dataset.md (Sections 3, 6, and 8: V1 historical compatibility, dual verification, and deterministic reconstruction)
+ * - docs/04-verification.md (Sections 7-10 and 12: dual verification model, script behavior, and failure conditions)
+ */
+
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");

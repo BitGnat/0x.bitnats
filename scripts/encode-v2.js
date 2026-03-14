@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * Normative references:
+ * - docs/03-dataset.md (Sections 4-6: 33-byte records, sharding, and dual verification model)
+ * - docs/07-encoding-algorithm.md (Sections 4-8: canonical encoding, sorting, family partitioning, and shard formation)
+ */
+
 const fs = require("fs");
 const path = require("path");
 
