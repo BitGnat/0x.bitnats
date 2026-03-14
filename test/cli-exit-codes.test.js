@@ -150,3 +150,24 @@ test("verify_volumes CLI returns deterministic success/failure exit codes", () =
   assertExitCode(v2Success, 0, "verify_volumes v2 success path");
   assertExitCode(usageFailure, 2, "verify_volumes usage failure path");
 });
+
+test("release-v2 CLI returns deterministic success/failure exit codes", () => {
+  const rootDir = makeTempDir();
+  const fixture = prepareSmallV2Fixture(path.join(rootDir, "fixture"), { shardTargetBytes: 350000 });
+  const releaseRootDir = path.join(rootDir, "releases");
+
+  const success = runNodeScript("scripts/release-v2.js", [
+    "prepare",
+    "--release-id",
+    "cli-release",
+    "--release-root",
+    releaseRootDir,
+    "--source-output-dir",
+    fixture.outputDir,
+  ]);
+
+  const usageFailure = runNodeScript("scripts/release-v2.js", ["unknown-command"]);
+
+  assertExitCode(success, 0, "release-v2 success path");
+  assertExitCode(usageFailure, 2, "release-v2 usage failure path");
+});

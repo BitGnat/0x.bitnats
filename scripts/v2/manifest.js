@@ -15,13 +15,21 @@ const {
   failClosed,
 } = require("./constants");
 const { sha256Hex } = require("./hash");
-const { getFamilyShardsDir, getFamilyStreamPath } = require("./paths");
+const {
+  FAMILY_SHARDS_DIRNAME,
+  getFamilyShardsDir,
+  getFamilyStreamPath,
+  getShardFileName,
+} = require("./paths");
 const { reconstructJsonlBufferFromStream } = require("./jsonl");
 const { assertContiguousShardIndexes } = require("./shard");
 
 const SHARD_FILENAME_PATTERN = /^shard-(\d{6})\.bin$/;
 const INSCRIPTION_ID_PATTERN = /^([0-9a-f]{64})i(0|[1-9][0-9]*)$/;
 const SHA256_HEX_PATTERN = /^[0-9a-f]{64}$/;
+const SHARD_INSCRIPTION_MAPPING_VERSION = 1;
+const SHARD_MAPPING_REQUIRED_KEYS = ["mapping_version", "families"];
+const SHARD_MAPPING_ENTRY_REQUIRED_KEYS = ["index", "shard_file", "inscription_id"];
 
 const EMPTY_SHA256 = sha256Hex(Buffer.alloc(0));
 
@@ -110,27 +118,218 @@ function readJsonFile(filePath, contextLabel) {
   }
 }
 
-function readShardInscriptionMap(filePath) {
-  const parsed = readJsonFile(filePath, "shard map");
+function toPosixPath(value) {
+  return value.split(path.sep).join("/");
+}
+
+function withOptionalPathPrefix(prefix, relativePath) {
+  if (typeof prefix !== "string" || prefix.length === 0) {
+    return relativePath;
+  }
+
+  const normalizedPrefix = prefix.replace(/\\/g, "/").replace(/\/+$/, "");
+  return `${normalizedPrefix}/${relativePath}`;
+}
+
+function buildRelativeShardPath(familyId, shardIndex) {
+  return path.posix.join(familyId, FAMILY_SHARDS_DIRNAME, getShardFileName(shardIndex));
+}
+
+function normalizeMappingEntryInscriptionId(inscriptionId, contextLabel, requireAssignedIds) {
+  if (requireAssignedIds) {
+    return assertCanonicalInscriptionId(inscriptionId, contextLabel);
+  }
+
+  if (inscriptionId === null || inscriptionId === "") {
+    return null;
+  }
+
+  return assertCanonicalInscriptionId(inscriptionId, contextLabel);
+}
+
+function assertUniqueInscriptionId(inscriptionId, seenInscriptionIds, contextLabel) {
+  assertInvariant(!seenInscriptionIds.has(inscriptionId), `Duplicate inscription id in ${contextLabel}.`, {
+    inscription_id: inscriptionId,
+  });
+  seenInscriptionIds.add(inscriptionId);
+}
+
+function assertExpectedShardCount(familyId, entries, expectedShardCounts) {
+  if (!expectedShardCounts) {
+    return;
+  }
+
+  const expectedCount = expectedShardCounts[familyId];
+
+  if (typeof expectedCount !== "number") {
+    return;
+  }
+
+  assertInvariant(entries.length === expectedCount, "Shard inscription mapping count mismatch.", {
+    family_id: familyId,
+    expected_shard_count: expectedCount,
+    mapped_shard_count: entries.length,
+  });
+}
+
+function assertExpectedShardFilePath(familyId, index, shardFilePath, expectedShardFilesByFamily) {
+  if (expectedShardFilesByFamily && Array.isArray(expectedShardFilesByFamily[familyId])) {
+    const expectedPath = expectedShardFilesByFamily[familyId][index];
+
+    assertInvariant(typeof expectedPath === "string" && expectedPath.length > 0, "Missing expected shard file path for mapping validation.", {
+      family_id: familyId,
+      shard_index: index,
+    });
+    assertInvariant(shardFilePath === expectedPath, "Shard mapping file path does not match expected shard location.", {
+      family_id: familyId,
+      shard_index: index,
+      expected_shard_file: expectedPath,
+      actual_shard_file: shardFilePath,
+    });
+    return;
+  }
+
+  const expectedSuffix = buildRelativeShardPath(familyId, index);
+  const normalizedShardFilePath = shardFilePath.replace(/\\/g, "/");
+
+  assertInvariant(
+    normalizedShardFilePath === expectedSuffix || normalizedShardFilePath.endsWith(`/${expectedSuffix}`),
+    "Shard mapping file path is not canonical for shard index.",
+    {
+      family_id: familyId,
+      shard_index: index,
+      expected_suffix: expectedSuffix,
+      actual_shard_file: shardFilePath,
+    }
+  );
+}
+
+function normalizeLegacyShardMap(parsed, options) {
   assertExactKeys(parsed, SUPPORTED_FAMILIES, [], "shard map");
 
   const normalized = {};
+  const seenInscriptionIds = new Set();
 
   for (const familyId of SUPPORTED_FAMILIES) {
     const entries = parsed[familyId];
-
     assertInvariant(Array.isArray(entries), `Invalid shard map ${familyId}: expected array of inscription ids.`);
-    normalized[familyId] = entries.map((inscriptionId, index) =>
-      assertCanonicalInscriptionId(inscriptionId, `shard map ${familyId}[${index}]`)
-    );
+
+    normalized[familyId] = entries.map((inscriptionId, index) => {
+      const normalizedInscriptionId = normalizeMappingEntryInscriptionId(
+        inscriptionId,
+        `shard map ${familyId}[${index}]`,
+        options.requireAssignedIds
+      );
+
+      if (normalizedInscriptionId !== null) {
+        assertUniqueInscriptionId(normalizedInscriptionId, seenInscriptionIds, "shard map");
+      }
+
+      return normalizedInscriptionId;
+    });
+
+    assertExpectedShardCount(familyId, normalized[familyId], options.expectedShardCounts);
   }
 
   return normalized;
 }
 
-function readFamilyShardFiles(outputDir, familyId) {
+function normalizeTemplateShardMap(parsed, options) {
+  assertExactKeys(parsed, SHARD_MAPPING_REQUIRED_KEYS, [], "shard inscription mapping");
+  assertInvariant(
+    parsed.mapping_version === SHARD_INSCRIPTION_MAPPING_VERSION,
+    "Unsupported shard inscription mapping version.",
+    {
+      expected_mapping_version: SHARD_INSCRIPTION_MAPPING_VERSION,
+      actual_mapping_version: parsed.mapping_version,
+    }
+  );
+
+  assertExactKeys(parsed.families, SUPPORTED_FAMILIES, [], "shard inscription mapping families");
+
+  const normalized = {};
+  const seenInscriptionIds = new Set();
+
+  for (const familyId of SUPPORTED_FAMILIES) {
+    const entries = parsed.families[familyId];
+
+    assertInvariant(Array.isArray(entries), `Invalid shard inscription mapping ${familyId}: expected array.`);
+    assertExpectedShardCount(familyId, entries, options.expectedShardCounts);
+
+    normalized[familyId] = entries.map((entry, index) => {
+      assertExactKeys(entry, SHARD_MAPPING_ENTRY_REQUIRED_KEYS, [], `${familyId} shard mapping entry`);
+      assertInvariant(Number.isSafeInteger(entry.index) && entry.index >= 0, `Invalid ${familyId} mapping index.`, {
+        family_id: familyId,
+        shard_index: entry.index,
+      });
+      assertInvariant(entry.index === index, "Shard mapping indexes must be contiguous and 0-based.", {
+        family_id: familyId,
+        expected_index: index,
+        actual_index: entry.index,
+      });
+
+      assertInvariant(
+        typeof entry.shard_file === "string" && entry.shard_file.length > 0,
+        `Invalid ${familyId} shard mapping file path.`,
+        {
+          family_id: familyId,
+          shard_index: index,
+          shard_file: entry.shard_file,
+        }
+      );
+      assertExpectedShardFilePath(familyId, index, entry.shard_file, options.expectedShardFilesByFamily);
+
+      const normalizedInscriptionId = normalizeMappingEntryInscriptionId(
+        entry.inscription_id,
+        `${familyId} shard mapping inscription_id`,
+        options.requireAssignedIds
+      );
+
+      if (normalizedInscriptionId !== null) {
+        assertUniqueInscriptionId(normalizedInscriptionId, seenInscriptionIds, "shard inscription mapping");
+      }
+
+      return normalizedInscriptionId;
+    });
+  }
+
+  return normalized;
+}
+
+function readShardInscriptionMap(filePath, options = {}) {
+  const resolvedOptions = {
+    requireAssignedIds: options.requireAssignedIds !== false,
+    expectedShardCounts: options.expectedShardCounts || null,
+    expectedShardFilesByFamily: options.expectedShardFilesByFamily || null,
+  };
+
+  const parsed = readJsonFile(filePath, "shard map");
+  if (
+    parsed !== null
+    && typeof parsed === "object"
+    && !Array.isArray(parsed)
+    && Object.prototype.hasOwnProperty.call(parsed, "mapping_version")
+    && Object.prototype.hasOwnProperty.call(parsed, "families")
+  ) {
+    return normalizeTemplateShardMap(parsed, resolvedOptions);
+  }
+
+  return normalizeLegacyShardMap(parsed, resolvedOptions);
+}
+
+function readFamilyShardFiles(outputDir, familyId, options = {}) {
+  assertFamilyId(familyId);
+
+  const allowMissingShardsDir = Boolean(options.allowMissingShardsDir);
   const shardsDir = getFamilyShardsDir(outputDir, familyId);
-  assertInvariant(fs.existsSync(shardsDir), `Missing ${familyId} shards directory: ${shardsDir}`);
+
+  if (!fs.existsSync(shardsDir)) {
+    if (allowMissingShardsDir) {
+      return [];
+    }
+
+    assertInvariant(false, `Missing ${familyId} shards directory: ${shardsDir}`);
+  }
 
   const shardFiles = [];
 
@@ -151,6 +350,8 @@ function readFamilyShardFiles(outputDir, familyId) {
       sha256: sha256Hex(bytes),
       bytes,
       filePath,
+      fileName: childName,
+      relativePath: toPosixPath(path.join(familyId, FAMILY_SHARDS_DIRNAME, childName)),
     });
   }
 
@@ -160,14 +361,79 @@ function readFamilyShardFiles(outputDir, familyId) {
   return shardFiles;
 }
 
-function buildFamilyDescriptor(outputDir, familyId, shardInscriptionIds) {
+function collectShardInventoryFromOutput(outputDir, options = {}) {
+  assertInvariant(typeof outputDir === "string" && outputDir.length > 0, "Missing V2 output directory.");
+  assertInvariant(fs.existsSync(outputDir), `Missing V2 output directory: ${outputDir}`);
+
+  const inventory = {};
+
+  for (const familyId of SUPPORTED_FAMILIES) {
+    inventory[familyId] = readFamilyShardFiles(outputDir, familyId, options).map((shard) => ({
+      index: shard.index,
+      fileName: shard.fileName,
+      relativePath: shard.relativePath,
+      filePath: shard.filePath,
+      byteLength: shard.byteLength,
+      sha256: shard.sha256,
+    }));
+  }
+
+  return inventory;
+}
+
+function buildShardInscriptionTemplateFromOutput(outputDir, options = {}) {
+  const pathPrefix = typeof options.pathPrefix === "string" ? options.pathPrefix : "";
+  const inventory = collectShardInventoryFromOutput(outputDir, {
+    allowMissingShardsDir: options.allowMissingShardsDir === true,
+  });
+
+  const families = {};
+
+  for (const familyId of SUPPORTED_FAMILIES) {
+    families[familyId] = inventory[familyId].map((shard) => ({
+      index: shard.index,
+      shard_file: withOptionalPathPrefix(pathPrefix, shard.relativePath),
+      inscription_id: null,
+    }));
+  }
+
+  return {
+    mapping_version: SHARD_INSCRIPTION_MAPPING_VERSION,
+    families,
+  };
+}
+
+function buildFamilyDescriptor(outputDir, familyId, shardInscriptionIds, options = {}) {
   assertFamilyId(familyId);
 
-  const streamPath = getFamilyStreamPath(outputDir, familyId);
-  assertInvariant(fs.existsSync(streamPath), `Missing ${familyId} stream file: ${streamPath}`);
+  const allowMissingStream = Boolean(options.allowMissingStream);
+  const allowMissingShardsDir = Boolean(options.allowMissingShardsDir);
 
-  const streamBytes = fs.readFileSync(streamPath);
-  const shards = readFamilyShardFiles(outputDir, familyId);
+  const shards = readFamilyShardFiles(outputDir, familyId, { allowMissingShardsDir });
+
+  const streamPath = getFamilyStreamPath(outputDir, familyId);
+  const streamExists = fs.existsSync(streamPath);
+
+  assertInvariant(streamExists || allowMissingStream, `Missing ${familyId} stream file: ${streamPath}`);
+
+  const concatenatedShardBytes = shards.length === 0
+    ? Buffer.alloc(0)
+    : Buffer.concat(shards.map((shard) => shard.bytes), shards.reduce((sum, shard) => sum + shard.byteLength, 0));
+
+  const streamBytes = streamExists ? fs.readFileSync(streamPath) : concatenatedShardBytes;
+
+  if (streamExists) {
+    assertInvariant(
+      Buffer.compare(concatenatedShardBytes, streamBytes) === 0,
+      "Shard bytes do not reconstruct the family stream exactly.",
+      {
+        family_id: familyId,
+        shard_bytes_length: concatenatedShardBytes.length,
+        stream_length: streamBytes.length,
+      }
+    );
+  }
+
 
   if (streamBytes.length % RECORD_SIZE_BYTES !== 0) {
     failClosed("Invalid family stream length: not divisible by record size.", {
@@ -187,20 +453,6 @@ function buildFamilyDescriptor(outputDir, familyId, shardInscriptionIds) {
     }
   );
 
-  const concatenatedShardBytes = shards.length === 0
-    ? Buffer.alloc(0)
-    : Buffer.concat(shards.map((shard) => shard.bytes), shards.reduce((sum, shard) => sum + shard.byteLength, 0));
-
-  assertInvariant(
-    Buffer.compare(concatenatedShardBytes, streamBytes) === 0,
-    "Shard bytes do not reconstruct the family stream exactly.",
-    {
-      family_id: familyId,
-      shard_bytes_length: concatenatedShardBytes.length,
-      stream_length: streamBytes.length,
-    }
-  );
-
   const reconstructedJsonl = reconstructJsonlBufferFromStream(streamBytes, familyId);
 
   return {
@@ -217,9 +469,15 @@ function buildFamilyDescriptor(outputDir, familyId, shardInscriptionIds) {
   };
 }
 
-function buildManifestV2FromOutput(outputDir, shardInscriptionMap) {
+function buildManifestV2FromOutput(outputDir, shardInscriptionMap, options = {}) {
   assertInvariant(typeof outputDir === "string" && outputDir.length > 0, "Missing V2 output directory.");
   assertInvariant(fs.existsSync(outputDir), `Missing V2 output directory: ${outputDir}`);
+  assertExactKeys(shardInscriptionMap, SUPPORTED_FAMILIES, [], "shard inscription map");
+
+  const buildOptions = {
+    allowMissingStream: options.allowMissingStream === true,
+    allowMissingShardsDir: options.allowMissingShardsDir === true,
+  };
 
   const manifest = {
     manifest_version: MANIFEST_VERSION_V2,
@@ -227,9 +485,9 @@ function buildManifestV2FromOutput(outputDir, shardInscriptionMap) {
     record_size_bytes: RECORD_SIZE_BYTES,
     shard_target_bytes: SHARD_TARGET_BYTES,
     families: {
-      base: buildFamilyDescriptor(outputDir, "base", shardInscriptionMap.base),
-      prospect: buildFamilyDescriptor(outputDir, "prospect", shardInscriptionMap.prospect),
-      forged: buildFamilyDescriptor(outputDir, "forged", shardInscriptionMap.forged),
+      base: buildFamilyDescriptor(outputDir, "base", shardInscriptionMap.base, buildOptions),
+      prospect: buildFamilyDescriptor(outputDir, "prospect", shardInscriptionMap.prospect, buildOptions),
+      forged: buildFamilyDescriptor(outputDir, "forged", shardInscriptionMap.forged, buildOptions),
     },
   };
 
@@ -396,6 +654,9 @@ function summarizeManifestV2(manifest) {
 }
 
 module.exports = {
+  SHARD_INSCRIPTION_MAPPING_VERSION,
+  buildShardInscriptionTemplateFromOutput,
+  collectShardInventoryFromOutput,
   buildManifestV2FromOutput,
   readManifestV2File,
   readShardInscriptionMap,

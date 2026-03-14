@@ -35,6 +35,8 @@ function printUsage() {
 	console.log("  --input-dir <path>    V2 artifact directory (default: dataset_v2)");
 	console.log("  --output, -o <path>   Manifest output path (default: <input-dir>/manifest.v2.json)");
 	console.log("  --shard-map <path>    JSON file mapping family ids to ordered shard inscription ids");
+	console.log("  --allow-missing-stream      Build from shard binaries when stream.bin files are absent");
+	console.log("  --allow-missing-shards-dir  Treat missing <family>/shards directories as empty families");
 	console.log("  --validate <path>     Validate an existing manifest instead of building one");
 	console.log("  --json                Print manifest JSON (build) or validation summary JSON (validate)");
 	console.log("  --help, -h            Show this message");
@@ -63,6 +65,8 @@ function parseArgs(argv) {
 		shardMap: null,
 		validate: null,
 		printJson: false,
+		allowMissingStream: false,
+		allowMissingShardsDir: false,
 	};
 
 	for (let index = 0; index < argv.length; index++) {
@@ -88,6 +92,14 @@ function parseArgs(argv) {
 			case "--validate":
 				options.validate = resolveCliPath(readOptionValue(argv, index, arg));
 				index += 1;
+				break;
+
+			case "--allow-missing-stream":
+				options.allowMissingStream = true;
+				break;
+
+			case "--allow-missing-shards-dir":
+				options.allowMissingShardsDir = true;
 				break;
 
 			case "--json":
@@ -134,7 +146,10 @@ function printValidateSummary(manifestPath, summary) {
 
 function runBuild(options) {
 	const shardMap = readShardInscriptionMap(options.shardMap);
-	const manifest = buildManifestV2FromOutput(options.inputDir, shardMap);
+	const manifest = buildManifestV2FromOutput(options.inputDir, shardMap, {
+		allowMissingStream: options.allowMissingStream,
+		allowMissingShardsDir: options.allowMissingShardsDir,
+	});
 
 	ensureParentDir(options.output);
 	fs.writeFileSync(options.output, JSON.stringify(manifest, null, 2) + "\n");

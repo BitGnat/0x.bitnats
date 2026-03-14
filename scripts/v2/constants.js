@@ -5,6 +5,8 @@ const TXID_BYTE_LENGTH = 32;
 const TXID_HEX_LENGTH = TXID_BYTE_LENGTH * 2;
 const U8_MAX = 255;
 const SHARD_TARGET_BYTES = 350000;
+const RELEASE_LAYOUT_VERSION = 1;
+const RELEASE_SHARD_TARGET_BYTES = 350000;
 
 const BASE_REQUIRED_INDEX = 0;
 const FORGED_REQUIRED_INDEX = 1;
@@ -50,6 +52,17 @@ function assertFamilyId(familyId) {
   );
 }
 
+function assertReleaseShardTargetBytes(value, contextLabel = "shard_target_bytes") {
+  assertInvariant(
+    value === RELEASE_SHARD_TARGET_BYTES,
+    `Invalid ${contextLabel}: expected fixed release policy value.`,
+    {
+      expected_release_shard_target_bytes: RELEASE_SHARD_TARGET_BYTES,
+      actual_shard_target_bytes: value,
+    }
+  );
+}
+
 module.exports = {
   BASE_REQUIRED_INDEX,
   FORMAT_ID_V2,
@@ -59,6 +72,8 @@ module.exports = {
   PROSPECT_MIN_INDEX,
   ProtocolValidationError,
   RECORD_SIZE_BYTES,
+  RELEASE_LAYOUT_VERSION,
+  RELEASE_SHARD_TARGET_BYTES,
   SHARD_TARGET_BYTES,
   SUPPORTED_FAMILIES,
   TXID_BYTE_LENGTH,
@@ -66,5 +81,6 @@ module.exports = {
   U8_MAX,
   assertFamilyId,
   assertInvariant,
+  assertReleaseShardTargetBytes,
   failClosed,
 };
