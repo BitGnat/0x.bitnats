@@ -270,9 +270,13 @@ For `base`, the reconstructed JSONL hash MUST match the canonical V1 dataset has
 
 Verification tooling SHOULD expose deterministic entry points equivalent to the following:
 
-- `scripts/verify_volumes.js` for V1 volume reconstruction verification
-- `scripts/verify_dataset.js` for end-to-end dataset verification
-- `scripts/verify_binary_stream.js` for V2 binary stream verification
+- `scripts/verify-v2.js verify` for Manifest V2 binary and reconstructed JSONL verification
+- `scripts/verify_volumes.js` for unified V1-only, V2-only, or V1+V2 verification
+- `scripts/release-v2.js verify-release` for release-payload verification against finalized canonical manifest artifacts
+
+Legacy compatibility note:
+
+- `scripts/verify_dataset.js` is maintained as a compatibility wrapper and delegates to `scripts/verify_volumes.js --mode both` unless an explicit mode is provided.
 
 All verification scripts MUST produce deterministic success or failure results for identical inputs.
 

@@ -97,7 +97,7 @@ test("build-manifest-v2 fails on shard-only bundle without --allow-missing-strea
 	assertFailed(manifestResult, /Missing base stream file:/, "missing stream failure");
 });
 
-test("release-v2 prepare creates canonical release contract and mapping template", () => {
+test("release-v2 prepare creates canonical release contract, mapping template, and local manifest", () => {
 	const rootDir = makeTempDir();
 	const fixture = prepareSmallV2Fixture(path.join(rootDir, "fixture"), { shardTargetBytes: 350000 });
 	const releaseRootDir = path.join(rootDir, "releases");
@@ -121,7 +121,20 @@ test("release-v2 prepare creates canonical release contract and mapping template
 	assert.ok(fs.existsSync(contract.shard_checksums_path), "missing shard checksum inventory");
 	assert.ok(fs.existsSync(contract.publish_plan_path), "missing publish plan");
 	assert.ok(fs.existsSync(contract.inscription_map_template_path), "missing inscription template");
+	assert.ok(fs.existsSync(contract.local_manifest_path), "missing temporary local manifest");
 	assert.ok(fs.existsSync(contract.metadata_path), "missing release metadata");
+	assert.ok(!fs.existsSync(contract.canonical_manifest_path), "canonical manifest must not exist before finalize");
+
+	const localVerifyResult = runNodeScript("scripts/verify-v2.js", [
+		"verify",
+		"--manifest",
+		contract.local_manifest_path,
+		"--output-dir",
+		contract.payload_dir,
+		"--base-hash-file",
+		fixture.baseHashPath,
+	]);
+	assert.equal(localVerifyResult.status, 0, `pre-inscription local manifest verification failed:\n${localVerifyResult.stderr}`);
 
 	const template = readJsonFile(contract.inscription_map_template_path);
 	assert.equal(template.mapping_version, 1);
@@ -189,7 +202,8 @@ test("release-v2 finalize-manifest enforces fixed non-final shard policy", () =>
 	assert.equal(prepareResult.status, 0, `release prepare failed:\n${prepareResult.stderr}`);
 
 	const template = readJsonFile(contract.inscription_map_template_path);
-	writeJsonFile(filledMapPath, buildFilledInscriptionMap(template));
+	const filledMap = buildFilledInscriptionMap(template);
+	writeJsonFile(filledMapPath, filledMap);
 
 	const finalizeResult = runNodeScript("scripts/release-v2.js", [
 		"finalize-manifest",
@@ -225,7 +239,8 @@ test("release-v2 finalize-manifest and verify-release succeed on policy-complian
 	assert.equal(prepareResult.status, 0, `release prepare failed:\n${prepareResult.stderr}`);
 
 	const template = readJsonFile(contract.inscription_map_template_path);
-	writeJsonFile(filledMapPath, buildFilledInscriptionMap(template));
+	const filledMap = buildFilledInscriptionMap(template);
+	writeJsonFile(filledMapPath, filledMap);
 
 	const finalizeResult = runNodeScript("scripts/release-v2.js", [
 		"finalize-manifest",
@@ -238,6 +253,23 @@ test("release-v2 finalize-manifest and verify-release succeed on policy-complian
 	]);
 	assert.equal(finalizeResult.status, 0, `finalize-manifest failed:\n${finalizeResult.stderr}`);
 	assert.ok(fs.existsSync(contract.canonical_manifest_path), "missing canonical manifest");
+	assert.ok(fs.existsSync(contract.final_inscription_map_path), "missing finalized inscription map");
+	assert.ok(fs.existsSync(contract.reconciliation_path), "missing reconciliation output");
+
+	const reconciliation = readJsonFile(contract.reconciliation_path);
+	assert.equal(reconciliation.release_id, releaseId);
+
+	for (const familyId of SUPPORTED_FAMILIES) {
+		const expectedEntries = template.families[familyId];
+		const familyEntries = reconciliation.entries.filter((entry) => entry.family_id === familyId);
+		assert.equal(familyEntries.length, expectedEntries.length, `reconciliation count mismatch for ${familyId}`);
+
+		for (let index = 0; index < expectedEntries.length; index++) {
+			assert.equal(familyEntries[index].index, expectedEntries[index].index);
+			assert.equal(familyEntries[index].shard_file, expectedEntries[index].shard_file);
+			assert.equal(familyEntries[index].inscription_id, filledMap.families[familyId][index].inscription_id);
+		}
+	}
 
 	const verifyReleaseResult = runNodeScript("scripts/release-v2.js", [
 		"verify-release",

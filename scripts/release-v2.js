@@ -9,6 +9,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const {
 	RECORD_SIZE_BYTES,
@@ -413,6 +414,32 @@ function buildPublishOrder(inventory) {
 	return publishOrder;
 }
 
+function buildDeterministicLocalInscriptionId(familyId, shardIndex) {
+	const txid = crypto.createHash("sha256").update(`release-local:${familyId}:${shardIndex}`).digest("hex");
+	return `${txid}i0`;
+}
+
+function buildDeterministicLocalShardMap(inventory) {
+	const shardMap = {};
+
+	for (const familyId of SUPPORTED_FAMILIES) {
+		shardMap[familyId] = inventory[familyId].map((shard) => {
+			assertInvariant(
+				Number.isSafeInteger(shard.index) && shard.index >= 0,
+				"Invalid shard index while constructing local release manifest mapping.",
+				{
+					family_id: familyId,
+					shard_index: shard.index,
+				}
+			);
+
+			return buildDeterministicLocalInscriptionId(familyId, shard.index);
+		});
+	}
+
+	return shardMap;
+}
+
 function assertReleaseShardPolicy(inventory) {
 	for (const familyId of SUPPORTED_FAMILIES) {
 		const shards = inventory[familyId];
@@ -526,6 +553,13 @@ function runPrepareCommand(options, context) {
 	};
 	writeJsonFile(contract.publish_plan_path, publishPlan);
 
+	const localManifestShardMap = buildDeterministicLocalShardMap(copiedInventory);
+	const localManifest = buildManifestV2FromOutput(contract.payload_dir, localManifestShardMap, {
+		allowMissingStream: true,
+		allowMissingShardsDir: true,
+	});
+	writeJsonFile(contract.local_manifest_path, localManifest);
+
 	const metadata = {
 		release_layout_version: RELEASE_LAYOUT_VERSION,
 		release_id: context.release_id,
@@ -540,6 +574,7 @@ function runPrepareCommand(options, context) {
 			checksums_file: formatDisplayPath(contract.shard_checksums_path),
 			publish_plan_file: formatDisplayPath(contract.publish_plan_path),
 			inscription_map_template_file: formatDisplayPath(contract.inscription_map_template_path),
+			local_manifest_path: formatDisplayPath(contract.local_manifest_path),
 			canonical_manifest_path: formatDisplayPath(contract.canonical_manifest_path),
 		},
 		families: publishPlan.families,
@@ -557,6 +592,7 @@ function runPrepareCommand(options, context) {
 			shard_checksums: formatDisplayPath(contract.shard_checksums_path),
 			publish_plan: formatDisplayPath(contract.publish_plan_path),
 			inscription_map_template: formatDisplayPath(contract.inscription_map_template_path),
+			local_manifest: formatDisplayPath(contract.local_manifest_path),
 			metadata: formatDisplayPath(contract.metadata_path),
 		},
 	};

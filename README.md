@@ -499,12 +499,14 @@ bitnats/
 │   └── volume9.jsonl.sha256
 │
 └── scripts/
+      ├── release-v2.js
       ├── build-manifest-v2.js
       ├── encode-v2.js
       ├── generate_manifest.js
       ├── parse-v1.js
       ├── run-tests.js
       ├── verify-v2.js
+      ├── verify_dataset.js
       └── verify_volumes.js
 ```
 ## Canonical Dataset
@@ -553,9 +555,9 @@ Both checks must pass. See `docs/04-verification.md` for the full verification a
 
 ## Protocol-Complete Workflow (V1 + V2)
 
-This repository now supports a protocol-complete operator flow for V2 generation, V2 dual verification, and unified V1+V2 verification.
+This repository now supports a release-oriented operator flow for deterministic pre-inscription preparation, post-inscription manifest finalization, and unified verification.
 
-### 1) Generate V2 Artifacts
+### 1) Generate Source V2 Family Artifacts
 
 Encode canonical V2 family streams and deterministic shards from the historical V1 dataset:
 
@@ -567,41 +569,54 @@ node scripts/encode-v2.js \
       --shard-target-bytes 350000
 ```
 
-Generate a deterministic local shard map (replace with real inscription ids for production publication):
+### 2) Prepare Release Layout (Pre-Inscription)
+
+Create a release unit with shard-only payload files, checksums, publish-order plan, inscription mapping template, and a temporary non-canonical local manifest:
 
 ```bash
-node -e 'const fs=require("fs");const path=require("path");const crypto=require("crypto");const out={};for(const family of ["base","prospect","forged"]){const dir=path.join("dataset_v2",family,"shards");const files=fs.existsSync(dir)?fs.readdirSync(dir).filter((name)=>/^shard-\d+\.bin$/.test(name)).sort():[];out[family]=files.map((unused,index)=>`${crypto.createHash("sha256").update(`${family}:${index}`).digest("hex")}i${index}`);}fs.writeFileSync("dataset_v2/shard-map.local.json",JSON.stringify(out,null,2)+"\n");'
+node scripts/release-v2.js prepare \
+      --release-id base-2026-03-14 \
+      --source-output-dir dataset_v2
 ```
 
-Build Manifest V2 from generated streams and shard files:
+### 3) Pre-Verify with Temporary Local Manifest
 
-```bash
-node scripts/build-manifest-v2.js \
-      --input-dir dataset_v2 \
-      --shard-map dataset_v2/shard-map.local.json \
-      --output dataset_v2/manifest.v2.json
-```
-
-### 2) Verify V2 (Dual Verification)
-
-Run binary stream verification and deterministic JSONL reconstruction verification:
+The pre-inscription manifest is local-only and must not be treated as canonical:
 
 ```bash
 node scripts/verify-v2.js verify \
-      --manifest dataset_v2/manifest.v2.json \
-      --output-dir dataset_v2 \
+      --manifest artifacts/releases/base-2026-03-14/temp/pre-inscription/manifest.local.v2.json \
+      --output-dir artifacts/releases/base-2026-03-14/payload \
       --base-hash-file dataset/inscriptions.jsonl.sha256
 ```
 
-### 3) Verify Both Generations
+### 4) Finalize Canonical Manifest (Post-Inscription)
 
-Use one entrypoint for V1 historical compatibility checks and V2 canonical verification:
+After replacing null values in the generated inscription mapping template with real on-chain inscription ids, finalize the canonical manifest:
+
+```bash
+node scripts/release-v2.js finalize-manifest \
+      --release-id base-2026-03-14 \
+      --inscription-map artifacts/releases/base-2026-03-14/planning/inscription-map.template.json
+```
+
+### 5) Verify Finalized Release and Both Dataset Generations
+
+Verify finalized release payload commitments:
+
+```bash
+node scripts/release-v2.js verify-release \
+      --release-id base-2026-03-14 \
+      --base-hash-file dataset/inscriptions.jsonl.sha256
+```
+
+Then verify V1 historical and V2 canonical commitments from one unified entrypoint:
 
 ```bash
 node scripts/verify_volumes.js \
       --mode both \
-      --manifest dataset_v2/manifest.v2.json \
-      --output-dir dataset_v2 \
+      --manifest artifacts/releases/base-2026-03-14/canonical/manifest.v2.json \
+      --output-dir artifacts/releases/base-2026-03-14/payload \
       --base-hash-file dataset/inscriptions.jsonl.sha256
 ```
 

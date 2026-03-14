@@ -79,32 +79,40 @@ Normative constraints:
 
 ## 5. Dataset Sharding
 
-The canonical V2 binary dataset is split into deterministic shards.
+The canonical V2 binary dataset is split into deterministic, family-separated shard files.
 
 Shard size target: ≤ 350 kB
 
 This limit ensures compatibility with ordinal inscription size constraints.
 
-Shards are stored as separate binary files:
+Shards are stored under family-specific directories:
 
 ```
 dataset_v2/
-	shard1.bin
-	shard2.bin
-	shard3.bin
-	...
+	base/
+		shards/
+			shard-000000.bin
+			shard-000001.bin
+	prospect/
+		shards/
+			shard-000000.bin
+	forged/
+		shards/
+			shard-000000.bin
 ```
 
 Normative constraints:
 
-- Shards MUST preserve canonical record ordering.
-- Shards MUST concatenate without modification.
-- Shards MUST reconstruct the full binary dataset exactly.
+- Shards MUST preserve canonical record ordering within each family stream.
+- Shards MUST concatenate without modification within each family stream.
+- Family streams MUST remain separated and MUST NOT be mixed during reconstruction.
 
-Reconstruction rule:
+Reconstruction rules:
 
 ```
-shard1 || shard2 || ... || shardN = canonical binary dataset
+base/shards/shard-000000.bin || ... || base/shards/shard-N.bin = canonical base binary stream
+prospect/shards/shard-000000.bin || ... || prospect/shards/shard-N.bin = canonical prospect binary stream
+forged/shards/shard-000000.bin || ... || forged/shards/shard-N.bin = canonical forged binary stream
 ```
 
 ## 6. Dual Verification Model
