@@ -82,6 +82,7 @@ rules contained in this repository.
     - [3) Pre-Verify with Temporary Local Manifest](#3-pre-verify-with-temporary-local-manifest)
     - [4) Finalize Canonical Manifest (Post-Inscription)](#4-finalize-canonical-manifest-post-inscription)
     - [5) Verify Finalized Release and Both Dataset Generations](#5-verify-finalized-release-and-both-dataset-generations)
+    - [6) Operator Runbook (GitHub to On-Chain)](#6-operator-runbook-github-to-on-chain)
     - [Failure Semantics](#failure-semantics)
     - [Formal References](#formal-references)
   - [License](#license)
@@ -731,6 +732,13 @@ node scripts/verify_volumes.js \
       --output-dir artifacts/releases/base-2026-03-14/payload \
       --base-hash-file dataset/inscriptions.jsonl.sha256
 ```
+
+### 6) Operator Runbook (GitHub to On-Chain)
+
+Use the release operator runbook for the full staged sequence and sign-off
+gates:
+
+- `docs/08-release-operator-runbook.md`
 
 ### Failure Semantics
 
