@@ -10,6 +10,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { spawnSync } = require("child_process");
 
 const {
 	RECORD_SIZE_BYTES,
@@ -48,6 +49,7 @@ const {
 	toRepoPath,
 } = require("./v2/paths");
 const { runVerifyCommand } = require("./verify-v2");
+const { runUnifiedVerification } = require("./verify_volumes");
 
 const EXIT_USAGE_ERROR = 2;
 const COMMAND_PREPARE = "prepare";
@@ -60,6 +62,10 @@ const SUPPORTED_COMMANDS = [
 	COMMAND_VERIFY_RELEASE,
 	COMMAND_SUMMARIZE,
 ];
+const DEFAULT_VOLUMES_DIR = path.join(ROOT, "volumes");
+const DEFAULT_VOLUME_COUNT = 9;
+const SHA256_HEX_PATTERN = /^[0-9a-f]{64}$/;
+const VERIFICATION_EVIDENCE_SCHEMA_VERSION = 1;
 
 class CliUsageError extends Error {
 	constructor(message) {
@@ -96,6 +102,16 @@ function sanitizeReleaseId(releaseId) {
 	return releaseId;
 }
 
+function parsePositiveInt(value, optionName) {
+	const parsed = Number(value);
+
+	if (!Number.isSafeInteger(parsed) || parsed <= 0) {
+		throw new CliUsageError(`Invalid value for ${optionName}: expected positive integer.`);
+	}
+
+	return parsed;
+}
+
 function printUsage() {
 	console.log("Usage: node scripts/release-v2.js <command> [options]");
 	console.log("");
@@ -126,6 +142,9 @@ function printUsage() {
 	console.log("  --payload-dir <path>        Payload directory (default: <release>/payload)");
 	console.log("  --family <id|all>           Family selector: base|prospect|forged|all (default: all)");
 	console.log("  --base-hash-file <path>     Canonical base hash file (default: dataset/inscriptions.jsonl.sha256)");
+	console.log("  --dataset-hash-file <path>  V1 dataset hash file for unified verification (default: dataset/inscriptions.jsonl.sha256)");
+	console.log("  --volumes-dir <path>        V1 volumes directory for unified verification (default: volumes)");
+	console.log("  --volume-count <n>          V1 volume count for unified verification (default: 9)");
 }
 
 function parseArgs(argv) {
@@ -142,6 +161,9 @@ function parseArgs(argv) {
 		manifestPath: null,
 		payloadDir: null,
 		baseHashPath: path.join(DATASET_DIR, "inscriptions.jsonl.sha256"),
+		datasetHashPath: path.join(DATASET_DIR, "inscriptions.jsonl.sha256"),
+		volumesDir: DEFAULT_VOLUMES_DIR,
+		volumeCount: DEFAULT_VOLUME_COUNT,
 		family: "all",
 	};
 
@@ -209,6 +231,21 @@ function parseArgs(argv) {
 
 			case "--base-hash-file":
 				options.baseHashPath = resolveCliPath(readOptionValue(args, index, arg));
+				index += 1;
+				break;
+
+			case "--dataset-hash-file":
+				options.datasetHashPath = resolveCliPath(readOptionValue(args, index, arg));
+				index += 1;
+				break;
+
+			case "--volumes-dir":
+				options.volumesDir = resolveCliPath(readOptionValue(args, index, arg));
+				index += 1;
+				break;
+
+			case "--volume-count":
+				options.volumeCount = parsePositiveInt(readOptionValue(args, index, arg), arg);
 				index += 1;
 				break;
 
@@ -523,6 +560,75 @@ function loadExistingMetadata(metadataPath) {
 	return readJsonFile(metadataPath, "release metadata");
 }
 
+function parseExpectedSha256File(filePath, contextLabel) {
+	assertInvariant(typeof filePath === "string" && filePath.length > 0, `Missing ${contextLabel} file path.`);
+	assertInvariant(fs.existsSync(filePath), `Missing ${contextLabel} file: ${filePath}`);
+
+	const token = fs.readFileSync(filePath, "utf8").trim().split(/\s+/)[0];
+
+	assertInvariant(
+		typeof token === "string" && SHA256_HEX_PATTERN.test(token),
+		`Invalid ${contextLabel}: expected lowercase SHA-256 hex token.`,
+		{
+			source_path: filePath,
+			value: token,
+		}
+	);
+
+	return token;
+}
+
+function sha256File(filePath) {
+	assertInvariant(fs.existsSync(filePath), `Missing file for hashing: ${filePath}`);
+	const bytes = fs.readFileSync(filePath);
+	return crypto.createHash("sha256").update(bytes).digest("hex");
+}
+
+function readGitHeadCommitSha() {
+	const commandResult = spawnSync("git", ["-C", ROOT, "rev-parse", "--verify", "HEAD"], {
+		encoding: "utf8",
+	});
+
+	if (commandResult.status !== 0) {
+		return {
+			git_commit_sha: null,
+			status: "unavailable",
+			reason: (commandResult.stderr || commandResult.stdout || "git rev-parse failed").trim(),
+		};
+	}
+
+	const commitSha = commandResult.stdout.trim();
+	if (!/^[0-9a-f]{40}$/.test(commitSha)) {
+		return {
+			git_commit_sha: null,
+			status: "unavailable",
+			reason: "git rev-parse returned a non-SHA output",
+		};
+	}
+
+	return {
+		git_commit_sha: commitSha,
+		status: "ok",
+		reason: null,
+	};
+}
+
+function buildFamilyHashCommitments(verifyResult) {
+	const commitments = {};
+
+	for (const familyId of verifyResult.verified_families) {
+		const family = verifyResult.families[familyId];
+		commitments[familyId] = {
+			shard_count: family.shard_count,
+			stream_hash_sha256: family.stream_hash_sha256,
+			reconstructed_jsonl_hash_sha256: family.reconstructed_jsonl_hash_sha256,
+			base_v1_jsonl_hash_sha256: family.base_v1_jsonl_hash_sha256,
+		};
+	}
+
+	return commitments;
+}
+
 function runPrepareCommand(options, context) {
 	if (fs.existsSync(context.release_dir)) {
 		if (!options.force) {
@@ -681,6 +787,11 @@ function runVerifyReleaseCommand(options, context) {
 	const contract = getReleaseContractPaths(context.release_dir);
 	const manifestPath = options.manifestPath || contract.canonical_manifest_path;
 	const payloadDir = options.payloadDir || contract.payload_dir;
+	const verificationStartedAt = new Date().toISOString();
+
+	const verifyV2EvidencePath = path.join(contract.verification_temp_dir, "verify-v2.json");
+	const verifyVolumesEvidencePath = path.join(contract.verification_temp_dir, "verify-volumes.both.json");
+	const verificationSummaryPath = path.join(contract.verification_temp_dir, "verification-evidence.json");
 
 	const verifyResult = runVerifyCommand({
 		command: "verify",
@@ -690,9 +801,108 @@ function runVerifyReleaseCommand(options, context) {
 		baseHashPath: options.baseHashPath,
 		printJson: false,
 	});
+	writeJsonFile(verifyV2EvidencePath, verifyResult);
 
-	const verificationEvidencePath = path.join(contract.verification_temp_dir, "verify-v2.json");
-	writeJsonFile(verificationEvidencePath, verifyResult);
+	const unifiedResult = runUnifiedVerification({
+		mode: "both",
+		datasetHashFile: options.datasetHashPath,
+		volumesDir: options.volumesDir,
+		volumeCount: options.volumeCount,
+		manifestPath,
+		outputDir: payloadDir,
+		family: options.family,
+		baseHashFile: options.baseHashPath,
+		printJson: false,
+		help: false,
+	});
+	writeJsonFile(verifyVolumesEvidencePath, unifiedResult);
+
+	const verificationCompletedAt = new Date().toISOString();
+	const commitBinding = readGitHeadCommitSha();
+	const includesBaseFamily = verifyResult.verified_families.includes("base");
+	const baseV1Hash = includesBaseFamily
+		? parseExpectedSha256File(options.baseHashPath, "base compatibility hash")
+		: null;
+	const datasetV1Hash = parseExpectedSha256File(options.datasetHashPath, "dataset hash");
+	const manifestSha256 = sha256File(manifestPath);
+
+	const summaryEvidence = {
+		schema_version: VERIFICATION_EVIDENCE_SCHEMA_VERSION,
+		generated_at: verificationCompletedAt,
+		verification_started_at: verificationStartedAt,
+		verification_completed_at: verificationCompletedAt,
+		release_id: context.release_id,
+		release_dir: formatDisplayPath(contract.release_dir),
+		command: COMMAND_VERIFY_RELEASE,
+		policy: {
+			shard_target_policy_bytes: RELEASE_SHARD_TARGET_BYTES,
+			record_size_bytes: RECORD_SIZE_BYTES,
+		},
+		commit_binding: commitBinding,
+		inputs: {
+			manifest_path: formatDisplayPath(manifestPath),
+			payload_dir: formatDisplayPath(payloadDir),
+			family_selector: options.family,
+			base_hash_file: formatDisplayPath(options.baseHashPath),
+			dataset_hash_file: formatDisplayPath(options.datasetHashPath),
+			volumes_dir: formatDisplayPath(options.volumesDir),
+			volume_count: options.volumeCount,
+		},
+		steps: {
+			verify_v2: {
+				exit_code: 0,
+				evidence_path: formatDisplayPath(verifyV2EvidencePath),
+				verified_families: verifyResult.verified_families,
+			},
+			verify_volumes_both: {
+				exit_code: 0,
+				evidence_path: formatDisplayPath(verifyVolumesEvidencePath),
+				mode: unifiedResult.mode,
+			},
+		},
+		commitments: {
+			manifest_sha256: manifestSha256,
+			base_v1_jsonl_hash_sha256: baseV1Hash,
+			dataset_v1_hash_sha256: datasetV1Hash,
+			families: buildFamilyHashCommitments(verifyResult),
+		},
+	};
+	writeJsonFile(verificationSummaryPath, summaryEvidence);
+
+	const existingMetadata = loadExistingMetadata(contract.metadata_path) || {};
+	const metadata = {
+		...existingMetadata,
+		release_layout_version: RELEASE_LAYOUT_VERSION,
+		release_id: context.release_id,
+		state: "verified",
+		verified_at: verificationCompletedAt,
+		shard_target_policy_bytes: RELEASE_SHARD_TARGET_BYTES,
+		record_size_bytes: RECORD_SIZE_BYTES,
+		paths: {
+			...(existingMetadata.paths || {}),
+			release_dir: formatDisplayPath(contract.release_dir),
+			payload_dir: formatDisplayPath(payloadDir),
+			canonical_manifest_path: formatDisplayPath(manifestPath),
+			verification_verify_v2_path: formatDisplayPath(verifyV2EvidencePath),
+			verification_verify_volumes_path: formatDisplayPath(verifyVolumesEvidencePath),
+			verification_evidence_path: formatDisplayPath(verificationSummaryPath),
+		},
+		verification: {
+			schema_version: VERIFICATION_EVIDENCE_SCHEMA_VERSION,
+			started_at: verificationStartedAt,
+			completed_at: verificationCompletedAt,
+			family_selector: options.family,
+			v2_exit_code: 0,
+			unified_exit_code: 0,
+			commit_binding: commitBinding,
+			manifest_sha256: manifestSha256,
+			base_v1_jsonl_hash_sha256: baseV1Hash,
+			dataset_v1_hash_sha256: datasetV1Hash,
+			verified_families: verifyResult.verified_families,
+		},
+		manifest_summary: summarizeManifestV2(readManifestV2File(manifestPath)),
+	};
+	writeJsonFile(contract.metadata_path, metadata);
 
 	return {
 		command: COMMAND_VERIFY_RELEASE,
@@ -700,7 +910,16 @@ function runVerifyReleaseCommand(options, context) {
 		manifest_path: formatDisplayPath(manifestPath),
 		payload_dir: formatDisplayPath(payloadDir),
 		verified_families: verifyResult.verified_families,
-		verification_evidence_path: formatDisplayPath(verificationEvidencePath),
+		exit_codes: {
+			verify_v2: 0,
+			verify_volumes_both: 0,
+		},
+		evidence_paths: {
+			verify_v2: formatDisplayPath(verifyV2EvidencePath),
+			verify_volumes_both: formatDisplayPath(verifyVolumesEvidencePath),
+			verification_summary: formatDisplayPath(verificationSummaryPath),
+			metadata: formatDisplayPath(contract.metadata_path),
+		},
 	};
 }
 
@@ -756,7 +975,7 @@ function printFinalizeSummary(result) {
 function printVerifySummary(result) {
 	console.log(`Verified release manifest: ${result.manifest_path}`);
 	console.log(`Payload shards: ${result.payload_dir}`);
-	console.log(`Evidence: ${result.verification_evidence_path}`);
+	console.log(`Evidence: ${result.evidence_paths.verification_summary}`);
 }
 
 function printSummarizeSummary(result) {
