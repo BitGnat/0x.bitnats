@@ -12,8 +12,9 @@ const { parseV1Id } = require("../scripts/v2/record");
 const { shardFamilyStream } = require("../scripts/v2/shard");
 const { sortFamilyRecordsCanonical } = require("../scripts/v2/sort");
 const { sha256Hex } = require("../scripts/v2/hash");
+const { getFamilyStreamPath } = require("../scripts/v2/paths");
 
-const { REPO_ROOT, readJsonFile } = require("./helpers/test_utils");
+const { REPO_ROOT, makeTempDir, readJsonFile, runNodeScript } = require("./helpers/test_utils");
 
 function readVector(relativePath) {
   return readJsonFile(path.join(REPO_ROOT, relativePath));
@@ -90,4 +91,45 @@ test("shard boundary edge-case vectors are deterministic", () => {
 
     assert.equal(Buffer.compare(reconstructedStream, stream), 0);
   }
+});
+
+test("encode-v2 preserves base input order for V1 compatibility", () => {
+  const rootDir = makeTempDir("bitnats-base-order-");
+  const inputPath = path.join(rootDir, "input.jsonl");
+  const outputDir = path.join(rootDir, "out");
+  const ids = [
+    `${"f".repeat(64)}i0`,
+    `${"1".repeat(64)}i0`,
+    `${"a".repeat(64)}i0`,
+  ];
+
+  const canonicalInput = ids.map((id) => JSON.stringify({ id })).join("\n");
+  fs.writeFileSync(inputPath, canonicalInput, "utf8");
+
+  const encodeResult = runNodeScript("scripts/encode-v2.js", [
+    "--input",
+    inputPath,
+    "--output-dir",
+    outputDir,
+    "--default-family",
+    "base",
+    "--shard-target-bytes",
+    "66",
+  ]);
+
+  assert.equal(encodeResult.status, 0, `encode-v2 failed:\n${encodeResult.stderr}`);
+
+  const baseStreamPath = getFamilyStreamPath(outputDir, "base");
+  const reconstructed = reconstructJsonlBufferFromStream(fs.readFileSync(baseStreamPath), "base");
+  const inputBytes = fs.readFileSync(inputPath);
+
+  assert.equal(reconstructed.toString("utf8"), inputBytes.toString("utf8"));
+  assert.equal(sha256Hex(reconstructed), sha256Hex(inputBytes));
+
+  const canonicalSortedText = `${ids
+    .slice()
+    .sort()
+    .map((id) => JSON.stringify({ id }))
+    .join("\n")}\n`;
+  assert.notEqual(sha256Hex(reconstructed), sha256Hex(Buffer.from(canonicalSortedText, "utf8")));
 });

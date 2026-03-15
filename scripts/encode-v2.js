@@ -316,6 +316,15 @@ function buildOutputPayload(options, sortedFamilies, totalRecords) {
 	return payload;
 }
 
+function reconcileFamilyOrderingForEncoding(classifiedFamilies, sortedFamilies) {
+	return {
+		// Preserve base input order so reconstructed base JSONL remains V1-compatible.
+		base: classifiedFamilies.base,
+		prospect: sortedFamilies.prospect,
+		forged: sortedFamilies.forged,
+	};
+}
+
 function printHumanSummary(payload) {
 	console.log("Completed V2 encode pipeline stage: parse -> classify -> sort -> encode -> shard");
 	console.log(`Input: ${payload.source}`);
@@ -337,7 +346,8 @@ function main() {
 		});
 
 		const sortedFamilies = sortClassifiedFamiliesCanonical(classifiedFamilies);
-		const payload = buildOutputPayload(options, sortedFamilies, records.length);
+		const reconciledFamilies = reconcileFamilyOrderingForEncoding(classifiedFamilies, sortedFamilies);
+		const payload = buildOutputPayload(options, reconciledFamilies, records.length);
 
 		if (options.output) {
 			ensureParentDir(options.output);

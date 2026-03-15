@@ -8,7 +8,7 @@ function formatRecordAsJsonlLine(record) {
   assertInvariant(typeof record.txidHex === "string", "Invalid logical record: missing txid hex.");
   assertInvariant(Number.isInteger(record.inscriptionIndex), "Invalid logical record: missing inscription index.");
 
-  return `{"id":"${record.txidHex}i${record.inscriptionIndex}"}\n`;
+  return `{"id":"${record.txidHex}i${record.inscriptionIndex}"}`;
 }
 
 function reconstructJsonlBufferFromRecords(records, familyId) {
@@ -22,7 +22,14 @@ function reconstructJsonlBufferFromRecords(records, familyId) {
     return Buffer.alloc(0);
   }
 
-  return Buffer.from(records.map((record) => formatRecordAsJsonlLine(record)).join(""), "utf8");
+  const lineJoined = records.map((record) => formatRecordAsJsonlLine(record)).join("\n");
+
+  // Base preserves historical V1 byte compatibility by omitting terminal LF.
+  if (familyId === "base") {
+    return Buffer.from(lineJoined, "utf8");
+  }
+
+  return Buffer.from(`${lineJoined}\n`, "utf8");
 }
 
 function reconstructJsonlBufferFromStream(streamBytes, familyId) {
