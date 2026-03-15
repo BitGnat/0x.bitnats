@@ -1,0 +1,148 @@
+{
+  "generated_at": "2026-03-15T00:22:35.073Z",
+  "run_root": "scratch/phase3-dry-run-2026-03-14",
+  "release_id": "base-phase3-dry-run",
+  "sample_input": {
+    "path": "scratch/phase3-dry-run-2026-03-14/input-inscriptions.sample.jsonl",
+    "line_count": 5000,
+    "sha256": "85eaf798421e1c3a291951584ac136038a8768533f3d1c567c6e3a2d0b3b007d"
+  },
+  "run_a": {
+    "run_name": "run-a",
+    "release_dir": "scratch/phase3-dry-run-2026-03-14/run-a/releases/base-phase3-dry-run",
+    "checksums_sha256": "752f1e18be598331e91f4896b1c36da48fa2871f09e358feecbcd7af5f2aa224",
+    "manifest_sha256": "9d5fd6e2efe5f9a795ab292482b33f43273d2488aeaa2417f3d2581185da364c",
+    "final_inscription_map_sha256": "fc3f6caa6c1e78ea3920f3b5c1df67a584646e889cf1fe8cf6df4ac2ba7a2e77",
+    "verification_summary_sha256": "868e26301db915a1422bb89ab10e8f8607c16793e963d5a1886790968786439d",
+    "shard_commitments": [
+      {
+        "family_id": "base",
+        "shard_file": "payload/base/shards/shard-000000.bin",
+        "byte_length": 165000,
+        "sha256": "ccbd401a1992b6a8a4232a893aaf7b13ed72915a211c9eaaa41026f22d94b6c7"
+      }
+    ],
+    "verify_release": {
+      "schema_version": 1,
+      "steps": {
+        "verify_v2": {
+          "exit_code": 0,
+          "evidence_path": "scratch/phase3-dry-run-2026-03-14/run-a/releases/base-phase3-dry-run/temp/verification/verify-v2.json",
+          "verified_families": [
+            "base",
+            "prospect",
+            "forged"
+          ]
+        },
+        "verify_volumes_both": {
+          "exit_code": 0,
+          "evidence_path": "scratch/phase3-dry-run-2026-03-14/run-a/releases/base-phase3-dry-run/temp/verification/verify-volumes.both.json",
+          "mode": "both"
+        }
+      },
+      "commitments": {
+        "manifest_sha256": "9d5fd6e2efe5f9a795ab292482b33f43273d2488aeaa2417f3d2581185da364c",
+        "base_v1_jsonl_hash_sha256": "47cb1baf156e5b3555169fb4bc33ed41688dd29ea77558b1d4bbac28a264f571",
+        "dataset_v1_hash_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+        "families": {
+          "base": {
+            "shard_count": 1,
+            "stream_hash_sha256": "ccbd401a1992b6a8a4232a893aaf7b13ed72915a211c9eaaa41026f22d94b6c7",
+            "reconstructed_jsonl_hash_sha256": "47cb1baf156e5b3555169fb4bc33ed41688dd29ea77558b1d4bbac28a264f571",
+            "base_v1_jsonl_hash_sha256": "47cb1baf156e5b3555169fb4bc33ed41688dd29ea77558b1d4bbac28a264f571"
+          },
+          "prospect": {
+            "shard_count": 0,
+            "stream_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "reconstructed_jsonl_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "base_v1_jsonl_hash_sha256": null
+          },
+          "forged": {
+            "shard_count": 0,
+            "stream_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "reconstructed_jsonl_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "base_v1_jsonl_hash_sha256": null
+          }
+        }
+      },
+      "commit_binding": {
+        "git_commit_sha": "6374e38d4046b523bd73ab98ae91f468da3a7c86",
+        "status": "ok",
+        "reason": null
+      }
+    }
+  },
+  "run_b": {
+    "run_name": "run-b",
+    "release_dir": "scratch/phase3-dry-run-2026-03-14/run-b/releases/base-phase3-dry-run",
+    "checksums_sha256": "752f1e18be598331e91f4896b1c36da48fa2871f09e358feecbcd7af5f2aa224",
+    "manifest_sha256": "9d5fd6e2efe5f9a795ab292482b33f43273d2488aeaa2417f3d2581185da364c",
+    "final_inscription_map_sha256": "fc3f6caa6c1e78ea3920f3b5c1df67a584646e889cf1fe8cf6df4ac2ba7a2e77",
+    "verification_summary_sha256": "78c0cfd9476cdfab55ec2481547e5ee57f65d34850df553c83e3b3c25f7164da",
+    "shard_commitments": [
+      {
+        "family_id": "base",
+        "shard_file": "payload/base/shards/shard-000000.bin",
+        "byte_length": 165000,
+        "sha256": "ccbd401a1992b6a8a4232a893aaf7b13ed72915a211c9eaaa41026f22d94b6c7"
+      }
+    ],
+    "verify_release": {
+      "schema_version": 1,
+      "steps": {
+        "verify_v2": {
+          "exit_code": 0,
+          "evidence_path": "scratch/phase3-dry-run-2026-03-14/run-b/releases/base-phase3-dry-run/temp/verification/verify-v2.json",
+          "verified_families": [
+            "base",
+            "prospect",
+            "forged"
+          ]
+        },
+        "verify_volumes_both": {
+          "exit_code": 0,
+          "evidence_path": "scratch/phase3-dry-run-2026-03-14/run-b/releases/base-phase3-dry-run/temp/verification/verify-volumes.both.json",
+          "mode": "both"
+        }
+      },
+      "commitments": {
+        "manifest_sha256": "9d5fd6e2efe5f9a795ab292482b33f43273d2488aeaa2417f3d2581185da364c",
+        "base_v1_jsonl_hash_sha256": "47cb1baf156e5b3555169fb4bc33ed41688dd29ea77558b1d4bbac28a264f571",
+        "dataset_v1_hash_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+        "families": {
+          "base": {
+            "shard_count": 1,
+            "stream_hash_sha256": "ccbd401a1992b6a8a4232a893aaf7b13ed72915a211c9eaaa41026f22d94b6c7",
+            "reconstructed_jsonl_hash_sha256": "47cb1baf156e5b3555169fb4bc33ed41688dd29ea77558b1d4bbac28a264f571",
+            "base_v1_jsonl_hash_sha256": "47cb1baf156e5b3555169fb4bc33ed41688dd29ea77558b1d4bbac28a264f571"
+          },
+          "prospect": {
+            "shard_count": 0,
+            "stream_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "reconstructed_jsonl_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "base_v1_jsonl_hash_sha256": null
+          },
+          "forged": {
+            "shard_count": 0,
+            "stream_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "reconstructed_jsonl_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "base_v1_jsonl_hash_sha256": null
+          }
+        }
+      },
+      "commit_binding": {
+        "git_commit_sha": "6374e38d4046b523bd73ab98ae91f468da3a7c86",
+        "status": "ok",
+        "reason": null
+      }
+    }
+  },
+  "parity": {
+    "checksums_sha256_match": true,
+    "manifest_sha256_match": true,
+    "final_inscription_map_sha256_match": true,
+    "shard_commitments_match": true,
+    "verify_commitments_match": true,
+    "verify_exit_codes_match": true
+  }
+}
