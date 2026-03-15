@@ -63,6 +63,28 @@ function assertReleaseShardTargetBytes(value, contextLabel = "shard_target_bytes
   );
 }
 
+function getAlignedShardPayloadByteLength(targetBytes, recordSizeBytes = RECORD_SIZE_BYTES) {
+  assertInvariant(
+    Number.isInteger(targetBytes) && targetBytes > 0,
+    "Invalid shard target size: expected positive integer.",
+    {
+      target_bytes: targetBytes,
+      record_size_bytes: recordSizeBytes,
+    }
+  );
+  assertInvariant(
+    Number.isInteger(recordSizeBytes) && recordSizeBytes > 0,
+    "Invalid record size: expected positive integer.",
+    {
+      target_bytes: targetBytes,
+      record_size_bytes: recordSizeBytes,
+    }
+  );
+
+  const alignedBytes = targetBytes - (targetBytes % recordSizeBytes);
+  return alignedBytes > 0 ? alignedBytes : recordSizeBytes;
+}
+
 module.exports = {
   BASE_REQUIRED_INDEX,
   FORMAT_ID_V2,
@@ -83,4 +105,5 @@ module.exports = {
   assertInvariant,
   assertReleaseShardTargetBytes,
   failClosed,
+  getAlignedShardPayloadByteLength,
 };

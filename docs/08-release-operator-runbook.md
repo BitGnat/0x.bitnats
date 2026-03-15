@@ -4,6 +4,7 @@ This runbook codifies the release sequence for V2 shard publication and
 post-inscription canonical manifest finalization.
 
 Normative references:
+
 - docs/03-dataset.md
 - docs/04-verification.md
 - docs/06-manifest-v2-spec.md
@@ -40,6 +41,7 @@ For release workflow consistency, keep this repository path contract stable:
 - Confirm V1 volume files exist under `volumes/`.
 - Choose a release id, for example `base-YYYY-MM-DD`.
 - Ensure shard target policy is the canonical fixed value (`350000` bytes).
+- Remember that with `33`-byte records, a full non-final shard payload is record-aligned to `349998` bytes even though the configured target policy remains `350000`.
 
 ## 1) Prepare Release Layout (Pre-Inscription)
 
@@ -59,6 +61,7 @@ node scripts/release-v2.js prepare \
 ```
 
 Expected outputs:
+
 - `payload/<family>/shards/*.bin`
 - `checksums/shard-checksums.sha256`
 - `planning/publish-order.json`
@@ -78,6 +81,7 @@ node scripts/verify-v2.js verify \
 ```
 
 Notes:
+
 - The temporary manifest is local verification state only.
 - Do not treat the temporary manifest as canonical release output.
 
@@ -87,6 +91,7 @@ Publish shard payloads and planning artifacts for auditability before
 inscription.
 
 Publish at minimum:
+
 - `payload/**/shards/*.bin`
 - `checksums/shard-checksums.sha256`
 - `planning/publish-order.json`
@@ -108,6 +113,7 @@ Fill `planning/inscription-map.template.json` by replacing all
 `inscription_id: null` entries with real inscription ids.
 
 Rules:
+
 - no missing ids
 - no duplicate ids
 - contiguous shard indexes must remain unchanged
@@ -123,6 +129,7 @@ node scripts/release-v2.js finalize-manifest \
 ```
 
 Expected outputs:
+
 - `canonical/manifest.v2.json`
 - `reconciliation/inscription-map.final.json`
 - `reconciliation/shard-reconciliation.json`
@@ -145,6 +152,7 @@ node scripts/verify_volumes.js \
 ```
 
 Required machine-readable evidence:
+
 - `temp/verification/verify-v2.json`
 - `temp/verification/verify-volumes.both.json`
 - `temp/verification/verification-evidence.json`

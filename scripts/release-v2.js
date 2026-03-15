@@ -20,6 +20,7 @@ const {
 	assertFamilyId,
 	assertInvariant,
 	assertReleaseShardTargetBytes,
+	getAlignedShardPayloadByteLength,
 } = require("./v2/constants");
 const {
 	SHARD_INSCRIPTION_MAPPING_VERSION,
@@ -478,6 +479,8 @@ function buildDeterministicLocalShardMap(inventory) {
 }
 
 function assertReleaseShardPolicy(inventory) {
+	const expectedNonFinalShardBytes = getAlignedShardPayloadByteLength(RELEASE_SHARD_TARGET_BYTES);
+
 	for (const familyId of SUPPORTED_FAMILIES) {
 		const shards = inventory[familyId];
 
@@ -498,12 +501,13 @@ function assertReleaseShardPolicy(inventory) {
 
 			if (!isLastShard) {
 				assertInvariant(
-					shard.byteLength === RELEASE_SHARD_TARGET_BYTES,
+					shard.byteLength === expectedNonFinalShardBytes,
 					"Release shard target policy violation for non-final shard.",
 					{
 						family_id: familyId,
 						shard_index: shard.index,
-						expected_byte_length: RELEASE_SHARD_TARGET_BYTES,
+						configured_shard_target_bytes: RELEASE_SHARD_TARGET_BYTES,
+						expected_aligned_byte_length: expectedNonFinalShardBytes,
 						actual_byte_length: shard.byteLength,
 					}
 				);

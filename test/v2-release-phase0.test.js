@@ -39,6 +39,10 @@ function buildFilledInscriptionMap(template) {
 	return output;
 }
 
+function buildSyntheticBaseIds(count) {
+	return Array.from({ length: count }, (unused, index) => `${index.toString(16).padStart(64, "0")}i0`);
+}
+
 test("build-manifest-v2 supports shard-only bundle with --allow-missing-stream", () => {
 	const fixture = prepareSmallV2Fixture(makeTempDir(), { shardTargetBytes: 66 });
 
@@ -271,6 +275,46 @@ test("release-v2 finalize-manifest and verify-release succeed on policy-complian
 		}
 	}
 
+
+		test("release-v2 finalize-manifest accepts aligned non-final shard bytes under fixed policy", () => {
+			const rootDir = makeTempDir();
+			const fixture = prepareSmallV2Fixture(path.join(rootDir, "fixture"), {
+				ids: buildSyntheticBaseIds(10607),
+				shardTargetBytes: 350000,
+			});
+			const releaseRootDir = path.join(rootDir, "releases");
+			const releaseId = "phase0-aligned-non-final";
+			const releaseDir = path.join(releaseRootDir, releaseId);
+			const contract = getReleaseContractPaths(releaseDir);
+			const filledMapPath = path.join(rootDir, "filled-map.json");
+
+			const prepareResult = runNodeScript("scripts/release-v2.js", [
+				"prepare",
+				"--release-id",
+				releaseId,
+				"--release-root",
+				releaseRootDir,
+				"--source-output-dir",
+				fixture.outputDir,
+			]);
+			assert.equal(prepareResult.status, 0, `release prepare failed:\n${prepareResult.stderr}`);
+
+			const template = readJsonFile(contract.inscription_map_template_path);
+			assert.equal(template.families.base.length, 2, "expected two base shards in regression fixture");
+			const filledMap = buildFilledInscriptionMap(template);
+			writeJsonFile(filledMapPath, filledMap);
+
+			const finalizeResult = runNodeScript("scripts/release-v2.js", [
+				"finalize-manifest",
+				"--release-id",
+				releaseId,
+				"--release-root",
+				releaseRootDir,
+				"--inscription-map",
+				filledMapPath,
+			]);
+			assert.equal(finalizeResult.status, 0, `finalize-manifest failed:\n${finalizeResult.stderr}`);
+		});
 	const verifyReleaseResult = runNodeScript("scripts/release-v2.js", [
 		"verify-release",
 		"--release-id",

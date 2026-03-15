@@ -1,0 +1,220 @@
+{
+  "release_layout_version": 1,
+  "release_id": "base-2026-03-15",
+  "created_at": "2026-03-15T06:36:18.689Z",
+  "shard_target_policy_bytes": 350000,
+  "families": {
+    "base": {
+      "shard_count": 22,
+      "total_bytes": 7397742
+    },
+    "prospect": {
+      "shard_count": 0,
+      "total_bytes": 0
+    },
+    "forged": {
+      "shard_count": 0,
+      "total_bytes": 0
+    }
+  },
+  "publish_order": [
+    {
+      "publish_ordinal": 0,
+      "family_id": "base",
+      "index": 0,
+      "shard_file": "payload/base/shards/shard-000000.bin",
+      "byte_length": 349998,
+      "sha256": "95f87e3596e1296910f3c1c1c11cae1bf5a6d75c8ec771f7e52dbfd75662bdd0",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 1,
+      "family_id": "base",
+      "index": 1,
+      "shard_file": "payload/base/shards/shard-000001.bin",
+      "byte_length": 349998,
+      "sha256": "34cf3adcbe639f1d2efcf2985b6d762d53e95aac3164bf908f43e38af49ef8c3",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 2,
+      "family_id": "base",
+      "index": 2,
+      "shard_file": "payload/base/shards/shard-000002.bin",
+      "byte_length": 349998,
+      "sha256": "a008c94eb7f5d57018f3319768e6a159f4b155a7024da43c9e985d8fcc315424",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 3,
+      "family_id": "base",
+      "index": 3,
+      "shard_file": "payload/base/shards/shard-000003.bin",
+      "byte_length": 349998,
+      "sha256": "39eba4dfea8d3377c5af869084f8dbc7d0cd9e986a4fae45e8dfbc9ab604cd8c",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 4,
+      "family_id": "base",
+      "index": 4,
+      "shard_file": "payload/base/shards/shard-000004.bin",
+      "byte_length": 349998,
+      "sha256": "90ff82bc1d811dddf99bf84e848612f4f90e94e58c46c60fa4e8764646c80d05",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 5,
+      "family_id": "base",
+      "index": 5,
+      "shard_file": "payload/base/shards/shard-000005.bin",
+      "byte_length": 349998,
+      "sha256": "c6fc9fb98ee56c4be86386f4a61e250074fce7e33ede589e48747c57349f8bb8",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 6,
+      "family_id": "base",
+      "index": 6,
+      "shard_file": "payload/base/shards/shard-000006.bin",
+      "byte_length": 349998,
+      "sha256": "4ed46c7f0f4d25bd904089f8b5fa1524c36a865eb70b645b33c1da2abe92a6a7",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 7,
+      "family_id": "base",
+      "index": 7,
+      "shard_file": "payload/base/shards/shard-000007.bin",
+      "byte_length": 349998,
+      "sha256": "a7640cbfb351031fb19abb2786304739f055522a0b7e2d4076643a93d59d23cb",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 8,
+      "family_id": "base",
+      "index": 8,
+      "shard_file": "payload/base/shards/shard-000008.bin",
+      "byte_length": 349998,
+      "sha256": "8402a7a693501f80a02bbd89026a8a94f7cc02033dd211de508a43cbe1e1068f",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 9,
+      "family_id": "base",
+      "index": 9,
+      "shard_file": "payload/base/shards/shard-000009.bin",
+      "byte_length": 349998,
+      "sha256": "ef91e9a48e302fac790ac8fe7cac5118ee551b52647e3bab28787d1f041a1f1b",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 10,
+      "family_id": "base",
+      "index": 10,
+      "shard_file": "payload/base/shards/shard-000010.bin",
+      "byte_length": 349998,
+      "sha256": "173c415bb031f196eb8828776fcd5ae52252476d4c59cf7383fec92f33116de3",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 11,
+      "family_id": "base",
+      "index": 11,
+      "shard_file": "payload/base/shards/shard-000011.bin",
+      "byte_length": 349998,
+      "sha256": "4a34180fb466157e52960d9cf6221b9d8e7ce11bc2d9776d315d1359e39aa201",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 12,
+      "family_id": "base",
+      "index": 12,
+      "shard_file": "payload/base/shards/shard-000012.bin",
+      "byte_length": 349998,
+      "sha256": "7f36849089a86098f43a30596946d41d06f2aef60d081e1f08c93afaebcb86da",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 13,
+      "family_id": "base",
+      "index": 13,
+      "shard_file": "payload/base/shards/shard-000013.bin",
+      "byte_length": 349998,
+      "sha256": "4c3eb86d1aeb89bb21b25aed498a41e07703b479d71c6aee93d0bdd0e6690b4b",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 14,
+      "family_id": "base",
+      "index": 14,
+      "shard_file": "payload/base/shards/shard-000014.bin",
+      "byte_length": 349998,
+      "sha256": "a6df65dc118ed2fe292e057db238c702c780d5e2a786ba90669061326b38fec0",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 15,
+      "family_id": "base",
+      "index": 15,
+      "shard_file": "payload/base/shards/shard-000015.bin",
+      "byte_length": 349998,
+      "sha256": "10bf5658d989ba658b578e8a01ae5760e3b84f6ee7573ba272605a4071f72973",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 16,
+      "family_id": "base",
+      "index": 16,
+      "shard_file": "payload/base/shards/shard-000016.bin",
+      "byte_length": 349998,
+      "sha256": "dd4db23e996d76c83957056e3b08a8816bbbc5d61f977f0b5b0fc10f415a5918",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 17,
+      "family_id": "base",
+      "index": 17,
+      "shard_file": "payload/base/shards/shard-000017.bin",
+      "byte_length": 349998,
+      "sha256": "2027ca55ef2499607b7b5abb61c385b792314ccc28ed3152a883c3c0e2ae9884",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 18,
+      "family_id": "base",
+      "index": 18,
+      "shard_file": "payload/base/shards/shard-000018.bin",
+      "byte_length": 349998,
+      "sha256": "0e55952ec9d23f864a14d5f6b9589270748ae962e7413d9085818a38ce5c38a4",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 19,
+      "family_id": "base",
+      "index": 19,
+      "shard_file": "payload/base/shards/shard-000019.bin",
+      "byte_length": 349998,
+      "sha256": "5543c098411a177f71eed675407acf36cb99717123f30a3f9381ca8606b90b99",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 20,
+      "family_id": "base",
+      "index": 20,
+      "shard_file": "payload/base/shards/shard-000020.bin",
+      "byte_length": 349998,
+      "sha256": "bed6599d0e201d62f7af62b88e8f091eba1731736806d700be267f8848f76c64",
+      "inscription_id": null
+    },
+    {
+      "publish_ordinal": 21,
+      "family_id": "base",
+      "index": 21,
+      "shard_file": "payload/base/shards/shard-000021.bin",
+      "byte_length": 47784,
+      "sha256": "04629d83fda1470b0e9e1d96ee387cf7a8716b491988b12a318a439c63a060c9",
+      "inscription_id": null
+    }
+  ]
+}

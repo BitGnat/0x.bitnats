@@ -1,0 +1,119 @@
+{
+  "mapping_version": 1,
+  "families": {
+    "base": [
+      {
+        "index": 0,
+        "shard_file": "payload/base/shards/shard-000000.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 1,
+        "shard_file": "payload/base/shards/shard-000001.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 2,
+        "shard_file": "payload/base/shards/shard-000002.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 3,
+        "shard_file": "payload/base/shards/shard-000003.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 4,
+        "shard_file": "payload/base/shards/shard-000004.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 5,
+        "shard_file": "payload/base/shards/shard-000005.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 6,
+        "shard_file": "payload/base/shards/shard-000006.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 7,
+        "shard_file": "payload/base/shards/shard-000007.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 8,
+        "shard_file": "payload/base/shards/shard-000008.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 9,
+        "shard_file": "payload/base/shards/shard-000009.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 10,
+        "shard_file": "payload/base/shards/shard-000010.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 11,
+        "shard_file": "payload/base/shards/shard-000011.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 12,
+        "shard_file": "payload/base/shards/shard-000012.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 13,
+        "shard_file": "payload/base/shards/shard-000013.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 14,
+        "shard_file": "payload/base/shards/shard-000014.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 15,
+        "shard_file": "payload/base/shards/shard-000015.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 16,
+        "shard_file": "payload/base/shards/shard-000016.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 17,
+        "shard_file": "payload/base/shards/shard-000017.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 18,
+        "shard_file": "payload/base/shards/shard-000018.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 19,
+        "shard_file": "payload/base/shards/shard-000019.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 20,
+        "shard_file": "payload/base/shards/shard-000020.bin",
+        "inscription_id": null
+      },
+      {
+        "index": 21,
+        "shard_file": "payload/base/shards/shard-000021.bin",
+        "inscription_id": null
+      }
+    ],
+    "prospect": [],
+    "forged": []
+  }
+}

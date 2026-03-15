@@ -1,0 +1,32 @@
+{
+  "release_layout_version": 1,
+  "release_id": "base-2026-03-15",
+  "state": "prepared",
+  "prepared_at": "2026-03-15T06:36:19.190Z",
+  "shard_target_policy_bytes": 350000,
+  "record_size_bytes": 33,
+  "source_output_dir": "dataset_v2",
+  "paths": {
+    "release_dir": "artifacts/releases/base-2026-03-15",
+    "payload_dir": "artifacts/releases/base-2026-03-15/payload",
+    "checksums_file": "artifacts/releases/base-2026-03-15/checksums/shard-checksums.sha256",
+    "publish_plan_file": "artifacts/releases/base-2026-03-15/planning/publish-order.json",
+    "inscription_map_template_file": "artifacts/releases/base-2026-03-15/planning/inscription-map.template.json",
+    "local_manifest_path": "artifacts/releases/base-2026-03-15/temp/pre-inscription/manifest.local.v2.json",
+    "canonical_manifest_path": "artifacts/releases/base-2026-03-15/canonical/manifest.v2.json"
+  },
+  "families": {
+    "base": {
+      "shard_count": 22,
+      "total_bytes": 7397742
+    },
+    "prospect": {
+      "shard_count": 0,
+      "total_bytes": 0
+    },
+    "forged": {
+      "shard_count": 0,
+      "total_bytes": 0
+    }
+  }
+}

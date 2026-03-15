@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-03-15T06:54:22Z",
+  "release_id": "base-2026-03-15",
+  "decision": "freeze-v1-hash-adjust-base-encoding-path",
+  "references": {
+    "policy_note": "docs/10-v1-hash-freeze-base-encoding-policy.md",
+    "plan": "prompts/10-plan-v2ReleaseGoStatus.prompt.md",
+    "dataset_jsonl": "dataset/inscriptions.jsonl",
+    "baseline_hash_file": "dataset/inscriptions.jsonl.sha256",
+    "pre_inscription_manifest": "artifacts/releases/base-2026-03-15/temp/pre-inscription/manifest.local.v2.json",
+    "payload_dir": "artifacts/releases/base-2026-03-15/payload"
+  },
+  "baseline": {
+    "dataset_v1_hash_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+    "hash_file_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+    "hash_file_unchanged": true
+  },
+  "pre_verify": {
+    "command": "node scripts/verify-v2.js verify --manifest artifacts/releases/base-2026-03-15/temp/pre-inscription/manifest.local.v2.json --output-dir artifacts/releases/base-2026-03-15/payload --base-hash-file dataset/inscriptions.jsonl.sha256 --json",
+    "verified_families": [
+      "base",
+      "prospect",
+      "forged"
+    ],
+    "base": {
+      "shard_count": 22,
+      "stream_byte_length": 7397742,
+      "stream_hash_sha256": "8df05d0585e01c0c442a03567fdda61d513c7a67bde71154bbcabe17017b94f4",
+      "reconstructed_jsonl_byte_length": 17037223,
+      "reconstructed_jsonl_hash_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+      "base_v1_jsonl_hash_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+      "frozen_hash_match": true
+    }
+  },
+  "rationale": {
+    "rejected_branch": "rewrite dataset/inscriptions.jsonl.sha256",
+    "adopted_branch": "keep the V1 hash frozen and reconcile V2 base encoding/reconstruction bytes",
+    "historical_base_eof_semantics_preserved": true
+  },
+  "commit_binding": {
+    "git_head_sha": "c19516734d53475c2997f367cb5358b1c46abeee",
+    "working_tree_dirty": true
+  }
+}

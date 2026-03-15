@@ -1,0 +1,162 @@
+{
+  "manifest_version": 2,
+  "format_id": "bitnats-manifest-v2",
+  "record_size_bytes": 33,
+  "shard_target_bytes": 350000,
+  "families": {
+    "base": {
+      "family_id": "base",
+      "stream_hash_sha256": "8df05d0585e01c0c442a03567fdda61d513c7a67bde71154bbcabe17017b94f4",
+      "reconstructed_jsonl_hash_sha256": "0de81f66e1f06cbb40f9c4e012125d8bf739fb4fc05a0aacc33b97fcc1fbf3e4",
+      "jsonl_schema": "bitnats-jsonl-id-v1",
+      "shards": [
+        {
+          "index": 0,
+          "inscription_id": "3a362bc94d1aeed35e29e3a4edde3c9f3cdecaa76e93f37eb5fe7596ad65ba6bi0",
+          "byte_length": 349998,
+          "sha256": "95f87e3596e1296910f3c1c1c11cae1bf5a6d75c8ec771f7e52dbfd75662bdd0"
+        },
+        {
+          "index": 1,
+          "inscription_id": "01ad3c3e61780f1df82cf6828bdbec41379cc3f51b4053ec50ae4602b1bf11a6i0",
+          "byte_length": 349998,
+          "sha256": "34cf3adcbe639f1d2efcf2985b6d762d53e95aac3164bf908f43e38af49ef8c3"
+        },
+        {
+          "index": 2,
+          "inscription_id": "a3e7d2830f786e50d016f38c42d78e79c65cc0ba646b086160bc2b3d9e41d139i0",
+          "byte_length": 349998,
+          "sha256": "a008c94eb7f5d57018f3319768e6a159f4b155a7024da43c9e985d8fcc315424"
+        },
+        {
+          "index": 3,
+          "inscription_id": "7d3ee0251ef5e2680179a14231aee02edbd0507e41e6c7c0344817c6e43cc747i0",
+          "byte_length": 349998,
+          "sha256": "39eba4dfea8d3377c5af869084f8dbc7d0cd9e986a4fae45e8dfbc9ab604cd8c"
+        },
+        {
+          "index": 4,
+          "inscription_id": "71d1c4164cf843eda0fc5098d51761483201e4de58049058c471741b6f88b117i0",
+          "byte_length": 349998,
+          "sha256": "90ff82bc1d811dddf99bf84e848612f4f90e94e58c46c60fa4e8764646c80d05"
+        },
+        {
+          "index": 5,
+          "inscription_id": "083b02c4da04b6c4a1ba08a67badeadd4e93dc11988991f43c292add3d90d113i0",
+          "byte_length": 349998,
+          "sha256": "c6fc9fb98ee56c4be86386f4a61e250074fce7e33ede589e48747c57349f8bb8"
+        },
+        {
+          "index": 6,
+          "inscription_id": "a901aafcf553b36f8e232d8f007dd5fb88e3379a17b026dbd10244674df68cf5i0",
+          "byte_length": 349998,
+          "sha256": "4ed46c7f0f4d25bd904089f8b5fa1524c36a865eb70b645b33c1da2abe92a6a7"
+        },
+        {
+          "index": 7,
+          "inscription_id": "e61482173d06b3bab5539de597ab01cc0818dc8770b2305e68424ba34d6007d1i0",
+          "byte_length": 349998,
+          "sha256": "a7640cbfb351031fb19abb2786304739f055522a0b7e2d4076643a93d59d23cb"
+        },
+        {
+          "index": 8,
+          "inscription_id": "9130912080076fd8bbee9cea3d59176bfb80743b2bf84cb80bcb94558ed02f85i0",
+          "byte_length": 349998,
+          "sha256": "8402a7a693501f80a02bbd89026a8a94f7cc02033dd211de508a43cbe1e1068f"
+        },
+        {
+          "index": 9,
+          "inscription_id": "18bd3e6e731dbc0881a8eb112c60e103177bdf292c23db897edcb48ea850ffe5i0",
+          "byte_length": 349998,
+          "sha256": "ef91e9a48e302fac790ac8fe7cac5118ee551b52647e3bab28787d1f041a1f1b"
+        },
+        {
+          "index": 10,
+          "inscription_id": "0f097060c9920922b8a65a88490d4e8042ac668f48557bfb7b3f2dc460c6ba8fi0",
+          "byte_length": 349998,
+          "sha256": "173c415bb031f196eb8828776fcd5ae52252476d4c59cf7383fec92f33116de3"
+        },
+        {
+          "index": 11,
+          "inscription_id": "96cc9fe477896dcd373dcb5ef42e51f6c3d8290df1a26967caeb3717bcb768aci0",
+          "byte_length": 349998,
+          "sha256": "4a34180fb466157e52960d9cf6221b9d8e7ce11bc2d9776d315d1359e39aa201"
+        },
+        {
+          "index": 12,
+          "inscription_id": "c7052b897beebf5452ad41ce08f363b87e9841cde314989bf3f6a0798906436di0",
+          "byte_length": 349998,
+          "sha256": "7f36849089a86098f43a30596946d41d06f2aef60d081e1f08c93afaebcb86da"
+        },
+        {
+          "index": 13,
+          "inscription_id": "d8fb0499ecca64cd1944ee20bb4ddc0ff606ecc2eef9be529dd7a85ad59ff9e9i0",
+          "byte_length": 349998,
+          "sha256": "4c3eb86d1aeb89bb21b25aed498a41e07703b479d71c6aee93d0bdd0e6690b4b"
+        },
+        {
+          "index": 14,
+          "inscription_id": "f233d843d8a885fc24684575a16339fd40206218e7719f05cbfe21fb79199b36i0",
+          "byte_length": 349998,
+          "sha256": "a6df65dc118ed2fe292e057db238c702c780d5e2a786ba90669061326b38fec0"
+        },
+        {
+          "index": 15,
+          "inscription_id": "800f7da6ddfe39f370c135963937e318c375bc4b35eaff8680129938295b1832i0",
+          "byte_length": 349998,
+          "sha256": "10bf5658d989ba658b578e8a01ae5760e3b84f6ee7573ba272605a4071f72973"
+        },
+        {
+          "index": 16,
+          "inscription_id": "f4ab3294f53d74dace52a8696655509704692ab7316d7e46cd9a959bc6714e9di0",
+          "byte_length": 349998,
+          "sha256": "dd4db23e996d76c83957056e3b08a8816bbbc5d61f977f0b5b0fc10f415a5918"
+        },
+        {
+          "index": 17,
+          "inscription_id": "86aecd7fee0da9db86a516db243a3238e10524afa1c320a4a1ce3028d1e07e1bi0",
+          "byte_length": 349998,
+          "sha256": "2027ca55ef2499607b7b5abb61c385b792314ccc28ed3152a883c3c0e2ae9884"
+        },
+        {
+          "index": 18,
+          "inscription_id": "2360a22594996dc0308f5732ec72073cf321140d1b719751cdc8eb2617d09ae0i0",
+          "byte_length": 349998,
+          "sha256": "0e55952ec9d23f864a14d5f6b9589270748ae962e7413d9085818a38ce5c38a4"
+        },
+        {
+          "index": 19,
+          "inscription_id": "93dce5a5bcb5570ea67fc826ed19fce224e7c81439643769aa9657f3daf28c65i0",
+          "byte_length": 349998,
+          "sha256": "5543c098411a177f71eed675407acf36cb99717123f30a3f9381ca8606b90b99"
+        },
+        {
+          "index": 20,
+          "inscription_id": "e8e6ed2abfb945c9df9c6fca20a3f170ed60a0f14ad06d08442a735526698f02i0",
+          "byte_length": 349998,
+          "sha256": "bed6599d0e201d62f7af62b88e8f091eba1731736806d700be267f8848f76c64"
+        },
+        {
+          "index": 21,
+          "inscription_id": "55d47da1fd5e82fc9551f4562ae2271040de60443f504f8ed5689a0a58e55f46i0",
+          "byte_length": 47784,
+          "sha256": "04629d83fda1470b0e9e1d96ee387cf7a8716b491988b12a318a439c63a060c9"
+        }
+      ]
+    },
+    "prospect": {
+      "family_id": "prospect",
+      "stream_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reconstructed_jsonl_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "jsonl_schema": "bitnats-jsonl-id-v1",
+      "shards": []
+    },
+    "forged": {
+      "family_id": "forged",
+      "stream_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reconstructed_jsonl_hash_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "jsonl_schema": "bitnats-jsonl-id-v1",
+      "shards": []
+    }
+  }
+}

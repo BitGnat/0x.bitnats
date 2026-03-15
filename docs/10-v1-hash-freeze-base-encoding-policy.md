@@ -11,6 +11,7 @@ The canonical V1 commitment remains frozen:
 The resolution path is:
 
 - adjust the V2 base encoding/reconstruction path so base reconstructed JSONL bytes hash to the frozen V1 commitment.
+- preserve historical base EOF semantics (no terminal LF) for byte-compatibility with the frozen V1 dataset file.
 
 Target acceptance equation:
 
@@ -87,4 +88,4 @@ Pre-inscription Go is allowed only when:
 
 - [docs/08-release-operator-runbook.md](08-release-operator-runbook.md)
 - [docs/09-release-checklist.md](09-release-checklist.md)
-- [prompts/10-plan-v2ReleaseGoStatus.prompt.md](../prompts/10-plan-v2ReleaseGoStatus.prompt.md)
+- [dataset/evidence/base-2026-03-15.hash-freeze-evidence.json](../dataset/evidence/base-2026-03-15.hash-freeze-evidence.json)
