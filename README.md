@@ -14,7 +14,7 @@ These leading zeros represent measurable **hash entropy** produced by Bitcoin
 mining. The Bitnats protocol captures this entropy and converts it into
 on-chain artifacts and derived units.
 
-Each Bitnat Block is therefore a deterministic representation of a specific
+Each Bitnats Block is therefore a deterministic representation of a specific
 moment in Bitcoin's proof-of-work history.
 
 The artifact's rarity is derived directly from the number of leading
@@ -43,6 +43,7 @@ rules contained in this repository.
 
 - [bitnats](#bitnats)
   - [Table of Contents](#table-of-contents)
+  - [Core Terminology](#core-terminology)
   - [Protocol Overview](#protocol-overview)
   - [Protocol Primitives](#protocol-primitives)
   - [Artifact Model](#artifact-model)
@@ -94,6 +95,22 @@ rules contained in this repository.
     - [Additional Warranty Notice](#additional-warranty-notice)
   - [Trademark](#trademark)
   - [Support the Bitnats Project](#support-the-bitnats-project)
+
+## Core Terminology
+
+The Bitnats protocol defines three canonical terms. These definitions are
+authoritative and must be applied uniformly across all documentation, APIs,
+and implementations. The full canonical reference is in
+[docs/10-terminology.md](docs/10-terminology.md).
+
+| Term | Type | Definition |
+| --- | --- | --- |
+| **bitnat** | atomic unit | A single extracted entropy unit derived from one leading hexadecimal zero in a Bitcoin block hash. Indivisible at the protocol layer. Equivalent to a **Bitnat Bitcoin** at the user-facing layer. |
+| **bitnats** | quantity | A count or set of bitnat units. Never a container — always a quantity. |
+| **bitnats block** | container | A Bitcoin block interpreted under the Bitnats protocol as containing N bitnats, where N equals the number of leading hexadecimal zeros in the block hash. Corresponds 1:1 with a Bitcoin block. |
+
+> Critical: A block must **never** be referred to as a "bitnat block".
+> A block is a container of bitnats, not a single bitnat unit.
 
 ## Protocol Overview
 
@@ -193,7 +210,7 @@ Trait: `0x15`
 
 Mintable supply from a forged bitnats block: `15 Bitnat Bitcoins`
 
-Minting is only possible from **forged bitnat blocks**.
+Minting is only possible from **forged bitnats blocks**.
 
 Base bitnats block artifacts alone cannot produce Bitnat Bitcoins.
 
@@ -203,13 +220,13 @@ A Bitcoin block qualifies as a **bitnats block** if:
 
 1. The block hash begins with **one or more leading hexadecimal zeros**.
 2. The referenced Bitcoin block must already exist on-chain at the time the
-   base Bitnat Block artifact is inscribed.
-3. Only **one valid Base Bitnat Block artifact may exist per Bitcoin block**.
+   base Bitnats Block artifact is inscribed.
+3. Only **one valid Base Bitnats Block artifact may exist per Bitcoin block**.
 
 These rules ensure deterministic artifact identity.
 
 The Bitnats Block sat refers to the canonical satoshi used to inscribe the
-base bitnats block artifact for each valid Bitnat Block within the
+base bitnats block artifact for each valid Bitnats Block within the
 deterministic Bitnats dataset.
 
 ## Canonical Artifact Rules
@@ -241,7 +258,7 @@ Blocks**.
 
 ### 2. Base Bitnats Block Artifact Rules
 
-A valid **Base Bitnat Block artifact** must satisfy the following:
+A valid **Base Bitnats Block artifact** must satisfy the following:
 
 1. The referenced Bitcoin block **must have already been mined and confirmed**.
 2. The block must exist within the **canonical Bitnats base dataset**.
@@ -449,7 +466,7 @@ rarity**.
 ## Bitnat Bitcoin Supply
 
 Bitnat Bitcoins represent the total mintable entropy extracted from forged
-bitnat blocks.
+bitnats blocks.
 
 Supply as of **Bitcoin block 939,413**:
 
@@ -557,6 +574,7 @@ bitnats/
 │
 ├── images/
 │   └── icon.svg
+│   └── donate-qr.svg
 │
 ├── dataset/
 │   ├── inscriptions.jsonl
@@ -635,11 +653,13 @@ node scripts/verify_volumes.js
 
 This script concatenates the nine volumes in order, computes the SHA-256 hash
 of the combined output, and compares it against the committed hash in
+
 `dataset/inscriptions.jsonl.sha256`.
 
 #### V2 Binary Stream Verification
 
 V2 verification requires dual verification as defined in
+
 `docs/04-verification.md`:
 
 1. Reconstruct the native binary stream from V2 shards in manifest-defined
@@ -829,7 +849,7 @@ operated separately by Bitnats infrastructure.
 
 ### On-Chain Artifact Notice
 
-Bitnat artifacts exist as ordinal inscriptions on the Bitcoin blockchain.
+Bitnats Block artifacts exist as ordinal inscriptions on the Bitcoin blockchain.
 Under protocol terminology, the corresponding canonical inscription placements
 are bitnat sats.
 
@@ -867,7 +887,7 @@ Bitcoin address:
 bc1qq92uur8dp65n87x40m2ta3qve2l2znuqwyg0s8
 ```
 
-<img src="images/donate-qr.svg" width="256" alt="Donate-QR/>
+<img src="images/donate-qr.svg" width="256" alt="Donate-QR"/>
 
 Donations are voluntary and provide no special privileges, governance rights,
 or ownership in the Bitnats protocol.
