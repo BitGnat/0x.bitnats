@@ -26,7 +26,7 @@ Bitcoin blockchain data.
 From each Forged Bitnats Block, the protocol allows the extraction of
 **Bitnat Bitcoins** - individual units derived from the block's entropy.
 
-Each leading hexadecimal zero may be minted as one Bitnat Bitcoin.
+Each leading hexadecimal zero may be extracted as one Bitnat Bitcoin.
 
 These units are **not fungible tokens** and they are **not arbitrary tokens**.
 
@@ -122,7 +122,7 @@ Bitnats protocol captures this entropy and binds it to ordinal artifacts
 representing specific Bitcoin blocks.
 
 These artifacts may then be extended through derived inscriptions and used to
-mint provenance-bound units tied to the entropy of the original block.
+extract provenance-bound units tied to the entropy of the original block.
 
 All artifact validity can be reproduced deterministically using only public
 Bitcoin blockchain data:
@@ -141,7 +141,7 @@ proof-of-work entropy into artifacts and derived units.
 | --- | --- |
 | **Base Bitnats Block** | Canonical ordinal artifact representing a Bitcoin block whose hash contains N leading hexadecimal zeros |
 | **Forged Bitnats Block** | Derived artifact reinscribed on the same satoshi as the base artifact |
-| **Bitnat Bitcoin** | Non-fungible unit minted from the entropy of a forged bitnats block |
+| **Bitnat Bitcoin** | Non-fungible unit extracted from the entropy of a forged bitnats block |
 
 These primitives transform **Bitcoin block hash entropy** into both
 collectible artifacts and provenance-bound units.
@@ -197,9 +197,9 @@ Forged artifacts may include SVG and other deterministic representations.
 Bitnat Bitcoins are non-fungible and non-arbitrary units derived from the
 **leading-zero entropy of forged bitnats blocks**.
 
-Each leading hexadecimal zero may be **minted as one Bitnat Bitcoin**.
+Each leading hexadecimal zero may be **extracted as one Bitnat Bitcoin**.
 
-Minting converts block entropy into transferable units while preserving
+Extraction converts block entropy into transferable units while preserving
 provenance to the canonical artifact.
 
 Example:
@@ -208,9 +208,9 @@ Block hash: `000000000000000abc123...`
 
 Trait: `0x15`
 
-Mintable supply from a forged bitnats block: `15 Bitnat Bitcoins`
+Extractable supply from a forged bitnats block: `15 Bitnat Bitcoins`
 
-Minting is only possible from **forged bitnats blocks**.
+Extraction is only possible from **forged bitnats blocks**.
 
 Base bitnats block artifacts alone cannot produce Bitnat Bitcoins.
 
@@ -465,7 +465,7 @@ rarity**.
 
 ## Bitnat Bitcoin Supply
 
-Bitnat Bitcoins represent the total mintable entropy extracted from forged
+Bitnat Bitcoins represent the total extractable entropy extracted from forged
 bitnats blocks.
 
 Supply as of **Bitcoin block 939,413**:

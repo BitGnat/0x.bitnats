@@ -63,7 +63,7 @@ A **bitnats block** is a Bitcoin block indexed and interpreted under the Bitnats
 - container of entropy units
 - corresponds 1:1 with a Bitcoin block
 - contains **N bitnats**, where N = leading zero count
-- N bitnats = N Bitnat Bitcoins mintable from the block's entropy
+- N bitnats = N Bitnat Bitcoins extractable from the block's entropy
 
 Critical rule:
 > A block MUST NOT be referred to as a "bitnat block"
