@@ -77,15 +77,6 @@ rules contained in this repository.
     - [Dataset Verification](#dataset-verification)
       - [V1 Volume Verification](#v1-volume-verification)
       - [V2 Binary Stream Verification](#v2-binary-stream-verification)
-  - [Protocol-Complete Workflow (V1 + V2)](#protocol-complete-workflow-v1--v2)
-    - [1) Generate Source V2 Family Artifacts](#1-generate-source-v2-family-artifacts)
-    - [2) Prepare Release Layout (Pre-Inscription)](#2-prepare-release-layout-pre-inscription)
-    - [3) Pre-Verify with Temporary Local Manifest](#3-pre-verify-with-temporary-local-manifest)
-    - [4) Finalize Canonical Manifest (Post-Inscription)](#4-finalize-canonical-manifest-post-inscription)
-    - [5) Verify Finalized Release and Both Dataset Generations](#5-verify-finalized-release-and-both-dataset-generations)
-    - [6) Operator Runbook (GitHub to On-Chain)](#6-operator-runbook-github-to-on-chain)
-    - [Failure Semantics](#failure-semantics)
-    - [Formal References](#formal-references)
   - [License](#license)
     - [Protocol Usage](#protocol-usage)
     - [Official Artifact Generation Restriction](#official-artifact-generation-restriction)
@@ -94,14 +85,13 @@ rules contained in this repository.
     - [On-Chain Artifact Notice](#on-chain-artifact-notice)
     - [Additional Warranty Notice](#additional-warranty-notice)
   - [Trademark](#trademark)
-  - [Support the Bitnats Project](#support-the-bitnats-project)
 
 ## Core Terminology
 
 The Bitnats protocol defines three canonical terms. These definitions are
 authoritative and must be applied uniformly across all documentation, APIs,
 and implementations. The full canonical reference is in
-[docs/10-terminology.md](docs/10-terminology.md).
+[docs/08-terminology.md](docs/08-terminology.md).
 
 | Term | Type | Definition |
 | --- | --- | --- |
@@ -551,6 +541,7 @@ Formal protocol rules are defined in the `docs/` directory.
 - `docs/06-manifest-v2-spec.md`: Manifest V2 formal specification.
 - `docs/07-encoding-algorithm.md`: V2 canonical encoding and decoding
   algorithm.
+- `docs/08-terminology.md`: Canonical protocol terminology.
 
 `docs/05-specification.md` is normative. All other documents define terms,
 rules, and procedures referenced by the normative specification.
@@ -570,7 +561,8 @@ bitnats/
 │   ├── 04-verification.md
 │   ├── 05-specification.md
 │   ├── 06-manifest-v2-spec.md
-│   └── 07-encoding-algorithm.md
+│   ├── 07-encoding-algorithm.md
+│   └── 08-terminology.md
 │
 ├── images/
 │   └── icon.svg
@@ -583,25 +575,7 @@ bitnats/
 │
 ├── artifacts/
 │   └── releases/
-│       └── base-2026-03-15/
-│           ├── canonical/
-│           ├── checksums/
-│           │   └── shard-checksums.sha256
-│           ├── metadata/
-│           │   └── release-metadata.json
-│           ├── payload/
-│           │   ├── base/shards/
-│           │   ├── prospect/shards/
-│           │   └── forged/shards/
-│           ├── planning/
-│           │   ├── inscription-map.template.json
-│           │   └── publish-order.json
-│           ├── reconciliation/
-│           └── temp/
-│               ├── pre-inscription/
-│               │   ├── manifest.local.v2.json
-│               │   └── verify-v2.pre-inscription.json
-│               └── verification/
+│       └── ...
 │
 ├── volumes/
 │   ├── volume1.jsonl
@@ -624,7 +598,6 @@ bitnats/
 │   └── volume9.jsonl.sha256
 │
 └── scripts/
-    ├── release-v2.js
     ├── build-manifest-v2.js
     ├── encode-v2.js
     ├── generate_manifest.js
@@ -695,115 +668,6 @@ V2 verification requires dual verification as defined in
 Both checks must pass. See `docs/04-verification.md` for the full verification
 algorithm and `docs/07-encoding-algorithm.md` for the canonical encoding and
 reconstruction procedure.
-
-## Protocol-Complete Workflow (V1 + V2)
-
-This repository now supports a release-oriented operator flow for deterministic
-pre-inscription preparation, post-inscription manifest finalization, and
-unified verification.
-
-### 1) Generate Source V2 Family Artifacts
-
-Encode canonical V2 family streams and deterministic shards from the
-historical V1 dataset:
-
-```bash
-node scripts/encode-v2.js \
-      --input dataset/inscriptions.jsonl \
-      --output-dir dataset_v2 \
-      --default-family base \
-      --shard-target-bytes 350000
-```
-
-### 2) Prepare Release Layout (Pre-Inscription)
-
-Create a release unit with shard-only payload files, checksums, publish-order
-plan, inscription mapping template, and a temporary non-canonical local
-manifest:
-
-```bash
-node scripts/release-v2.js prepare \
-      --release-id base-2026-03-14 \
-      --source-output-dir dataset_v2
-```
-
-### 3) Pre-Verify with Temporary Local Manifest
-
-The pre-inscription manifest is local-only and must not be treated as
-canonical:
-
-```bash
-node scripts/verify-v2.js verify \
-  --manifest \
-  artifacts/releases/base-2026-03-14/temp/pre-inscription/\
-manifest.local.v2.json \
-  --output-dir \
-  artifacts/releases/base-2026-03-14/payload \
-  --base-hash-file \
-  dataset/inscriptions.jsonl.sha256
-```
-
-### 4) Finalize Canonical Manifest (Post-Inscription)
-
-After replacing null values in the generated inscription mapping template with
-real on-chain inscription ids, finalize the canonical manifest:
-
-```bash
-node scripts/release-v2.js finalize-manifest \
-      --release-id base-2026-03-14 \
-      --inscription-map artifacts/releases/base-2026-03-14/planning/inscription-map.template.json
-```
-
-### 5) Verify Finalized Release and Both Dataset Generations
-
-Verify finalized release payload commitments:
-
-```bash
-node scripts/release-v2.js verify-release \
-      --release-id base-2026-03-14 \
-      --base-hash-file dataset/inscriptions.jsonl.sha256
-```
-
-Then verify V1 historical and V2 canonical commitments from one unified
-entrypoint:
-
-```bash
-node scripts/verify_volumes.js \
-      --mode both \
-      --manifest artifacts/releases/base-2026-03-14/canonical/manifest.v2.json \
-      --output-dir artifacts/releases/base-2026-03-14/payload \
-      --base-hash-file dataset/inscriptions.jsonl.sha256
-```
-
-### 6) Operator Runbook (GitHub to On-Chain)
-
-Use the release operator runbook for the full staged sequence and sign-off
-gates:
-
-- `docs/08-release-operator-runbook.md`
-
-### Failure Semantics
-
-Verification and manifest checks are fail-closed.
-
-- Any consensus-relevant manifest schema or semantic violation returns
-  non-zero.
-- Any shard byte-length or shard hash mismatch returns non-zero.
-- Any stream hash or reconstructed JSONL hash mismatch returns non-zero.
-- `verify-v2.js` and `verify_volumes.js` return exit code `2` on CLI usage
-  errors.
-- Successful verification returns exit code `0`.
-
-### Formal References
-
-- `docs/03-dataset.md` defines V1/V2 dataset structure and dual verification
-  expectations.
-- `docs/04-verification.md` defines the verification algorithm, vectors, and
-  MUST-fail conditions.
-- `docs/06-manifest-v2-spec.md` defines Manifest V2 schema and fail-closed
-  requirements.
-- `docs/07-encoding-algorithm.md` defines canonical ordering, encoding,
-  sharding, and reconstruction.
 
 ## License
 
@@ -894,22 +758,3 @@ This repository contains open protocol specifications and datasets under the
 MIT License. Use of the Bitnats name, brand, or visual identity in commercial
 products or services may require permission.
 
----
-
-## Support the Bitnats Project
-
-The Bitnats protocol is maintained by BitGnat.
-
-If you find the Bitnats protocol useful, you can support its continued
-development with a Bitcoin donation.
-
-Bitcoin address:
-
-```text
-bc1qq92uur8dp65n87x40m2ta3qve2l2znuqwyg0s8
-```
-
-<img src="images/donate-qr.svg" width="256" alt="Donate-QR"/>
-
-Donations are voluntary and provide no special privileges, governance rights,
-or ownership in the Bitnats protocol.
