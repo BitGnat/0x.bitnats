@@ -581,6 +581,28 @@ bitnats/
 │   ├── inscriptions.jsonl.sha256
 │   └── manifest.json
 │
+├── artifacts/
+│   └── releases/
+│       └── base-2026-03-15/
+│           ├── canonical/
+│           ├── checksums/
+│           │   └── shard-checksums.sha256
+│           ├── metadata/
+│           │   └── release-metadata.json
+│           ├── payload/
+│           │   ├── base/shards/
+│           │   ├── prospect/shards/
+│           │   └── forged/shards/
+│           ├── planning/
+│           │   ├── inscription-map.template.json
+│           │   └── publish-order.json
+│           ├── reconciliation/
+│           └── temp/
+│               ├── pre-inscription/
+│               │   ├── manifest.local.v2.json
+│               │   └── verify-v2.pre-inscription.json
+│               └── verification/
+│
 ├── volumes/
 │   ├── volume1.jsonl
 │   ├── volume1.jsonl.sha256
