@@ -546,6 +546,24 @@ Formal protocol rules are defined in the `docs/` directory.
 `docs/05-specification.md` is normative. All other documents define terms,
 rules, and procedures referenced by the normative specification.
 
+Docs reading order: `docs/00-overview.md` -> `docs/01-core-protocol.md` ->
+`docs/02-artifact-rules.md` -> `docs/03-dataset.md` ->
+`docs/04-verification.md` -> `docs/05-specification.md` ->
+`docs/06-manifest-v2-spec.md` -> `docs/07-encoding-algorithm.md` ->
+`docs/08-terminology.md`.
+
+Normative and informational scope: `docs/05-specification.md` defines
+normative protocol behavior; `docs/08-terminology.md` defines canonical
+vocabulary; supporting documents provide formal procedures and explanatory
+context that must remain consistent with the normative specification.
+
+Verification entry points:
+
+```bash
+node scripts/verify_volumes.js
+node scripts/verify-v2.js verify --manifest <manifest.v2.json> --output-dir <payload-dir> --base-hash-file dataset/inscriptions.jsonl.sha256
+```
+
 ## Repository Structure
 
 ```text
@@ -757,4 +775,3 @@ protocol.
 This repository contains open protocol specifications and datasets under the
 MIT License. Use of the Bitnats name, brand, or visual identity in commercial
 products or services may require permission.
-
