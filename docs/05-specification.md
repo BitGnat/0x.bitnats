@@ -34,7 +34,7 @@ All verification procedures defined in this document MUST be reproducible from p
 ## Terminology
 
 | Term | Definition |
-|---|---|
+| --- | --- |
 | Bitcoin Block | A confirmed block in the Bitcoin blockchain |
 | Block Hash | The double SHA-256 hash identifying a Bitcoin block |
 | Leading Zero Depth | Number of leading hexadecimal zeros in the block hash |
@@ -168,8 +168,7 @@ A valid Forged Bitnat Block artifact MUST satisfy all of the following condition
 
 ### Dataset Versioning
 
-Bitnats defines two dataset formats.
-
+Bitnats defines two dataset formats.  
 **Version 1 — Historical JSONL**
 
 ```
@@ -178,8 +177,7 @@ dataset/inscriptions.jsonl
 
 Human-readable canonical dataset. Used for archival reference, deterministic reconstruction, and compatibility with early tooling.
 
-V1 MUST NOT be considered the canonical protocol dataset format.
-
+V1 MUST NOT be considered the canonical protocol dataset format.  
 **Version 2 — Compact Binary Canonical Stream**
 
 Version 2 is the canonical forward dataset format.
@@ -214,7 +212,7 @@ Unsupported inscription index values MUST cause verification failure.
 Version 2 defines the following family-separated canonical binary streams:
 
 | Stream | Artifact Family | Index Byte |
-|---|---|---|
+| --- | --- | --- |
 | Base stream | Base Bitnats Block artifacts | `0x00` |
 | Forged stream | Forged Bitnat Block artifacts | `0x01` |
 
@@ -373,7 +371,7 @@ procedure VERIFY_DATASET_V2(manifest, shards, canonical_jsonl_hash):
 Reference files:
 
 | Path | Purpose |
-|---|---|
+| --- | --- |
 | `dataset/inscriptions.jsonl` | V1 canonical JSONL dataset |
 | `dataset/inscriptions.jsonl.sha256` | V1 dataset SHA-256 commitment |
 | `dataset/manifest.json` | Manifest (current V1 format) |
